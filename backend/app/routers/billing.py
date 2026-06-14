@@ -5,6 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from app.config import get_settings
 from app.dependencies import get_current_user
+from app.db import get_db
 from app.models import User, Subscription, Tier, SubscriptionStatus
 from app.schemas import SubscriptionCreate, SubscriptionRead, CheckoutSessionRequest
 
