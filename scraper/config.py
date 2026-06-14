@@ -53,6 +53,10 @@ DATABASE_URL = os.getenv(
     "DATABASE_URL_SYNC",
     os.getenv("DATABASE_URL", "sqlite:///./leadsignal.db"),
 )
+# The scraper uses synchronous SQLAlchemy sessions, so async driver URLs
+# (e.g., sqlite+aiosqlite) must be converted to their sync equivalent.
+if DATABASE_URL.startswith("sqlite+aiosqlite:///"):
+    DATABASE_URL = DATABASE_URL.replace("sqlite+aiosqlite:///", "sqlite:///")
 
 # PermitStack API
 PERMITSTACK_API_KEY = os.getenv("PERMITSTACK_API_KEY", "")
