@@ -16,7 +16,7 @@ from scraper.db_client import get_or_create_company, insert_signal, Session, sig
 from app.models import SignalType
 
 
-# Verified live ODR RSS feeds.
+# Verified live ODR RSS feeds (discovered by scraping the ODR site map).
 FEED_URLS = {
     "building_permits": "https://www.omahadailyrecord.com/taxonomy/term/3701/all/feed",
     "mechanical_permits": "https://www.omahadailyrecord.com/taxonomy/term/3807/all/feed",
@@ -30,6 +30,22 @@ FEED_URLS = {
     "deeds": "https://www.omahadailyrecord.com/taxonomy/term/3719/all/feed",
     "active_property_sales": "https://www.omahadailyrecord.com/taxonomy/term/3700/all/feed",
     "active_probates": "https://www.omahadailyrecord.com/taxonomy/term/3718/all/feed",
+    "tax_lien": "https://www.omahadailyrecord.com/taxonomy/term/3806/all/feed",
+    "city_omaha": "https://www.omahadailyrecord.com/taxonomy/term/3694/all/feed",
+    "douglas_county": "https://www.omahadailyrecord.com/taxonomy/term/3695/all/feed",
+    "sarpy_county": "https://www.omahadailyrecord.com/taxonomy/term/3746/all/feed",
+    "state_nebraska": "https://www.omahadailyrecord.com/taxonomy/term/3693/all/feed",
+    "omaha_public_schools": "https://www.omahadailyrecord.com/taxonomy/term/3696/all/feed",
+    "millard_public_schools": "https://www.omahadailyrecord.com/taxonomy/term/3748/all/feed",
+    "westside_community_schools": "https://www.omahadailyrecord.com/taxonomy/term/3753/all/feed",
+    "bennington_public_schools": "https://www.omahadailyrecord.com/taxonomy/term/3756/all/feed",
+    "omaha_airport_authority": "https://www.omahadailyrecord.com/taxonomy/term/3827/all/feed",
+    "omaha_housing_authority": "https://www.omahadailyrecord.com/taxonomy/term/3826/all/feed",
+    "meca": "https://www.omahadailyrecord.com/taxonomy/term/3747/all/feed",
+    "mapa": "https://www.omahadailyrecord.com/taxonomy/term/3749/all/feed",
+    "learning_community": "https://www.omahadailyrecord.com/taxonomy/term/3750/all/feed",
+    "metro_transit_authority": "https://www.omahadailyrecord.com/taxonomy/term/3829/all/feed",
+    "public_records": "https://www.omahadailyrecord.com/taxonomy/term/3698/all/feed",
 }
 
 
@@ -63,20 +79,20 @@ def _pubdate_to_datetime(published) -> datetime | None:
 def _signal_type_for_feed(feed_name: str) -> SignalType:
     if "permit" in feed_name:
         return SignalType.permit_filing
-    if feed_name in ("notice_of_default", "active_property_sales"):
+    if feed_name in ("notice_of_default", "active_property_sales", "tax_lien"):
         return SignalType.tax_delinquency
     if feed_name == "deeds":
         return SignalType.parcel_change
     if feed_name == "active_probates":
         return SignalType.new_business_registration
-    if feed_name == "citycounty_bids":
+    if feed_name in ("citycounty_bids", "city_omaha", "douglas_county", "sarpy_county", "state_nebraska"):
         return SignalType.gov_contract_award
     return SignalType.new_business_registration
 
 
 def _is_omaha_relevant(title: str, summary: str) -> bool:
     text = f"{title} {summary}".lower()
-    return any(x in text for x in ["omaha", "douglas", "sarpy", "nebraska"])
+    return any(x in text for x in ["omaha", "douglas", "sarpy", "bellevue", "ralston", "gretna", "bennington", "valley", "waterloo", "boys town", "nebraska"])
 
 
 def _classify_public_notice(title: str, summary: str) -> SignalType:
@@ -93,7 +109,7 @@ def _classify_public_notice(title: str, summary: str) -> SignalType:
         return SignalType.gov_contract_award
     if any(k in text for k in ["probate", "estate of", "notice to creditors"]):
         return SignalType.new_business_registration
-    if any(k in text for k in ["tax sale", "delinquent tax", "property sale", "foreclosure"]):
+    if any(k in text for k in ["tax sale", "delinquent tax", "property sale", "foreclosure", "tax lien"]):
         return SignalType.tax_delinquency
     if any(k in text for k in ["deed", "quit claim", "warranty deed", "trustee deed"]):
         return SignalType.parcel_change
