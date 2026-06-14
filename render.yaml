@@ -33,3 +33,28 @@ services:
         value: sqlite+aiosqlite:///./leadsignal.db
       - key: SYNC_DATABASE_URL
         value: sqlite:///./leadsignal.db
+      - key: PERMITSTACK_API_KEY
+        sync: false
+      - key: APIFY_TOKEN
+        sync: false
+  - type: cron
+    name: leadsignal-scrapers
+    runtime: python
+    plan: starter
+    buildCommand: |
+      pip install -r requirements.txt
+    schedule: "0 */6 * * *"
+    startCommand: PYTHONPATH=/opt/render/project/src/backend python -m scraper.run_all
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: DATABASE_URL
+        value: sqlite+aiosqlite:///./leadsignal.db
+      - key: SYNC_DATABASE_URL
+        value: sqlite:///./leadsignal.db
+      - key: PERMITSTACK_API_KEY
+        sync: false
+      - key: APIFY_TOKEN
+        sync: false
+      - key: GOOGLE_PLACES_API_KEY
+        sync: false
