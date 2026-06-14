@@ -16,6 +16,11 @@ class Settings(BaseSettings):
         url = self.database_url_raw
         if url.startswith("postgres://"):
             url = "postgresql" + url.removeprefix("postgres")
+        # Drop sslmode query param for asyncpg (it uses ssl argument instead)
+        if "?" in url:
+            base, query = url.split("?", 1)
+            params = [p for p in query.split("&") if not p.startswith("sslmode")]
+            url = base + ("?" + "&".join(params) if params else "")
         if "+asyncpg" not in url and "postgresql://" in url:
             url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
         return url
