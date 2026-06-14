@@ -1,4 +1,3 @@
-
 import os
 from dataclasses import dataclass
 from typing import List
@@ -49,14 +48,29 @@ REVIEW_CLUSTER_MAX_STARS = 2.0
 # Permit thresholds
 PERMIT_MIN_PROJECT_VALUE = 50000
 
-DATABASE_URL = os.getenv(
-    "DATABASE_URL_SYNC",
-    os.getenv("DATABASE_URL", "sqlite:///./leadsignal.db"),
-)
+
+def _default_db_path() -> str:
+    """Return an absolute SQLite path shared by the backend app and scrapers."""
+    cwd = os.getcwd()
+    if os.path.basename(cwd) == "backend":
+        return os.path.abspath("leadsignal.db")
+    if os.path.basename(cwd) == "leadsignal":
+        return os.path.abspath(os.path.join("backend", "leadsignal.db"))
+    # Fallback: assume the backend dir is next to scraper dir.
+    this_dir = os.path.dirname(os.path.abspath(__file__))
+    backend_dir = os.path.abspath(os.path.join(this_dir, "..", "backend"))
+    if os.path.isdir(backend_dir):
+        return os.path.join(backend_dir, "leadsignal.db")
+    return os.path.abspath("leadsignal.db")
+
+
+DATABASE_URL = os.getenv("DATABASE_URL_SYNC") or os.getenv("DATABASE_URL") or f"sqlite:///{_default_db_path()}"
 # The scraper uses synchronous SQLAlchemy sessions, so async driver URLs
 # (e.g., sqlite+aiosqlite) must be converted to their sync equivalent.
 if DATABASE_URL.startswith("sqlite+aiosqlite:///"):
     DATABASE_URL = DATABASE_URL.replace("sqlite+aiosqlite:///", "sqlite:///")
+if DATABASE_URL.startswith("sqlite:///./"):
+    DATABASE_URL = f"sqlite:///{_default_db_path()}"
 
 # PermitStack API
 PERMITSTACK_API_KEY = os.getenv("PERMITSTACK_API_KEY", "")
@@ -77,4 +91,3 @@ CIVICDATA_API_BASE = "https://www.civicdata.com/api/3"
 
 # Apify
 APIFY_TOKEN = os.getenv("APIFY_TOKEN", "")
-

@@ -1,6 +1,7 @@
 from pydantic_settings import BaseSettings
 from pydantic import Field
 from functools import lru_cache
+import os
 
 
 class Settings(BaseSettings):
@@ -14,7 +15,8 @@ class Settings(BaseSettings):
     def database_url(self) -> str:
         url = self.database_url_raw
         if not url or "sqlite" in url:
-            return "sqlite+aiosqlite:///./leadsignal.db"
+            # Use an absolute path so async app and sync scrapers share the same file.
+            return f"sqlite+aiosqlite:///{self._db_path()}"
         if url.startswith("postgres://"):
             url = "postgresql" + url.removeprefix("postgres")
         if ".flycast:5432" in url:
@@ -31,7 +33,7 @@ class Settings(BaseSettings):
     def sync_database_url(self) -> str:
         url = self.sync_database_url_raw
         if not url or "sqlite" in url:
-            return "sqlite:///./leadsignal.db"
+            return f"sqlite:///{self._db_path()}"
         if url.startswith("postgres://"):
             url = "postgresql" + url.removeprefix("postgres")
         if ".flycast:5432" in url:
@@ -39,6 +41,17 @@ class Settings(BaseSettings):
         if "+psycopg2" not in url and "+asyncpg" not in url and "postgresql://" in url:
             url = url.replace("postgresql://", "postgresql+psycopg2://", 1)
         return url
+
+    @staticmethod
+    def _db_path() -> str:
+        # Render and local dev both use /opt/render/project/src/backend on Render,
+        # or the backend directory when running locally. Put the SQLite file there.
+        cwd = os.getcwd()
+        # If we're inside the backend dir, use cwd. Otherwise resolve to backend/.
+        if os.path.basename(cwd) == "backend":
+            return os.path.abspath("leadsignal.db")
+        backend_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+        return os.path.join(backend_dir, "leadsignal.db")
 
     secret_key: str = "change-me-in-production"
     algorithm: str = "HS256"

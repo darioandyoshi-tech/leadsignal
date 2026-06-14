@@ -9,8 +9,8 @@ settings = get_settings()
 
 # SQLite fallback for MVP demos / local dev when no Postgres is configured
 if not settings.database_url_raw or "sqlite" in settings.database_url_raw:
-    SQLITE_URL = "sqlite+aiosqlite:///./leadsignal.db"
-    SYNC_SQLITE_URL = "sqlite:///./leadsignal.db"
+    SQLITE_URL = settings.database_url
+    SYNC_SQLITE_URL = settings.sync_database_url
     engine = create_async_engine(SQLITE_URL, echo=settings.debug)
     async_session_maker = async_sessionmaker(engine, expire_on_commit=False)
     sync_engine = create_engine(SYNC_SQLITE_URL, connect_args={"check_same_thread": False, "timeout": 60})
