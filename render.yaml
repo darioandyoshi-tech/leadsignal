@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: leadsignal-api
+    env: python
+    plan: starter
+    buildCommand: |
+      pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: SECRET_KEY
+        generateValue: true
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_PUBLISHABLE_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: STRIPE_PRICE_STARTER
+        sync: false
+      - key: STRIPE_PRICE_PRO
+        sync: false
+      - key: STRIPE_PRICE_GROWTH
+        sync: false
+      - key: GOOGLE_PLACES_API_KEY
+        sync: false
+      - key: AGENTMAIL_API_KEY
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: DATABASE_URL
+        value: sqlite+aiosqlite:///./leadsignal.db
+      - key: SYNC_DATABASE_URL
+        value: sqlite:///./leadsignal.db
