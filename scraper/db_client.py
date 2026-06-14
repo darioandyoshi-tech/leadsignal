@@ -1,6 +1,6 @@
 
 import uuid
-from datetime import datetime
+from datetime import datetime, timedelta
 from sqlalchemy import create_engine, select
 from sqlalchemy.orm import sessionmaker
 from scraper.config import DATABASE_URL
@@ -35,9 +35,7 @@ def get_or_create_company(session, name: str, city: str = None, state: str = Non
 
 
 def signal_exists(session, company_id: uuid.UUID, signal_type: SignalType, headline: str, window_hours: int = 48) -> bool:
-    from sqlalchemy import text
-    cutoff = datetime.utcnow() - __import__('datetime').timedelta(hours=window_hours)
-    # Deduplicate by headline hash-ish for MVP
+    cutoff = datetime.utcnow() - timedelta(hours=window_hours)
     stmt = select(Signal).where(
         Signal.company_id == company_id,
         Signal.signal_type == signal_type,

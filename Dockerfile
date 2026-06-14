@@ -6,10 +6,12 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends gcc libpq-dev libxml2-dev libxslt1-dev \
     && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt .
+# Backend code lives in the backend/ subdirectory
+COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY backend/ .
+COPY scraper/ ./scraper/
 
 ENV PORT=8000
 EXPOSE 8000
