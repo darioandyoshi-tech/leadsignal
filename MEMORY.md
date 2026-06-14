@@ -400,3 +400,10 @@ Next heartbeat check recommended in ~30 minutes or as system events warrant.
 - **Context**: All 8 cron jobs operational and healthy, Phase 4 SSM Leap Test ongoing with Alert #19 sent June 13 (11 remaining)
 - **Application**: System remains stable with all monitoring systems functioning normally
 - **Source**: Daily heartbeat checks and PulseWatch monitoring
+
+## Skill-First Workflow (June 14, 2026)
+Before starting any non-trivial task, scan available skills, select the most relevant one, and read its SKILL.md before proceeding.
+
+## Absolute Rule - 100% No Assumptions (June 14, 2026 10:12 CDT)
+Never assume anything. Every claim must be verified. Every fact must be checked. Every source must be tested. If I do not have 100% proof, I must say so explicitly.
+Applies to all code, deployment, data sources, business claims, and operational decisions.

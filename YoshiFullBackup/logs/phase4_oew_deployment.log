@@ -1,0 +1,122 @@
+2026-06-10 18:42:54,780 - INFO - MambaIntentJudgeAdapter initialized for mamba-3:2.8b
+2026-06-10 18:42:54,780 - INFO - ======================================================================
+2026-06-10 18:42:54,780 - INFO - 🚀 PHASE 4 SSM LEAP LIVE DEPLOYMENT INITIATED
+2026-06-10 18:42:54,780 - INFO -    Activating <200ms Intent Judge in Sentry-Swarm OEW Loop
+2026-06-10 18:42:54,780 - INFO - ======================================================================
+2026-06-10 18:42:54,780 - INFO - 🚀 INITIALIZING PHASE 4 SSM LEAP FOR LIVE DEPLOYMENT
+2026-06-10 18:42:54,780 - INFO -    Deploying <200ms Intent Judge to live Sentry-Swarm OEW Loop
+2026-06-10 18:42:54,780 - INFO - Loading Mamba model: mamba-3:2.8b
+2026-06-10 18:42:54,880 - INFO - Mamba model mamba-3:2.8b loaded successfully
+2026-06-10 18:42:54,880 - INFO - Warming up Mamba model with 5 iterations
+2026-06-10 18:42:54,981 - INFO - Warmup complete. Average encoding time: 20.12ms
+2026-06-10 18:42:54,981 - INFO - Performance target met: 20.12ms encoding time
+2026-06-10 18:42:54,981 - INFO - ✅ Phase 4 Intent Judge initialized and DEPLOYED
+2026-06-10 18:42:54,981 - INFO -    Status: LIVE IN SENTRY-SWARM OEW LOOP
+2026-06-10 18:42:54,981 - INFO - 
+📡 PROCESSING 6 LIVE PULSEWATCH EVENTS...
+2026-06-10 18:42:54,981 - INFO - --------------------------------------------------
+2026-06-10 18:42:54,981 - INFO - 
+📡 Live Event 1/6:
+2026-06-10 18:42:54,981 - INFO - 📡 LIVE OEW EVENT #1: CRITICAL AWS S3 Service Disruption
+2026-06-10 18:42:55,005 - ERROR - Live deployment failed: name 'total_latency' is not defined
+2026-06-10 18:44:51,118 - INFO - MambaIntentJudgeAdapter initialized for mamba-3:2.8b
+2026-06-10 18:44:51,118 - INFO - ======================================================================
+2026-06-10 18:44:51,119 - INFO - 🚀 PHASE 4 SSM LEAP LIVE DEPLOYMENT INITIATED
+2026-06-10 18:44:51,119 - INFO -    Activating <200ms Intent Judge in Sentry-Swarm OEW Loop
+2026-06-10 18:44:51,119 - INFO - ======================================================================
+2026-06-10 18:44:51,119 - INFO - 🚀 INITIALIZING PHASE 4 SSM LEAP FOR LIVE DEPLOYMENT
+2026-06-10 18:44:51,119 - INFO -    Deploying <200ms Intent Judge to live Sentry-Swarm OEW Loop
+2026-06-10 18:44:51,119 - INFO - Loading Mamba model: mamba-3:2.8b
+2026-06-10 18:44:51,219 - INFO - Mamba model mamba-3:2.8b loaded successfully
+2026-06-10 18:44:51,219 - INFO - Warming up Mamba model with 5 iterations
+2026-06-10 18:44:51,320 - INFO - Warmup complete. Average encoding time: 20.15ms
+2026-06-10 18:44:51,320 - INFO - Performance target met: 20.15ms encoding time
+2026-06-10 18:44:51,320 - INFO - ✅ Phase 4 Intent Judge initialized and DEPLOYED
+2026-06-10 18:44:51,320 - INFO -    Status: LIVE IN SENTRY-SWARM OEW LOOP
+2026-06-10 18:44:51,320 - INFO - 
+📡 PROCESSING 6 LIVE PULSEWATCH EVENTS...
+2026-06-10 18:44:51,320 - INFO - --------------------------------------------------
+2026-06-10 18:44:51,320 - INFO - 
+📡 Live Event 1/6:
+2026-06-10 18:44:51,320 - INFO - 📡 LIVE OEW EVENT #1: CRITICAL AWS S3 Service Disruption
+2026-06-10 18:44:51,344 - ERROR - Live deployment failed: name 'total_latency' is not defined
+2026-06-10 18:46:27,831 - INFO - MambaIntentJudgeAdapter initialized for mamba-3:2.8b
+2026-06-10 18:46:27,832 - INFO - ======================================================================
+2026-06-10 18:46:27,832 - INFO - 🚀 PHASE 4 SSM LEAP LIVE DEPLOYMENT INITIATED
+2026-06-10 18:46:27,832 - INFO -    Activating <200ms Intent Judge in Sentry-Swarm OEW Loop
+2026-06-10 18:46:27,832 - INFO - ======================================================================
+2026-06-10 18:46:27,832 - INFO - 🚀 INITIALIZING PHASE 4 SSM LEAP FOR LIVE DEPLOYMENT
+2026-06-10 18:46:27,832 - INFO -    Deploying <200ms Intent Judge to live Sentry-Swarm OEW Loop
+2026-06-10 18:46:27,832 - INFO - Loading Mamba model: mamba-3:2.8b
+2026-06-10 18:46:27,932 - INFO - Mamba model mamba-3:2.8b loaded successfully
+2026-06-10 18:46:27,932 - INFO - Warming up Mamba model with 5 iterations
+2026-06-10 18:46:28,033 - INFO - Warmup complete. Average encoding time: 20.19ms
+2026-06-10 18:46:28,033 - INFO - Performance target met: 20.19ms encoding time
+2026-06-10 18:46:28,033 - INFO - ✅ Phase 4 Intent Judge initialized and DEPLOYED
+2026-06-10 18:46:28,033 - INFO -    Status: LIVE IN SENTRY-SWARM OEW LOOP
+2026-06-10 18:46:28,033 - INFO - 
+📡 PROCESSING 6 LIVE PULSEWATCH EVENTS...
+2026-06-10 18:46:28,033 - INFO - --------------------------------------------------
+2026-06-10 18:46:28,033 - INFO - 
+𝓁 Live Event 1/6:
+2026-06-10 18:46:28,033 - INFO - 📡 LIVE OEW EVENT #1: CRITICAL AWS S3 Service Disruption
+2026-06-10 18:46:28,057 - ERROR - Live deployment failed: name 'total_latency' is not defined
+2026-06-10 18:49:21,294 - INFO - MambaIntentJudgeAdapter initialized for mamba-3:2.8b
+2026-06-10 18:49:21,295 - INFO - ======================================================================
+2026-06-10 18:49:21,295 - INFO - 🚀 PHASE 4 SSM LEAP LIVE DEPLOYMENT INITIATED
+2026-06-10 18:49:21,295 - INFO -    Activating <200ms Intent Judge in Sentry-Swarm OEW Loop
+2026-06-10 18:49:21,295 - INFO - ======================================================================
+2026-06-10 18:49:21,295 - INFO - 🚀 INITIALIZING PHASE 4 SSM LEAP FOR LIVE DEPLOYMENT
+2026-06-10 18:49:21,295 - INFO -    Deploying <200ms Intent Judge to live Sentry-Swarm OEW Loop
+2026-06-10 18:49:21,295 - INFO - Loading Mamba model: mamba-3:2.8b
+2026-06-10 18:49:21,395 - INFO - Mamba model mamba-3:2.8b loaded successfully
+2026-06-10 18:49:21,395 - INFO - Warming up Mamba model with 5 iterations
+2026-06-10 18:49:21,496 - INFO - Warmup complete. Average encoding time: 20.14ms
+2026-06-10 18:49:21,496 - INFO - Performance target met: 20.14ms encoding time
+2026-06-10 18:49:21,496 - INFO - ✅ Phase 4 Intent Judge initialized and DEPLOYED
+2026-06-10 18:49:21,496 - INFO -    Status: LIVE IN SENTRY-SWARM OEW LOOP
+2026-06-10 18:49:21,496 - INFO - 
+📡 PROCESSING 6 LIVE PULSEWATCH EVENTS...
+2026-06-10 18:49:21,496 - INFO - --------------------------------------------------
+2026-06-10 18:49:21,496 - INFO - 
+📡 Live Event 1/6:
+2026-06-10 18:49:21,496 - INFO - 📡 LIVE OEW EVENT #1: CRITICAL AWS S3 Service Disruption
+2026-06-10 18:49:21,520 - INFO - 💰 ARBITRAGE OPPORTUNITY CAPTURED! Intent: 15.25ms | Total: 23.44ms
+2026-06-10 18:49:23,521 - INFO - 
+📡 Live Event 2/6:
+2026-06-10 18:49:23,521 - INFO - 📡 LIVE OEW EVENT #2: CRITICAL GitHub API Authentication Failure
+2026-06-10 18:49:23,544 - INFO - 💰 ARBITRAGE OPPORTUNITY CAPTURED! Intent: 15.20ms | Total: 23.49ms
+2026-06-10 18:49:25,546 - INFO - 
+📡 Live Event 3/6:
+2026-06-10 18:49:25,546 - INFO - 📡 LIVE OEW EVENT #3: CRITICAL Stripe Payment Processing Outage
+2026-06-10 18:49:25,569 - INFO - 💰 ARBITRAGE OPPORTUNITY CAPTURED! Intent: 15.13ms | Total: 23.30ms
+2026-06-10 18:49:27,571 - INFO - 
+📡 Live Event 4/6:
+2026-06-10 18:49:27,571 - INFO - 📡 LIVE OEW EVENT #4: MAJOR Cloudflare DNS Resolution Failure
+2026-06-10 18:49:27,594 - INFO - 💰 ARBITRAGE OPPORTUNITY CAPTURED! Intent: 15.16ms | Total: 23.44ms
+2026-06-10 18:49:29,596 - INFO - 
+📡 Live Event 5/6:
+2026-06-10 18:49:29,596 - INFO - 📡 LIVE OEW EVENT #5: MAJOR Ledger Hardware Wallet Connectivity Issue
+2026-06-10 18:49:29,620 - INFO - 💰 ARBITRAGE OPPORTUNITY CAPTURED! Intent: 15.16ms | Total: 23.55ms
+2026-06-10 18:49:31,621 - INFO - 
+📡 Live Event 6/6:
+2026-06-10 18:49:31,621 - INFO - 📡 LIVE OEW EVENT #6: MAJOR Microsoft Azure VM Service Degradation
+2026-06-10 18:49:31,644 - INFO - 💰 ARBITRAGE OPPORTUNITY CAPTURED! Intent: 15.16ms | Total: 23.43ms
+2026-06-10 18:49:33,646 - INFO - 
+======================================================================
+2026-06-10 18:49:33,646 - INFO - 📊 PHASE 4 SSM LEAP LIVE DEPLOYMENT REPORT
+2026-06-10 18:49:33,646 - INFO - ======================================================================
+2026-06-10 18:49:33,646 - INFO - ⏱️  Deployment Time: 0.21 minutes
+2026-06-10 18:49:33,646 - INFO - 📡 Events Processed: 6
+2026-06-10 18:49:33,646 - INFO - 💰 Arbitrage Opportunities Captured: 6
+2026-06-10 18:49:33,646 - INFO - ⚡ Average Latency: 23.44ms
+2026-06-10 18:49:33,646 - INFO - 📈 Arbitrage Rate: 100.0%
+2026-06-10 18:49:33,646 - INFO - 🚀 Performance Advantage: 36.3x faster than baseline
+2026-06-10 18:49:33,646 - INFO - 🟢 System Status: LIVE DEPLOYMENT ACTIVE
+2026-06-10 18:49:33,646 - INFO - 🎯 Ready for Arbitrage: True
+2026-06-10 18:49:33,646 - INFO - 
+🏆 LIVE DEPLOYMENT: SUCCESSFULLY ACTIVATED!
+2026-06-10 18:49:33,646 - INFO -    Phase 4 SSM Leap is now OPERATIONAL in live Sentry-Swarm OEW Loop
+2026-06-10 18:49:33,646 - INFO -    Real-time arbitrage capability: ENABLED
+2026-06-10 18:49:33,646 - INFO -    Business value: ACTIVELY BEING CAPTURED
+2026-06-10 18:49:33,646 - ERROR - Live deployment failed: name 'json' is not defined

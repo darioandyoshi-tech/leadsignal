@@ -1,0 +1,185 @@
+{
+  "version": 1,
+  "skills": {
+    "self-improving": {
+      "version": "1.2.16",
+      "installedAt": 1781054241346,
+      "registry": "https://clawhub.ai"
+    },
+    "multi-search-engine": {
+      "version": "2.1.3",
+      "installedAt": 1781054310165,
+      "registry": "https://clawhub.ai"
+    },
+    "ontology": {
+      "version": "1.0.4",
+      "installedAt": 1781054330086,
+      "registry": "https://clawhub.ai"
+    },
+    "github": {
+      "version": "1.0.0",
+      "installedAt": 1781054343468,
+      "registry": "https://clawhub.ai"
+    },
+    "obsidian": {
+      "version": "1.0.0",
+      "installedAt": 1781054358015,
+      "registry": "https://clawhub.ai"
+    },
+    "agent-browser-clawdbot": {
+      "version": "0.1.0",
+      "installedAt": 1781054409553,
+      "registry": "https://clawhub.ai"
+    },
+    "nano-banana-pro": {
+      "version": "1.0.1",
+      "installedAt": 1781054416976,
+      "registry": "https://clawhub.ai"
+    },
+    "skill-vetter": {
+      "version": "1.0.0",
+      "installedAt": 1781054650378,
+      "registry": "https://clawhub.ai"
+    },
+    "desktop-control": {
+      "version": "1.0.0",
+      "installedAt": 1781054659110,
+      "registry": "https://clawhub.ai"
+    },
+    "skill-creator": {
+      "version": "0.1.0",
+      "installedAt": 1781054666396,
+      "registry": "https://clawhub.ai"
+    },
+    "humanizer": {
+      "version": "1.0.0",
+      "installedAt": 1781055604627,
+      "registry": "https://clawhub.ai"
+    },
+    "pollyreach": {
+      "version": "1.0.3",
+      "installedAt": 1781055631855,
+      "registry": "https://clawhub.ai"
+    },
+    "discord": {
+      "version": "1.0.1",
+      "installedAt": 1781055754948,
+      "registry": "https://clawhub.ai"
+    },
+    "web-search": {
+      "version": "1.0.0",
+      "installedAt": 1781055760423,
+      "registry": "https://clawhub.ai"
+    },
+    "agentmail": {
+      "version": "1.1.1",
+      "installedAt": 1781055839878,
+      "registry": "https://clawhub.ai"
+    },
+    "deep-research-pro": {
+      "version": "1.0.2",
+      "installedAt": 1781055845633,
+      "registry": "https://clawhub.ai"
+    },
+    "n8n-workflow-automation": {
+      "version": "1.0.0",
+      "installedAt": 1781055854493,
+      "registry": "https://clawhub.ai"
+    },
+    "duckduckgo-search": {
+      "version": "1.0.0",
+      "installedAt": 1781055971448,
+      "registry": "https://clawhub.ai"
+    },
+    "exa-web-search-free": {
+      "version": "1.0.1",
+      "installedAt": 1781055978411,
+      "registry": "https://clawhub.ai"
+    },
+    "security-auditor": {
+      "version": "1.0.0",
+      "installedAt": 1781056122290,
+      "registry": "https://clawhub.ai"
+    },
+    "agent-team-orchestration": {
+      "version": "1.0.0",
+      "installedAt": 1781056130622,
+      "registry": "https://clawhub.ai"
+    },
+    "marketing-mode": {
+      "version": "1.0.0",
+      "installedAt": 1781056138305,
+      "registry": "https://clawhub.ai"
+    },
+    "web-search-plus": {
+      "version": "3.1.0",
+      "installedAt": 1781056147185,
+      "registry": "https://clawhub.ai"
+    },
+    "goplaces": {
+      "version": "1.0.0",
+      "installedAt": 1781056269927,
+      "registry": "https://clawhub.ai"
+    },
+    "moltbook-interact": {
+      "version": "1.0.1",
+      "installedAt": 1781056294815,
+      "registry": "https://clawhub.ai"
+    },
+    "self-reflection": {
+      "version": "1.1.1",
+      "installedAt": 1781056366732,
+      "registry": "https://clawhub.ai"
+    },
+    "screenshot": {
+      "version": "1.0.1",
+      "installedAt": 1781056372395,
+      "registry": "https://clawhub.ai"
+    },
+    "google-search": {
+      "version": "1.0.0",
+      "installedAt": 1781056378746,
+      "registry": "https://clawhub.ai"
+    },
+    "openclaw-agent-optimize": {
+      "version": "1.2.1",
+      "installedAt": 1781056494174,
+      "registry": "https://clawhub.ai"
+    },
+    "prompt-guard": {
+      "version": "3.6.2",
+      "installedAt": 1781056511543,
+      "registry": "https://clawhub.ai"
+    },
+    "marketing-strategy-pmm": {
+      "version": "2.1.1",
+      "installedAt": 1781056621039,
+      "registry": "https://clawhub.ai"
+    },
+    "chart-image": {
+      "version": "2.6.35",
+      "installedAt": 1781056628441,
+      "registry": "https://clawhub.ai"
+    },
+    "cursor-agent": {
+      "version": "2.1.0",
+      "installedAt": 1781056635205,
+      "registry": "https://clawhub.ai"
+    },
+    "deep-scraper": {
+      "version": "1.0.1",
+      "installedAt": 1781056758096,
+      "registry": "https://clawhub.ai"
+    },
+    "linkedin-api": {
+      "version": "1.0.9",
+      "installedAt": 1781056765034,
+      "registry": "https://clawhub.ai"
+    },
+    "social-media-agent": {
+      "version": "1.0.0",
+      "installedAt": 1781056772486,
+      "registry": "https://clawhub.ai"
+    }
+  }
+}

@@ -1,0 +1,176 @@
+2026-06-10 10:45:09,319 - INFO - 🚀 Starting Phase 4 Performance Monitoring for Sentry-Swarm OEW Loop Integration
+2026-06-10 10:45:09,320 - INFO - 📊 Tracking real-world performance of Mamba-3:2.8b Intent Judge
+2026-06-10 10:45:09,320 - INFO - 🎯 Target: <200ms trigger-to-thought latency
+2026-06-10 10:45:09,320 - INFO - ⚡ Validated baseline: 18.94ms (44.89x improvement over gemma4)
+2026-06-10 10:45:09,320 - INFO - 
+📋 Simulating 10 market events through OEW Loop...
+2026-06-10 10:45:09,320 - INFO - 
+📡 OEW Loop Trigger 1/10: CRITICAL: AWS US-EAST-1 S3 experiencing elevated error rates...
+2026-06-10 10:45:09,353 - INFO - ✅ Intent judgment successful: 20.68ms (Target: <200.0ms)
+2026-06-10 10:45:09,353 - INFO -    ⚡ Intent Judgment: 20.68ms
+2026-06-10 10:45:09,353 - INFO -    📊 Total OEW Loop: 32.98ms
+2026-06-10 10:45:09,353 - INFO -    🎯 REAL-TIME ARBITRAGE OPPORTUNITY CAPTURED!
+2026-06-10 10:45:10,354 - INFO - 
+📡 OEW Loop Trigger 2/10: MAJOR: GitHub API degradation affecting pull requests...
+2026-06-10 10:45:10,386 - INFO - ✅ Intent judgment successful: 20.11ms (Target: <200.0ms)
+2026-06-10 10:45:10,386 - INFO -    ⚡ Intent Judgment: 20.11ms
+2026-06-10 10:45:10,386 - INFO -    📊 Total OEW Loop: 32.39ms
+2026-06-10 10:45:10,386 - INFO -    🎯 REAL-TIME ARBITRAGE OPPORTUNITY CAPTURED!
+2026-06-10 10:45:11,387 - INFO - 
+📡 OEW Loop Trigger 3/10: CRITICAL: Stripe payment processing delays reported globally...
+2026-06-10 10:45:11,418 - INFO - ✅ Intent judgment successful: 19.16ms (Target: <200.0ms)
+2026-06-10 10:45:11,419 - INFO -    ⚡ Intent Judgment: 19.16ms
+2026-06-10 10:45:11,419 - INFO -    📊 Total OEW Loop: 31.44ms
+2026-06-10 10:45:11,419 - INFO -    🎯 REAL-TIME ARBITRAGE OPPORTUNITY CAPTURED!
+2026-06-10 10:45:12,419 - INFO - 
+📡 OEW Loop Trigger 4/10: MAJOR: Cloudflare Log Explorer query failures increasing...
+2026-06-10 10:45:12,451 - INFO - ✅ Intent judgment successful: 20.16ms (Target: <200.0ms)
+2026-06-10 10:45:12,452 - INFO -    ⚡ Intent Judgment: 20.16ms
+2026-06-10 10:45:12,452 - INFO -    📊 Total OEW Loop: 32.44ms
+2026-06-10 10:45:12,452 - INFO -    🎯 REAL-TIME ARBITRAGE OPPORTUNITY CAPTURED!
+2026-06-10 10:45:13,452 - INFO - 
+📡 OEW Loop Trigger 5/10: CRITICAL: Ledger ZCash (ZEC) Mainnet Service Disruption ongo...
+2026-06-10 10:45:13,486 - INFO - ✅ Intent judgment successful: 21.14ms (Target: <200.0ms)
+2026-06-10 10:45:13,486 - INFO -    ⚡ Intent Judgment: 21.14ms
+2026-06-10 10:45:13,486 - INFO -    📊 Total OEW Loop: 33.53ms
+2026-06-10 10:45:13,486 - INFO -    🎯 REAL-TIME ARBITRAGE OPPORTUNITY CAPTURED!
+2026-06-10 10:45:14,486 - INFO - 
+📡 OEW Loop Trigger 6/10: MAJOR: Microsoft Azure regional outage affecting VMs in US-W...
+2026-06-10 10:45:14,519 - INFO - ✅ Intent judgment successful: 20.15ms (Target: <200.0ms)
+2026-06-10 10:45:14,519 - INFO -    ⚡ Intent Judgment: 20.15ms
+2026-06-10 10:45:14,519 - INFO -    📊 Total OEW Loop: 32.59ms
+2026-06-10 10:45:14,519 - INFO -    🎯 REAL-TIME ARBITRAGE OPPORTUNITY CAPTURED!
+2026-06-10 10:45:15,520 - INFO - 
+📡 OEW Loop Trigger 7/10: CRITICAL: OpenAI API experiencing high latency and timeouts...
+2026-06-10 10:45:15,551 - INFO - ✅ Intent judgment successful: 19.17ms (Target: <200.0ms)
+2026-06-10 10:45:15,552 - INFO -    ⚡ Intent Judgment: 19.17ms
+2026-06-10 10:45:15,552 - INFO -    📊 Total OEW Loop: 31.44ms
+2026-06-10 10:45:15,552 - INFO -    🎯 REAL-TIME ARBITRAGE OPPORTUNITY CAPTURED!
+2026-06-10 10:45:16,552 - INFO - 
+📡 OEW Loop Trigger 8/10: MAJOR: Docker Hub registry experiencing pull failures...
+2026-06-10 10:45:16,584 - INFO - ✅ Intent judgment successful: 20.15ms (Target: <200.0ms)
+2026-06-10 10:45:16,585 - INFO -    ⚡ Intent Judgment: 20.15ms
+2026-06-10 10:45:16,585 - INFO -    📊 Total OEW Loop: 32.40ms
+2026-06-10 10:45:16,585 - INFO -    🎯 REAL-TIME ARBITRAGE OPPORTUNITY CAPTURED!
+2026-06-10 10:45:17,585 - INFO - 
+📡 OEW Loop Trigger 9/10: CRITICAL: Slack WebSocket connection issues affecting teams...
+2026-06-10 10:45:17,617 - INFO - ✅ Intent judgment successful: 19.14ms (Target: <200.0ms)
+2026-06-10 10:45:17,617 - INFO -    ⚡ Intent Judgment: 19.14ms
+2026-06-10 10:45:17,617 - INFO -    📊 Total OEW Loop: 31.39ms
+2026-06-10 10:45:17,617 - INFO -    🎯 REAL-TIME ARBITRAGE OPPORTUNITY CAPTURED!
+2026-06-10 10:45:18,617 - INFO - 
+📡 OEW Loop Trigger 10/10: MAJOR: Zoom video service degradation reported...
+2026-06-10 10:45:18,650 - INFO - ✅ Intent judgment successful: 21.15ms (Target: <200.0ms)
+2026-06-10 10:45:18,651 - INFO - 📊 Phase 4 Performance Summary (Last 10 operations):
+2026-06-10 10:45:18,651 - INFO -    ⚡ Average latency: 20.10ms
+2026-06-10 10:45:18,651 - INFO -    🎯 Success rate: 100.0% (<200.0ms)
+2026-06-10 10:45:18,651 - INFO -    📈 Improvement vs baseline: 42.3x
+2026-06-10 10:45:18,651 - INFO -    🔢 Total alerts processed: 10
+2026-06-10 10:45:18,651 - INFO -    ✅ Successful judgments: 10
+2026-06-10 10:45:18,651 - INFO -    ❌ Latency violations: 0
+2026-06-10 10:45:18,651 - INFO -    ⚡ Intent Judgment: 21.15ms
+2026-06-10 10:45:18,651 - INFO -    📊 Total OEW Loop: 33.45ms
+2026-06-10 10:45:18,651 - INFO -    🎯 REAL-TIME ARBITRAGE OPPORTUNITY CAPTURED!
+2026-06-10 10:45:19,652 - INFO - 
+============================================================
+2026-06-10 10:45:19,652 - INFO - 📊 FINAL PHASE 4 PERFORMANCE REPORT
+2026-06-10 10:45:19,652 - INFO - ============================================================
+2026-06-10 10:45:19,652 - INFO - ⏱️  Monitoring duration: 0.17 minutes
+2026-06-10 10:45:19,652 - INFO - 📢 Total alerts processed: 10
+2026-06-10 10:45:19,652 - INFO - ✅ Successful judgments: 10
+2026-06-10 10:45:19,652 - INFO - ⚡ Average latency: 20.1ms
+2026-06-10 10:45:19,652 - INFO - 🎯 Success rate: 100.0%
+2026-06-10 10:45:19,652 - INFO - 📈 Improvement vs baseline: 42.29x
+2026-06-10 10:45:19,652 - INFO - 🎯 Performance target met: True
+2026-06-10 10:45:19,652 - INFO - 
+🏆 PHASE 4 INTEGRATION: SUCCESSFUL!
+2026-06-10 10:45:19,652 - INFO -    Real-time Intent Judge enhancing live OEW Loop operations
+2026-06-10 10:45:19,653 - INFO - 💾 Performance report saved to ./logs/phase4_performance_report.json
+2026-06-10 11:57:33,752 - INFO - 🚀 Starting Phase 4 Performance Monitoring for Sentry-Swarm OEW Loop Integration
+2026-06-10 11:57:33,752 - INFO - 📊 Tracking real-world performance of Mamba-3:2.8b Intent Judge
+2026-06-10 11:57:33,752 - INFO - 🎯 Target: <200ms trigger-to-thought latency
+2026-06-10 11:57:33,752 - INFO - ⚡ Validated baseline: 18.94ms (44.89x improvement over gemma4)
+2026-06-10 11:57:33,752 - INFO - 
+📋 Simulating 10 market events through OEW Loop...
+2026-06-10 11:57:33,752 - INFO - 
+📡 OEW Loop Trigger 1/10: CRITICAL: AWS US-EAST-1 S3 experiencing elevated error rates...
+2026-06-10 11:57:33,785 - INFO - ✅ Intent judgment successful: 19.57ms (Target: <200.0ms)
+2026-06-10 11:57:33,785 - INFO -    ⚡ Intent Judgment: 19.57ms
+2026-06-10 11:57:33,785 - INFO -    📊 Total OEW Loop: 31.85ms
+2026-06-10 11:57:33,785 - INFO -    🎯 REAL-TIME ARBITRAGE OPPORTUNITY CAPTURED!
+2026-06-10 11:57:34,786 - INFO - 
+📡 OEW Loop Trigger 2/10: MAJOR: GitHub API degradation affecting pull requests...
+2026-06-10 11:57:34,818 - INFO - ✅ Intent judgment successful: 19.15ms (Target: <200.0ms)
+2026-06-10 11:57:34,818 - INFO -    ⚡ Intent Judgment: 19.15ms
+2026-06-10 11:57:34,818 - INFO -    📊 Total OEW Loop: 31.50ms
+2026-06-10 11:57:34,818 - INFO -    🎯 REAL-TIME ARBITRAGE OPPORTUNITY CAPTURED!
+2026-06-10 11:57:35,818 - INFO - 
+📡 OEW Loop Trigger 3/10: CRITICAL: Stripe payment processing delays reported globally...
+2026-06-10 11:57:35,851 - INFO - ✅ Intent judgment successful: 20.15ms (Target: <200.0ms)
+2026-06-10 11:57:35,851 - INFO -    ⚡ Intent Judgment: 20.15ms
+2026-06-10 11:57:35,851 - INFO -    📊 Total OEW Loop: 32.50ms
+2026-06-10 11:57:35,851 - INFO -    🎯 REAL-TIME ARBITRAGE OPPORTUNITY CAPTURED!
+2026-06-10 11:57:36,852 - INFO - 
+📡 OEW Loop Trigger 4/10: MAJOR: Cloudflare Log Explorer query failures increasing...
+2026-06-10 11:57:36,884 - INFO - ✅ Intent judgment successful: 20.12ms (Target: <200.0ms)
+2026-06-10 11:57:36,885 - INFO -    ⚡ Intent Judgment: 20.12ms
+2026-06-10 11:57:36,885 - INFO -    📊 Total OEW Loop: 32.36ms
+2026-06-10 11:57:36,885 - INFO -    🎯 REAL-TIME ARBITRAGE OPPORTUNITY CAPTURED!
+2026-06-10 11:57:37,885 - INFO - 
+📡 OEW Loop Trigger 5/10: CRITICAL: Ledger ZCash (ZEC) Mainnet Service Disruption ongo...
+2026-06-10 11:57:37,917 - INFO - ✅ Intent judgment successful: 19.14ms (Target: <200.0ms)
+2026-06-10 11:57:37,917 - INFO -    ⚡ Intent Judgment: 19.14ms
+2026-06-10 11:57:37,917 - INFO -    📊 Total OEW Loop: 31.41ms
+2026-06-10 11:57:37,917 - INFO -    🎯 REAL-TIME ARBITRAGE OPPORTUNITY CAPTURED!
+2026-06-10 11:57:38,917 - INFO - 
+📡 OEW Loop Trigger 6/10: MAJOR: Microsoft Azure regional outage affecting VMs in US-W...
+2026-06-10 11:57:38,949 - INFO - ✅ Intent judgment successful: 20.12ms (Target: <200.0ms)
+2026-06-10 11:57:38,950 - INFO -    ⚡ Intent Judgment: 20.12ms
+2026-06-10 11:57:38,950 - INFO -    📊 Total OEW Loop: 32.47ms
+2026-06-10 11:57:38,950 - INFO -    🎯 REAL-TIME ARBITRAGE OPPORTUNITY CAPTURED!
+2026-06-10 11:57:39,950 - INFO - 
+📡 OEW Loop Trigger 7/10: CRITICAL: OpenAI API experiencing high latency and timeouts...
+2026-06-10 11:57:39,982 - INFO - ✅ Intent judgment successful: 19.15ms (Target: <200.0ms)
+2026-06-10 11:57:39,982 - INFO -    ⚡ Intent Judgment: 19.15ms
+2026-06-10 11:57:39,982 - INFO -    📊 Total OEW Loop: 31.57ms
+2026-06-10 11:57:39,982 - INFO -    🎯 REAL-TIME ARBITRAGE OPPORTUNITY CAPTURED!
+2026-06-10 11:57:40,983 - INFO - 
+📡 OEW Loop Trigger 8/10: MAJOR: Docker Hub registry experiencing pull failures...
+2026-06-10 11:57:41,016 - INFO - ✅ Intent judgment successful: 20.12ms (Target: <200.0ms)
+2026-06-10 11:57:41,016 - INFO -    ⚡ Intent Judgment: 20.12ms
+2026-06-10 11:57:41,016 - INFO -    📊 Total OEW Loop: 32.40ms
+2026-06-10 11:57:41,016 - INFO -    🎯 REAL-TIME ARBITRAGE OPPORTUNITY CAPTURED!
+2026-06-10 11:57:42,016 - INFO - 
+📡 OEW Loop Trigger 9/10: CRITICAL: Slack WebSocket connection issues affecting teams...
+2026-06-10 11:57:42,050 - INFO - ✅ Intent judgment successful: 21.15ms (Target: <200.0ms)
+2026-06-10 11:57:42,050 - INFO -    ⚡ Intent Judgment: 21.15ms
+2026-06-10 11:57:42,050 - INFO -    📊 Total OEW Loop: 33.50ms
+2026-06-10 11:57:42,050 - INFO -    🎯 REAL-TIME ARBITRAGE OPPORTUNITY CAPTURED!
+2026-06-10 11:57:43,050 - INFO - 
+📡 OEW Loop Trigger 10/10: MAJOR: Zoom video service degradation reported...
+2026-06-10 11:57:43,083 - INFO - ✅ Intent judgment successful: 20.15ms (Target: <200.0ms)
+2026-06-10 11:57:43,083 - INFO - 📊 Phase 4 Performance Summary (Last 10 operations):
+2026-06-10 11:57:43,083 - INFO -    ⚡ Average latency: 19.88ms
+2026-06-10 11:57:43,083 - INFO -    🎯 Success rate: 100.0% (<200.0ms)
+2026-06-10 11:57:43,083 - INFO -    📈 Improvement vs baseline: 42.8x
+2026-06-10 11:57:43,083 - INFO -    🔢 Total alerts processed: 10
+2026-06-10 11:57:43,083 - INFO -    ✅ Successful judgments: 10
+2026-06-10 11:57:43,083 - INFO -    ❌ Latency violations: 0
+2026-06-10 11:57:43,083 - INFO -    ⚡ Intent Judgment: 20.15ms
+2026-06-10 11:57:43,083 - INFO -    📊 Total OEW Loop: 32.51ms
+2026-06-10 11:57:43,083 - INFO -    🎯 REAL-TIME ARBITRAGE OPPORTUNITY CAPTURED!
+2026-06-10 11:57:44,084 - INFO - 
+============================================================
+2026-06-10 11:57:44,084 - INFO - 📊 FINAL PHASE 4 PERFORMANCE REPORT
+2026-06-10 11:57:44,084 - INFO - ============================================================
+2026-06-10 11:57:44,084 - INFO - ⏱️  Monitoring duration: 0.17 minutes
+2026-06-10 11:57:44,084 - INFO - 📢 Total alerts processed: 10
+2026-06-10 11:57:44,084 - INFO - ✅ Successful judgments: 10
+2026-06-10 11:57:44,084 - INFO - ⚡ Average latency: 19.88ms
+2026-06-10 11:57:44,084 - INFO - 🎯 Success rate: 100.0%
+2026-06-10 11:57:44,084 - INFO - 📈 Improvement vs baseline: 42.75x
+2026-06-10 11:57:44,084 - INFO - 🎯 Performance target met: True
+2026-06-10 11:57:44,084 - INFO - 
+🏆 PHASE 4 INTEGRATION: SUCCESSFUL!
+2026-06-10 11:57:44,084 - INFO -    Real-time Intent Judge enhancing live OEW Loop operations
+2026-06-10 11:57:44,085 - INFO - 💾 Performance report saved to ./logs/phase4_performance_report.json

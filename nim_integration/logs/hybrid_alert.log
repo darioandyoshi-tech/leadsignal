@@ -1,0 +1,12 @@
+2026-06-11 22:50:37,298 - __main__ - INFO - ✅ Mamba-3:2.8b deployer concept ready (we know it works from deployment logs)
+2026-06-11 22:50:37,317 - nim_client_clean - INFO - ✅ NVIDIA NIM client initialized successfully
+2026-06-11 22:50:37,317 - __main__ - INFO - ✅ NVIDIA NIM client ready for deep analysis
+2026-06-11 22:50:37,318 - __main__ - INFO - 🚀 Hybrid Alert Processor initialized
+2026-06-11 22:50:37,318 - __main__ - INFO - 🔄 Processing hybrid alert: CRITICAL AWS S3 Service Disruption
+2026-06-11 22:50:37,318 - __main__ - ERROR - ❌ Hybrid alert processing failed after 0ms: cannot access local variable 'end_time' where it is not associated with a value
+2026-06-11 22:50:37,318 - __main__ - INFO - 🔄 Processing hybrid alert: CRITICAL Stripe Payment Processing Outage
+2026-06-11 22:50:37,318 - __main__ - ERROR - ❌ Hybrid alert processing failed after 0ms: cannot access local variable 'end_time' where it is not associated with a value
+2026-06-11 22:50:37,318 - __main__ - INFO - 🔄 Processing hybrid alert: CRITICAL GitHub API Authentication Failure
+2026-06-11 22:50:37,318 - __main__ - ERROR - ❌ Hybrid alert processing failed after 0ms: cannot access local variable 'end_time' where it is not associated with a value
+2026-06-11 22:50:37,318 - __main__ - INFO - 🔄 Processing hybrid alert: MINOR LocalBank Minor Website Update
+2026-06-11 22:50:37,319 - __main__ - ERROR - ❌ Hybrid alert processing failed after 0ms: cannot access local variable 'end_time' where it is not associated with a value

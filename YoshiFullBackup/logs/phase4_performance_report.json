@@ -1,0 +1,58 @@
+{
+  "monitoring_duration_minutes": 0.17,
+  "total_alerts_processed": 10,
+  "successful_judgments": 10,
+  "latency_violations": 0,
+  "average_latency_ms": 19.88,
+  "success_rate_percent": 100.0,
+  "improvement_vs_baseline": 42.75,
+  "performance_target_met": true,
+  "recent_performance": [
+    {
+      "timestamp": "2026-06-10T11:57:38.949957",
+      "market_event": "MAJOR: Microsoft Azure regional outage affecting VMs in US-West",
+      "processing_time_ms": 20.12,
+      "latency_target_met": true,
+      "improvement_vs_baseline": 42.25,
+      "improvement_vs_validated": 0.94,
+      "alert_number": 6
+    },
+    {
+      "timestamp": "2026-06-10T11:57:39.982191",
+      "market_event": "CRITICAL: OpenAI API experiencing high latency and timeouts",
+      "processing_time_ms": 19.15,
+      "latency_target_met": true,
+      "improvement_vs_baseline": 44.39,
+      "improvement_vs_validated": 0.99,
+      "alert_number": 7
+    },
+    {
+      "timestamp": "2026-06-10T11:57:41.016042",
+      "market_event": "MAJOR: Docker Hub registry experiencing pull failures",
+      "processing_time_ms": 20.12,
+      "latency_target_met": true,
+      "improvement_vs_baseline": 42.24,
+      "improvement_vs_validated": 0.94,
+      "alert_number": 8
+    },
+    {
+      "timestamp": "2026-06-10T11:57:42.050129",
+      "market_event": "CRITICAL: Slack WebSocket connection issues affecting teams",
+      "processing_time_ms": 21.15,
+      "latency_target_met": true,
+      "improvement_vs_baseline": 40.19,
+      "improvement_vs_validated": 0.9,
+      "alert_number": 9
+    },
+    {
+      "timestamp": "2026-06-10T11:57:43.083151",
+      "market_event": "MAJOR: Zoom video service degradation reported",
+      "processing_time_ms": 20.15,
+      "latency_target_met": true,
+      "improvement_vs_baseline": 42.18,
+      "improvement_vs_validated": 0.94,
+      "alert_number": 10
+    }
+  ],
+  "timestamp": "2026-06-10T11:57:44.084918"
+}

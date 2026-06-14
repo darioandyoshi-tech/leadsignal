@@ -1,0 +1,11 @@
+def safe_unicode_string(text: str, max_length: int = None) -> str:
+    """Safely handle Unicode strings for logging/printing to avoid ASCII encoding errors"""
+    if not isinstance(text, str):
+        text = str(text)
+    try:
+        # Test if we can encode to ASCII
+        text.encode('ascii')
+        return text
+    except UnicodeEncodeError:
+        # Replace problematic Unicode characters
+        return text.encode('ascii', 'replace').decode('ascii')
