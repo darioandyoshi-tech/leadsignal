@@ -12,17 +12,17 @@
 
 ---
 
-## LeadSignal Product Launch — June 14, 2026 04:31 CDT
+## LeadSignal Product Launch — June 14, 2026 05:04 CDT
 - **Product**: LeadSignal — local market opportunity scanner for Omaha, NE
 - **Signals**: hiring spikes, negative review clusters, commercial permit filings
-- **Stack**: Python scrapers + Postgres + FastAPI + Next.js + Stripe + cron alerts
+- **Stack**: Python scrapers + Postgres/SQLite + FastAPI + Next.js + Stripe + cron alerts
 - **Buyers/Tiers**: Starter $49/mo, Pro $149/mo, Growth $399/mo, Enterprise custom
 - **Delivery**: email, dashboard, Slack, Discord, webhook, CSV, API
 - **GitHub Repo**: https://github.com/darioandyoshi-tech/leadsignal (private)
 - **Live Dashboard**: https://leadsignal-dme1.vercel.app
-- **Status**: Frontend deployed; backend not yet deployed; Stripe/DB not provisioned
+- **Backend Status**: Fly.io app deployed but DB SSL issues; Render Blueprint ready with SQLite fallback
 - **API Keys Stored**: Google Maps Platform key in backend/scraper `.env` files
-- **Next Steps**: Deploy backend, provision Postgres+Redis, create Stripe prices, wire live permit feed, build auth pages
+- **Next Steps**: Deploy backend on Render (one-click Blueprint), create Stripe prices, set Vercel API URL, build auth pages, implement Accela scraper
 
 ---
 
