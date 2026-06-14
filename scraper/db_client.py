@@ -1,3 +1,4 @@
+"""Synchronous DB client shared by scraper modules."""
 
 import uuid
 import sys
@@ -16,7 +17,7 @@ from scraper.config import DATABASE_URL
 from app.models import Base, Company, Signal, SignalType
 
 # SQLite: allow cross-thread usage and wait longer on write locks.
-sqlite_connect_args = {"check_same_thread": False, "timeout": 30}
+sqlite_connect_args = {"check_same_thread": False, "timeout": 60}
 engine = create_engine(
     DATABASE_URL,
     connect_args=sqlite_connect_args,

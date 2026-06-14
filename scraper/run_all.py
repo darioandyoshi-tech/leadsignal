@@ -6,6 +6,7 @@ import os
 # Make backend models importable from scraper directory
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
+# Scraper sources
 from scraper.sources import (
     apify_jobs_reviews,
     apify_business_licenses,
@@ -73,6 +74,8 @@ def main():
             print(result)
         except Exception as e:
             print(f"ERROR in {name}: {e}")
+            import traceback
+            traceback.print_exc()
             results.append({"source": name, "error": str(e)})
 
     total_created = sum(r.get("signals_created", 0) for r in results)

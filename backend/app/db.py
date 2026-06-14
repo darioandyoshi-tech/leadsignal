@@ -13,7 +13,7 @@ if not settings.database_url_raw or "sqlite" in settings.database_url_raw:
     SYNC_SQLITE_URL = "sqlite:///./leadsignal.db"
     engine = create_async_engine(SQLITE_URL, echo=settings.debug)
     async_session_maker = async_sessionmaker(engine, expire_on_commit=False)
-    sync_engine = create_engine(SYNC_SQLITE_URL)
+    sync_engine = create_engine(SYNC_SQLITE_URL, connect_args={"check_same_thread": False, "timeout": 60})
     sync_session_maker = sessionmaker(sync_engine)
 else:
     # Fly Postgres uses a self-signed cert over the internal network; disable verification
