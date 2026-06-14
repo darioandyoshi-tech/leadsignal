@@ -180,6 +180,11 @@
       "version": "1.0.0",
       "installedAt": 1781056772486,
       "registry": "https://clawhub.ai"
+    },
+    "apify": {
+      "version": "1.0.3",
+      "installedAt": 1781451153991,
+      "registry": "https://clawhub.ai"
     }
   }
 }
