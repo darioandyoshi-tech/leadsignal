@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, and_, desc
 from typing import Optional
 from app.db import get_db
-from app.dependencies import get_current_user
+from app.dependencies import get_current_user_optional
 from app.models import User, Signal, Company, SignalType
 from app.schemas import SignalRead, SignalFilter
 
@@ -19,9 +19,10 @@ async def list_signals(
     zip_code: Optional[str] = None,
     limit: int = Query(50, le=100),
     offset: int = Query(0, ge=0),
-    user: User = Depends(get_current_user),
+    user: Optional[User] = Depends(get_current_user_optional),
     db: AsyncSession = Depends(get_db),
 ):
+    # Public read access for MVP demo; paid tiers can gate later.
     stmt = select(Signal).join(Company).where(Signal.severity >= min_severity)
     if signal_type:
         stmt = stmt.where(Signal.signal_type == signal_type)
@@ -35,7 +36,7 @@ async def list_signals(
 
 
 @router.get("/stats")
-async def signal_stats(user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
+async def signal_stats(user: Optional[User] = Depends(get_current_user_optional), db: AsyncSession = Depends(get_db)):
     from sqlalchemy import func
     stmt = select(Signal.signal_type, func.count(Signal.id)).group_by(Signal.signal_type)
     result = await db.execute(stmt)
@@ -44,5 +45,9 @@ async def signal_stats(user: User = Depends(get_current_user), db: AsyncSession 
         "hiring_spike": counts.get("hiring_spike", 0),
         "negative_review_cluster": counts.get("negative_review_cluster", 0),
         "permit_filing": counts.get("permit_filing", 0),
+        "parcel_change": counts.get("parcel_change", 0),
+        "tax_delinquency": counts.get("tax_delinquency", 0),
+        "gov_contract_award": counts.get("gov_contract_award", 0),
+        "business_license": counts.get("business_license", 0),
         "total": sum(counts.values()),
     }

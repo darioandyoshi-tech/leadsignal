@@ -2,27 +2,29 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { getSignals, getSignalStats, sendDigest, getSubscription } from '@/lib/api';
 
 export default function Dashboard() {
-  const router = useRouter();
   const [signals, setSignals] = useState<any[]>([]);
-  const [stats, setStats] = useState({ hiring_spike: 0, negative_review_cluster: 0, permit_filing: 0, total: 0 });
+  const [stats, setStats] = useState({
+    total: 0,
+    hiring_spike: 0,
+    negative_review_cluster: 0,
+    permit_filing: 0,
+    parcel_change: 0,
+    tax_delinquency: 0,
+    gov_contract_award: 0,
+    business_license: 0,
+  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [user, setUser] = useState<{ email?: string; tier?: string } | null>(null);
 
   useEffect(() => {
-    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
-    if (!token) {
-      router.push('/auth/login');
-      return;
-    }
     load();
-  }, [router]);
+  }, []);
 
   async function load() {
     try {
@@ -36,12 +38,7 @@ export default function Dashboard() {
       setStats(statData);
       setUser(subData);
     } catch (e: any) {
-      if (e.response?.status === 401) {
-        localStorage.removeItem('token');
-        router.push('/auth/login');
-      } else {
-        setError(e.response?.data?.detail || e.message);
-      }
+      setError(e.response?.data?.detail || e.message);
     } finally {
       setLoading(false);
     }
@@ -49,17 +46,23 @@ export default function Dashboard() {
 
   function logout() {
     localStorage.removeItem('token');
-    router.push('/auth/login');
+    window.location.reload();
   }
 
   const typeLabels: Record<string, string> = {
     hiring_spike: '💼 Hiring Spike',
     negative_review_cluster: '⭐ Negative Reviews',
     permit_filing: '🏗️ Permit Filing',
+    parcel_change: '🏠 Parcel Change',
+    tax_delinquency: '💰 Tax Delinquency',
+    gov_contract_award: '📜 Gov Contract',
+    business_license: '📋 Business License',
+    ucc_filing: '🏛️ UCC Filing',
+    new_business_registration: '🆕 New Business',
   };
 
   return (
-    <main className="max-w-5xl mx-auto p-6">
+    <main className="max-w-6xl mx-auto p-6">
       <header className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">LeadSignal</h1>
@@ -74,15 +77,25 @@ export default function Dashboard() {
           <Link href="/billing">
             <Button variant="outline">Pricing</Button>
           </Link>
-          <Button variant="ghost" onClick={logout}>Sign out</Button>
+          {user ? (
+            <Button variant="ghost" onClick={logout}>Sign out</Button>
+          ) : (
+            <Link href="/auth/login">
+              <Button variant="ghost">Sign in</Button>
+            </Link>
+          )}
         </div>
       </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
         <StatCard title="Total Signals" value={stats.total} />
         <StatCard title="Hiring Spikes" value={stats.hiring_spike} />
         <StatCard title="Review Clusters" value={stats.negative_review_cluster} />
         <StatCard title="Permit Filings" value={stats.permit_filing} />
+        <StatCard title="Parcel Changes" value={stats.parcel_change} />
+        <StatCard title="Tax Delinquency" value={stats.tax_delinquency} />
+        <StatCard title="Gov Contracts" value={stats.gov_contract_award} />
+        <StatCard title="Business Licenses" value={stats.business_license} />
       </div>
 
       <div className="flex items-center justify-between mb-4">
