@@ -16,7 +16,10 @@ class Settings(BaseSettings):
         url = self.database_url_raw
         if url.startswith("postgres://"):
             url = "postgresql" + url.removeprefix("postgres")
-        # Drop sslmode query param for asyncpg (it uses ssl argument instead)
+        # Fly internal Postgres uses port 5433 directly, no SSL needed over WireGuard
+        if ".flycast:5432" in url:
+            url = url.replace(":5432", ":5433")
+        # Drop any sslmode query param for asyncpg
         if "?" in url:
             base, query = url.split("?", 1)
             params = [p for p in query.split("&") if not p.startswith("sslmode")]
@@ -30,6 +33,8 @@ class Settings(BaseSettings):
         url = self.sync_database_url_raw
         if url.startswith("postgres://"):
             url = "postgresql" + url.removeprefix("postgres")
+        if ".flycast:5432" in url:
+            url = url.replace(":5432", ":5433")
         if "+psycopg2" not in url and "+asyncpg" not in url and "postgresql://" in url:
             url = url.replace("postgresql://", "postgresql+psycopg2://", 1)
         return url

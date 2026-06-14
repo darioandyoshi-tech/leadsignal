@@ -6,12 +6,7 @@ from app.config import get_settings
 
 settings = get_settings()
 
-# Fly.io Postgres requires SSL; asyncpg needs it as connect_args
-async_connect_args = {}
-if settings.database_url_raw and ("flycast" in settings.database_url_raw or "sslmode" in settings.database_url_raw):
-    async_connect_args["ssl"] = True
-
-engine = create_async_engine(settings.database_url, echo=settings.debug, connect_args=async_connect_args)
+engine = create_async_engine(settings.database_url, echo=settings.debug)
 async_session_maker = async_sessionmaker(engine, expire_on_commit=False)
 
 sync_engine = create_engine(settings.sync_database_url)
