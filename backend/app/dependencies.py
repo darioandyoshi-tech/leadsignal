@@ -7,10 +7,17 @@ from app.db import get_db, async_session_maker
 from app.models import User
 from app.security import decode_token
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login", auto_error=False)
 
 
-async def get_current_user(token: str = Depends(oauth2_scheme), db: AsyncSession = Depends(get_db)) -> User:
+async def _get_token_optional(token: Optional[str] = Depends(oauth2_scheme)) -> Optional[str]:
+    return token
+
+
+async def get_current_user(
+    token: str = Depends(OAuth2PasswordBearer(tokenUrl="/auth/login")),
+    db: AsyncSession = Depends(get_db),
+) -> User:
     payload = decode_token(token)
     if not payload or "sub" not in payload:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")
@@ -22,8 +29,13 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db: AsyncSession
     return user
 
 
-async def get_current_user_optional(token: str = Depends(oauth2_scheme), db: AsyncSession = Depends(get_db)) -> Optional[User]:
+async def get_current_user_optional(
+    token: Optional[str] = Depends(_get_token_optional),
+    db: AsyncSession = Depends(get_db),
+) -> Optional[User]:
     """Return current user if a valid token is provided, otherwise None."""
+    if not token:
+        return None
     try:
         return await get_current_user(token, db)
     except HTTPException:
