@@ -1,4 +1,3 @@
-
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
 from jose import JWTError, jwt
@@ -13,7 +12,8 @@ def verify_password(plain: str, hashed: str) -> bool:
 
 
 def hash_password(plain: str) -> str:
-    return pwd_context.hash(plain)
+    # bcrypt has a 72-byte limit on the raw password input
+    return pwd_context.hash(plain[:72])
 
 
 def create_access_token(data: dict, expires_delta: timedelta | None = None) -> str:
