@@ -1,0 +1,28 @@
+# Replit configuration for LeadSignal frontend
+# This points the frontend at the live Render backend.
+
+entrypoint = "frontend/package.json"
+run = "cd frontend && npm run dev"
+modules = ["nodejs-20"]
+
+hidden = [".config", "node_modules", "backend/venv312"]
+
+[nix]
+channel = "stable-24_05"
+
+[env]
+NEXT_PUBLIC_API_URL = "https://leadsignal-8y5f.onrender.com"
+NODE_ENV = "development"
+NEXT_TELEMETRY_DISABLED = "1"
+
+[packager]
+language = "nodejs"
+
+[packager.features]
+packageSearch = true
+guessImports = true
+enabledForHosting = false
+
+[deployment]
+build = ["cd frontend && npm install && npm run build"]
+run = ["cd frontend && npm run start"]
