@@ -13,10 +13,21 @@ export default function Dashboard() {
     hiring_spike: 0,
     negative_review_cluster: 0,
     permit_filing: 0,
+    permit_subtypes: {
+      building: 0,
+      electrical: 0,
+      mechanical: 0,
+      plumbing: 0,
+      wrecking_demolition: 0,
+      inspection: 0,
+      other: 0,
+    },
     parcel_change: 0,
     tax_delinquency: 0,
     gov_contract_award: 0,
     business_license: 0,
+    ucc_filing: 0,
+    new_business_registration: 0,
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -61,6 +72,16 @@ export default function Dashboard() {
     new_business_registration: '🆕 New Business',
   };
 
+  const permitLabels: Record<string, string> = {
+    building: '🏗️ Building',
+    electrical: '⚡ Electrical',
+    mechanical: '🔧 Mechanical',
+    plumbing: '🚰 Plumbing',
+    wrecking_demolition: '💥 Wrecking',
+    inspection: '🔍 Inspection',
+    other: '📋 Other Permit',
+  };
+
   return (
     <main className="max-w-6xl mx-auto p-6">
       <header className="mb-8 flex items-center justify-between">
@@ -96,7 +117,20 @@ export default function Dashboard() {
         <StatCard title="Tax Delinquency" value={stats.tax_delinquency} />
         <StatCard title="Gov Contracts" value={stats.gov_contract_award} />
         <StatCard title="Business Licenses" value={stats.business_license} />
+        <StatCard title="UCC Filings" value={stats.ucc_filing || 0} />
+        <StatCard title="New Businesses" value={stats.new_business_registration || 0} />
       </div>
+
+      {stats.permit_filing > 0 && (
+        <div className="mb-8">
+          <h3 className="text-sm font-semibold text-slate-500 mb-3 uppercase tracking-wide">Permit Subtypes</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
+            {Object.entries(stats.permit_subtypes || {}).map(([key, value]) => (
+              <StatCard key={key} title={permitLabels[key] || key} value={value as number} />
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-semibold">Latest Signals</h2>
