@@ -7,6 +7,7 @@ publisher when possible.
 """
 
 import feedparser
+import re
 import requests
 from datetime import datetime
 from typing import List
@@ -78,6 +79,27 @@ def _is_omaha_relevant(title: str, summary: str) -> bool:
     return any(x in text for x in ["omaha", "douglas", "sarpy", "nebraska"])
 
 
+def _classify_public_notice(title: str, summary: str) -> SignalType:
+    """Classify a public notice article by content keywords."""
+    text = f"{title} {summary}".lower()
+    # Strip common HTML tags so keywords inside the body are visible.
+    for tag in ["<p>", "</p>", "<strong>", "</strong>", "<em>", "</em>", "<div>", "</div>", "<span>", "</span>", "<br>", "<br/>", "\n"]:
+        text = text.replace(tag, " ")
+    text = re.sub(r"<[^>]+>", " ", text)
+
+    if any(k in text for k in ["liquor license", "class c license", "alcoholic liquor", "beverage control"]):
+        return SignalType.business_license
+    if any(k in text for k in ["bid", "rfp", "request for proposal", "invitation to bid", "solicitation", "contract award", "notice inviting bids", "sealed bids"]):
+        return SignalType.gov_contract_award
+    if any(k in text for k in ["probate", "estate of", "notice to creditors"]):
+        return SignalType.new_business_registration
+    if any(k in text for k in ["tax sale", "delinquent tax", "property sale", "foreclosure"]):
+        return SignalType.tax_delinquency
+    if any(k in text for k in ["deed", "quit claim", "warranty deed", "trustee deed"]):
+        return SignalType.parcel_change
+    return SignalType.new_business_registration
+
+
 def _extract_organization(title: str) -> str:
     """Best-effort publisher name from ODR notice title."""
     title = title.replace("Public Notices", "").replace("Notice Inviting Bids", "").strip(" -")
@@ -90,6 +112,7 @@ def run(limit_per_feed: int = 50) -> dict:
     created = 0
     skipped = 0
     inspected = 0
+    by_type = {}
 
     for feed_name, url in FEED_URLS.items():
         entries = _fetch_feed(url)[:limit_per_feed]
@@ -97,8 +120,12 @@ def run(limit_per_feed: int = 50) -> dict:
         for entry in entries:
             inspected += 1
             title = entry["title"]
-            if not _is_omaha_relevant(title, entry["summary"]):
+            summary = entry["summary"]
+            if not _is_omaha_relevant(title, summary):
                 continue
+            # Public notices can cover many topics; classify by content.
+            if feed_name == "public_notices":
+                signal_type = _classify_public_notice(title, summary)
             company_name = _extract_organization(title)
             published_at = _pubdate_to_datetime(entry["published"])
 
@@ -115,7 +142,7 @@ def run(limit_per_feed: int = 50) -> dict:
                     signal_type=signal_type,
                     severity=2,
                     headline=headline,
-                    summary=entry["summary"] or title,
+                    summary=summary or title,
                     source_url=entry["link"] or url,
                     source_api=f"odr_{feed_name}",
                     location_name="Omaha, NE",
@@ -129,6 +156,7 @@ def run(limit_per_feed: int = 50) -> dict:
                 )
                 if sid:
                     created += 1
+                    by_type[signal_type.value] = by_type.get(signal_type.value, 0) + 1
                 session.commit()
 
     return {
@@ -136,6 +164,7 @@ def run(limit_per_feed: int = 50) -> dict:
         "signals_created": created,
         "signals_skipped": skipped,
         "entries_inspected": inspected,
+        "by_type": by_type,
     }
 
 
