@@ -54,6 +54,11 @@ DATABASE_URL = os.getenv(
     os.getenv("DATABASE_URL", "sqlite:///./leadsignal.db"),
 )
 
+# PermitStack API
+PERMITSTACK_API_KEY = os.getenv("PERMITSTACK_API_KEY", "")
+PERMITSTACK_API_BASE = "https://api.permit-stack.com/v1"
+PERMITSTACK_MIN_VALUE = int(os.getenv("PERMITSTACK_MIN_VALUE", "1000"))
+
 # Thresholds and constants for the expanded Omaha signal set
 DOR_DELINQ_MIN_BALANCE = 500
 DOR_DELINQ_COUNTIES = ["28"]  # Douglas County FIPS code in NE

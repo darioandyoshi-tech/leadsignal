@@ -24,7 +24,8 @@ vars_to_set = {
     "PYTHON_VERSION": "3.12.0",
     "DATABASE_URL": "sqlite+aiosqlite:///./leadsignal.db",
     "SYNC_DATABASE_URL": "sqlite:///./leadsignal.db",
-    "SECRET_KEY": secrets.token_hex(32),
+    "SECRET_KEY": "818c472758002ef877100977c650583a21973e011df04020fb07f40637586998",
+    "PERMITSTACK_API_KEY": "pk_JZGLF-DI4XZO3bpSqqDKMDFxSEW8DnvMNWKD9Plu8Uc",
 }
 
 for key, value in vars_to_set.items():

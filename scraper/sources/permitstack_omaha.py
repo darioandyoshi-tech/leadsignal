@@ -1,105 +1,166 @@
-"""PermitStack integration placeholder for live Omaha building permits.
+"""PermitStack live Omaha building permit integration.
 
-PermitStack coverage page shows Omaha, NE with 505,643 active permits,
-updated 2 days ago: https://permit-stack.com/coverage.html
+PermitStack API docs: https://api.permit-stack.com/docs
+Coverage page: https://permit-stack.com/coverage.html
 
-This is a commercial data service. Integration steps once an API key is
-available:
-  1. Request API access / pricing at https://permit-stack.com
-  2. Use their permits endpoint for Omaha/Douglas County.
-  3. Emit permit_filing signals for commercial projects above the value threshold.
-
-This module documents the expected schema and provides a JSON/CSV ingestion helper.
+Search endpoint: GET /v1/permits/search
+Key field mappings from API response:
+  id, permit_number, status, category, tags, property_type,
+  address_street, address_city, address_state, address_zip,
+  description_raw, estimated_value, date_filed, date_issued,
+  date_completed, contractor_name, jurisdiction_name, latitude, longitude.
 """
 
 from datetime import datetime
 from typing import List, Dict
 
-from scraper.config import PERMIT_MIN_PROJECT_VALUE
+import requests
+
+from scraper.config import (
+    OMAHA,
+    PERMITSTACK_API_KEY,
+    PERMITSTACK_API_BASE,
+    PERMITSTACK_MIN_VALUE,
+)
 from scraper.db_client import get_or_create_company, insert_signal, Session, signal_exists
 from app.models import SignalType
 
 
+SEARCH_URL = f"{PERMITSTACK_API_BASE}/permits/search"
 COVERAGE_URL = "https://permit-stack.com/coverage.html"
 
 
-def run() -> dict:
-    """Placeholder: PermitStack requires a commercial API key."""
-    return {
-        "source": "permitstack_omaha",
-        "signals_created": 0,
-        "status": "not_configured",
-        "note": "PermitStack has live Omaha permit data (505,643 active permits). Commercial API key required.",
-        "coverage_url": COVERAGE_URL,
-        "next_step": "Contact PermitStack for API key/pricing and implement their permits endpoint.",
-    }
+def _search_permits(city: str, state: str, limit: int = 100, page: int = 1) -> List[Dict]:
+    if not PERMITSTACK_API_KEY:
+        return []
+    params = {"city": city, "state": state, "limit": limit, "page": page}
+    try:
+        r = requests.get(
+            SEARCH_URL,
+            params=params,
+            headers={"X-API-Key": PERMITSTACK_API_KEY, "Accept": "application/json"},
+            timeout=30,
+        )
+        r.raise_for_status()
+        return r.json().get("results", [])
+    except Exception:
+        return []
 
 
-def emit_from_records(records: List[Dict]) -> dict:
-    """Emit permit_filing signals from a PermitStack export.
+def _date_or_none(value) -> datetime | None:
+    if not value:
+        return None
+    try:
+        return datetime.strptime(value, "%Y-%m-%d")
+    except Exception:
+        return None
 
-    Expected fields: permit_number, project_type, project_value, address,
-    city, state, zip, issue_date, contractor, owner, status.
-    """
+
+def _money(value) -> int:
+    if value is None:
+        return 0
+    try:
+        cleaned = "".join(c for c in str(value) if c.isdigit() or c == ".")
+        return int(float(cleaned))
+    except Exception:
+        return 0
+
+
+def run(limit_per_page: int = 100, max_pages: int = 5) -> dict:
+    if not PERMITSTACK_API_KEY:
+        return {
+            "source": "permitstack_omaha",
+            "signals_created": 0,
+            "status": "not_configured",
+            "note": "PermitStack API key not configured.",
+            "coverage_url": COVERAGE_URL,
+        }
+
     created = 0
     skipped = 0
     inspected = 0
-    for record in records:
-        inspected += 1
-        city = (record.get("city") or "Omaha").strip()
-        if city.lower() != "omaha":
-            continue
-        value = 0
-        try:
-            value = int(float(str(record.get("project_value", "0")).replace("$", "").replace(",", "")))
-        except Exception:
-            pass
-        if value < PERMIT_MIN_PROJECT_VALUE:
-            continue
 
-        contractor = (record.get("contractor") or record.get("owner") or "Unknown").strip()
-        address = " ".join(
-            p for p in [record.get("address"), city, record.get("state"), record.get("zip")] if p
-        )
-        try:
-            issue_date = datetime.strptime(record["issue_date"].strip(), "%Y-%m-%d") if record.get("issue_date") else None
-        except Exception:
-            issue_date = None
+    for page in range(1, max_pages + 1):
+        results = _search_permits(OMAHA.city, OMAHA.state_code, limit=limit_per_page, page=page)
+        if not results:
+            break
+        for record in results:
+            inspected += 1
+            value = _money(record.get("estimated_value"))
+            category = (record.get("category") or "").upper()
+            prop_type = (record.get("property_type") or "").upper()
+            status = (record.get("status") or "").upper()
 
-        with Session() as session:
-            company = get_or_create_company(session, contractor, city=city, state="Nebraska")
-            headline = f"Permit filed: {record.get('project_type', 'Commercial project')} in {record.get('zip', 'Omaha')} valued ${value:,.0f}"
-            if signal_exists(session, company.id, SignalType.permit_filing, headline):
-                skipped += 1
+            # Skip cancelled and unknown-property permits with no value.
+            if status == "CANCELLED":
                 continue
-            sid = insert_signal(
-                company_id=company.id,
-                signal_type=SignalType.permit_filing,
-                severity=3 if value >= 200_000 else 2,
-                headline=headline,
-                summary=f"Address: {address}\nContractor/Owner: {contractor}\nValue: ${value:,.0f}\nType: {record.get('project_type', 'N/A')}\nStatus: {record.get('status', 'N/A')}",
-                source_url=COVERAGE_URL,
-                source_api="permitstack_omaha",
-                location_name=address,
-                published_at=issue_date,
-                metadata={
-                    "permit_number": record.get("permit_number"),
-                    "project_value": value,
-                    "project_type": record.get("project_type"),
-                    "address": address,
-                    "zip": record.get("zip"),
-                    "issue_date": issue_date.isoformat() if issue_date else None,
-                    "status": record.get("status"),
-                },
-                session=session,
+            # Keep commercial/renovation/new construction/significant categories even if value is missing.
+            valuable_category = category in {"NEW_CONSTRUCTION", "RENOVATION", "MECHANICAL", "HVAC", "FIRE_ALARM", "SIGN", "OTHER"}
+            commercial = prop_type == "COMMERCIAL" or category == "OTHER"
+            if value < PERMITSTACK_MIN_VALUE and not valuable_category and not commercial:
+                continue
+
+            contractor = (record.get("contractor_name") or "Unknown").strip()
+            address = " ".join(
+                p
+                for p in [
+                    record.get("address_street"),
+                    record.get("address_city"),
+                    record.get("address_state"),
+                    record.get("address_zip"),
+                ]
+                if p
             )
-            if sid:
-                created += 1
-            session.commit()
+            issued = _date_or_none(record.get("date_issued")) or _date_or_none(record.get("date_filed"))
+
+            with Session() as session:
+                company = get_or_create_company(
+                    session, contractor, city=record.get("address_city", "Omaha"), state="Nebraska"
+                )
+                value_text = f" valued ${value:,.0f}" if value else ""
+                headline = f"PermitStack {record.get('category', 'permit')} in {record.get('address_zip', 'Omaha')}{value_text}"
+                if signal_exists(session, company.id, SignalType.permit_filing, headline):
+                    skipped += 1
+                    continue
+                sid = insert_signal(
+                    company_id=company.id,
+                    signal_type=SignalType.permit_filing,
+                    severity=3 if value >= 200_000 or category == "NEW_CONSTRUCTION" else 2,
+                    headline=headline,
+                    summary=f"Address: {address}\nContractor: {contractor}\nValue: ${value:,.0f}" if value else f"Address: {address}\nContractor: {contractor}\nValue: not provided\nDescription: {record.get('description_raw', 'N/A')}\nStatus: {record.get('status', 'N/A')}",
+                    source_url=COVERAGE_URL,
+                    source_api="permitstack_omaha",
+                    location_name=address,
+                    published_at=issued,
+                    metadata={
+                        "permit_number": record.get("permit_number"),
+                        "category": record.get("category"),
+                        "property_type": record.get("property_type"),
+                        "address": address,
+                        "zip": record.get("address_zip"),
+                        "jurisdiction": record.get("jurisdiction_name"),
+                        "estimated_value": value,
+                        "date_filed": record.get("date_filed"),
+                        "date_issued": record.get("date_issued"),
+                        "date_completed": record.get("date_completed"),
+                        "status": record.get("status"),
+                        "description": record.get("description_raw"),
+                        "permitstack_id": record.get("id"),
+                    },
+                    session=session,
+                )
+                if sid:
+                    created += 1
+                session.commit()
 
     return {
         "source": "permitstack_omaha",
         "signals_created": created,
         "signals_skipped": skipped,
         "inspected": inspected,
+        "status": "ok" if created > 0 or inspected > 0 else "no_results",
     }
+
+
+if __name__ == "__main__":
+    print(run())
