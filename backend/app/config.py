@@ -1,5 +1,5 @@
 
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, Field
 from functools import lru_cache
 
 
@@ -7,8 +7,26 @@ class Settings(BaseSettings):
     app_name: str = "LeadSignal"
     debug: bool = False
 
-    database_url: str = "postgresql+asyncpg://leadsignal:leadsignal@localhost:5432/leadsignal"
-    sync_database_url: str = "postgresql://leadsignal:leadsignal@localhost:5432/leadsignal"
+    database_url_raw: str = Field(default="postgresql+asyncpg://leadsignal:leadsignal@localhost:5432/leadsignal", alias="DATABASE_URL")
+    sync_database_url_raw: str = Field(default="postgresql://leadsignal:***@localhost:5432/leadsignal", alias="SYNC_DATABASE_URL")
+
+    @property
+    def database_url(self) -> str:
+        url = self.database_url_raw
+        if url.startswith("postgres://"):
+            url = "postgresql" + url.removeprefix("postgres")
+        if "+asyncpg" not in url and "postgresql://" in url:
+            url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
+        return url
+
+    @property
+    def sync_database_url(self) -> str:
+        url = self.sync_database_url_raw
+        if url.startswith("postgres://"):
+            url = "postgresql" + url.removeprefix("postgres")
+        if "+psycopg2" not in url and "+asyncpg" not in url and "postgresql://" in url:
+            url = url.replace("postgresql://", "postgresql+psycopg2://", 1)
+        return url
 
     secret_key: str = "change-me-in-production"
     algorithm: str = "HS256"
