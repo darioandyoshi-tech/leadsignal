@@ -2,6 +2,8 @@
 .env.vercel
 .env.render
 .venv/
+venv312/
+venv/
 __pycache__/
 *.pyc
 .DS_Store
