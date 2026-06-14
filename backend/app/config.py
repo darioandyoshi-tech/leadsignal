@@ -1,4 +1,3 @@
-
 from pydantic_settings import BaseSettings
 from pydantic import Field
 from functools import lru_cache
@@ -8,18 +7,18 @@ class Settings(BaseSettings):
     app_name: str = "LeadSignal"
     debug: bool = False
 
-    database_url_raw: str = Field(default="postgresql+asyncpg://leadsignal:leadsignal@localhost:5432/leadsignal", alias="DATABASE_URL")
-    sync_database_url_raw: str = Field(default="postgresql://leadsignal:***@localhost:5432/leadsignal", alias="SYNC_DATABASE_URL")
+    database_url_raw: str = Field(default="sqlite+aiosqlite:///./leadsignal.db", alias="DATABASE_URL")
+    sync_database_url_raw: str = Field(default="sqlite:///./leadsignal.db", alias="SYNC_DATABASE_URL")
 
     @property
     def database_url(self) -> str:
         url = self.database_url_raw
+        if not url or "sqlite" in url:
+            return "sqlite+aiosqlite:///./leadsignal.db"
         if url.startswith("postgres://"):
             url = "postgresql" + url.removeprefix("postgres")
-        # Fly internal Postgres uses port 5433 directly, no SSL needed over WireGuard
         if ".flycast:5432" in url:
             url = url.replace(":5432", ":5433")
-        # Drop any sslmode query param for asyncpg
         if "?" in url:
             base, query = url.split("?", 1)
             params = [p for p in query.split("&") if not p.startswith("sslmode")]
@@ -31,6 +30,8 @@ class Settings(BaseSettings):
     @property
     def sync_database_url(self) -> str:
         url = self.sync_database_url_raw
+        if not url or "sqlite" in url:
+            return "sqlite:///./leadsignal.db"
         if url.startswith("postgres://"):
             url = "postgresql" + url.removeprefix("postgres")
         if ".flycast:5432" in url:
