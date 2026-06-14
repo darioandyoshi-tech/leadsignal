@@ -80,6 +80,8 @@ def run(limit_per_page: int = 100, max_pages: int = 5) -> dict:
     created = 0
     skipped = 0
     inspected = 0
+    # Use a fresh session engine per run to avoid inheriting async engine state.
+    from scraper.db_client import Session as DbSession
 
     for page in range(1, max_pages + 1):
         results = _search_permits(OMAHA.city, OMAHA.state_code, limit=limit_per_page, page=page)
@@ -114,7 +116,7 @@ def run(limit_per_page: int = 100, max_pages: int = 5) -> dict:
             )
             issued = _date_or_none(record.get("date_issued")) or _date_or_none(record.get("date_filed"))
 
-            with Session() as session:
+            with DbSession() as session:
                 company = get_or_create_company(
                     session, contractor, city=record.get("address_city", "Omaha"), state="Nebraska"
                 )
@@ -128,7 +130,7 @@ def run(limit_per_page: int = 100, max_pages: int = 5) -> dict:
                     signal_type=SignalType.permit_filing,
                     severity=3 if value >= 200_000 or category == "NEW_CONSTRUCTION" else 2,
                     headline=headline,
-                    summary=f"Address: {address}\nContractor: {contractor}\nValue: ${value:,.0f}" if value else f"Address: {address}\nContractor: {contractor}\nValue: not provided\nDescription: {record.get('description_raw', 'N/A')}\nStatus: {record.get('status', 'N/A')}",
+                    summary=(f"Address: {address}\nContractor: {contractor}\nValue: ${value:,.0f}" if value else f"Address: {address}\nContractor: {contractor}\nValue: not provided\nDescription: {record.get('description_raw', 'N/A')}\nStatus: {record.get('status', 'N/A')}"),
                     source_url=COVERAGE_URL,
                     source_api="permitstack_omaha",
                     location_name=address,

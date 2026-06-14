@@ -9,20 +9,20 @@ from scraper.config import OMAHA, TARGET_INDUSTRIES, REVIEW_CLUSTER_MIN_REVIEWS,
 from scraper.db_client import get_or_create_company, insert_signal, Session, signal_exists
 from app.models import SignalType
 
-API_KEY = os.getenv("GOOGLE_PLACES_API_KEY", "")
+# API_KEY is read at runtime in each function so env changes propagate
 PLACES_TEXTSEARCH_URL = "https://maps.googleapis.com/maps/api/place/textsearch/json"
 PLACE_DETAILS_URL = "https://maps.googleapis.com/maps/api/place/details/json"
 
 
 def search_places(query: str, location: str = "Omaha, NE", radius: int = 25000, max_pages: int = 3) -> list:
-    if not API_KEY:
+    if not os.getenv("GOOGLE_PLACES_API_KEY", ""):
         return []
     places = []
     params = {
         "query": query,
         "location": "41.2565,-95.9345",
         "radius": radius,
-        "key": API_KEY,
+        "key": os.getenv("GOOGLE_PLACES_API_KEY", ""),
     }
     next_token = True
     page = 0
@@ -36,7 +36,7 @@ def search_places(query: str, location: str = "Omaha, NE", radius: int = 25000, 
         places.extend(data.get("results", []))
         next_token = data.get("next_page_token")
         if next_token:
-            params = {"pagetoken": next_token, "key": API_KEY}
+            params = {"pagetoken": next_token, "key": os.getenv("GOOGLE_PLACES_API_KEY", "")}
             time.sleep(2)
         else:
             next_token = False
@@ -45,12 +45,12 @@ def search_places(query: str, location: str = "Omaha, NE", radius: int = 25000, 
 
 
 def get_place_details(place_id: str) -> dict:
-    if not API_KEY:
+    if not os.getenv("GOOGLE_PLACES_API_KEY", ""):
         return {}
     params = {
         "place_id": place_id,
         "fields": "name,formatted_address,website,url,reviews,types",
-        "key": API_KEY,
+        "key": os.getenv("GOOGLE_PLACES_API_KEY", ""),
     }
     try:
         r = requests.get(PLACE_DETAILS_URL, params=params, timeout=20)
@@ -61,7 +61,7 @@ def get_place_details(place_id: str) -> dict:
 
 
 def run() -> dict:
-    if not API_KEY:
+    if not os.getenv("GOOGLE_PLACES_API_KEY", ""):
         return {"source": "google_reviews", "signals_created": 0, "skipped": 0, "error": "No GOOGLE_PLACES_API_KEY"}
 
     cutoff = datetime.utcnow() - timedelta(days=14)
