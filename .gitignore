@@ -17,3 +17,6 @@ data/cache/*.json
 backend/alembic/versions/*.pyc
 backend/static/uploads
 postgres_data/
+*.db
+*.sqlite
+*.sqlite3
