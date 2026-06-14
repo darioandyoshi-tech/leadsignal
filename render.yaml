@@ -1,7 +1,7 @@
 services:
   - type: web
     name: leadsignal-api
-    env: python
+    runtime: python
     plan: starter
     buildCommand: |
       pip install -r requirements.txt
