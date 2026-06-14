@@ -17,9 +17,9 @@ import requests
 from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
 from scraper.config import OMAHA, PERMIT_MIN_PROJECT_VALUE
-from scraper.db_client import get_or_create_company, insert_signal
+from scraper.db_client import get_or_create_company, insert_signal, Session, signal_exists
 from scraper.sources.permits_omaha import _seed_permits
-from backend.app.models import SignalType
+from app.models import SignalType
 
 BASE_URL = "https://aca-prod.accela.com/OMAHA/Cap/CapHome.aspx"
 SEARCH_URL = "https://aca-prod.accela.com/OMAHA/Cap/CapSearch.aspx"
@@ -79,16 +79,16 @@ def run() -> dict:
             continue
 
         company_name = row.get("contractor") or row.get("owner") or "Unknown"
-        with __import__("sqlalchemy").orm.sessionmaker(bind=__import__("scraper.db_client", fromlist=["engine"]).engine)() as session:
+        with Session() as session:
             company = get_or_create_company(
                 session, company_name,
                 city=row.get("city", "Omaha"), state="Nebraska",
             )
             headline = f"Permit filed: {row.get('project_type','Commercial project')} in {row.get('zip','Omaha')} valued ${value:,.0f}"
-            if __import__("scraper.db_client", fromlist=["signal_exists"]).signal_exists(session, company.id, SignalType.permit_filing, headline):
+            if signal_exists(session, company.id, SignalType.permit_filing, headline):
                 skipped += 1
                 continue
-            sid = __import__("scraper.db_client", fromlist=["insert_signal"]).insert_signal(
+            sid = insert_signal(
                 company_id=company.id,
                 signal_type=SignalType.permit_filing,
                 severity=3 if value >= 200_000 else 2,
@@ -103,8 +103,10 @@ def run() -> dict:
                     "permit_type": row.get("permit_type"),
                     "zip": row.get("zip"),
                 },
+                session=session,
             )
             if sid:
                 created += 1
+            session.commit()
 
     return {"source": "accela_omaha", "signals_created": created, "signals_skipped": skipped, "rows_processed": len(rows), "live_fetch": len(rows) != len(_seed_permits())}

@@ -20,7 +20,7 @@ from scraper.config import (
     CIVICDATA_HISTORICAL_RESOURCE,
 )
 from scraper.db_client import get_or_create_company, insert_signal, Session, signal_exists
-from backend.app.models import SignalType
+from app.models import SignalType
 
 
 def _api(action: str, **params) -> dict:
@@ -144,9 +144,11 @@ def emit_historical_signals(limit: int = 500) -> dict:
                     "contractor": contractor,
                     "permit_class": row.get("PermitClass"),
                 },
+                session=session,
             )
             if sid:
                 created += 1
+            session.commit()
     return {
         "source": "civicdata_permits_historical",
         "signals_created": created,

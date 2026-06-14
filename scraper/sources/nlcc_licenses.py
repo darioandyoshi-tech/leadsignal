@@ -14,7 +14,7 @@ import openpyxl
 
 from scraper.config import OMAHA
 from scraper.db_client import get_or_create_company, insert_signal, Session, signal_exists
-from backend.app.models import SignalType
+from app.models import SignalType
 
 
 BASE_URL = "https://lcc.nebraska.gov/licensing-sdl/active-license-roster"
@@ -128,9 +128,11 @@ def run() -> dict:
                     "effective_date": str(effective) if effective else None,
                     "expiration_date": str(expiration) if expiration else None,
                 },
+                session=session,
             )
             if sid:
                 created += 1
+            session.commit()
 
     wb.close()
     return {"source": "nlcc_licenses", "signals_created": created, "signals_skipped": skipped, "inspected": inspected, "url": url}

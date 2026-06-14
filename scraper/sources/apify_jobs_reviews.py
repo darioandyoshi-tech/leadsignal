@@ -27,7 +27,7 @@ from scraper.config import (
     REVIEW_CLUSTER_MAX_STARS,
 )
 from scraper.db_client import get_or_create_company, insert_signal, Session, signal_exists
-from backend.app.models import SignalType
+from app.models import SignalType
 
 
 APIFY_TOKEN = os.getenv("APIFY_TOKEN")
@@ -144,9 +144,11 @@ def run_indeed() -> dict:
                     "titles": [j.get("title", j.get("positionName", "")) for j in jobs[:10]],
                     "search_keywords": list(set(j.get("_search_keyword", "") for j in jobs)),
                 },
+                session=session,
             )
             if sid:
                 created += 1
+            session.commit()
 
     return {
         "source": "apify_indeed",
@@ -237,9 +239,11 @@ def run_google_reviews() -> dict:
                         ),
                         "place_id": place_id,
                     },
+                    session=session,
                 )
                 if sid:
                     created += 1
+                session.commit()
 
     return {
         "source": "apify_google_reviews",

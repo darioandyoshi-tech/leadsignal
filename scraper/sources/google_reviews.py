@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 
 from scraper.config import OMAHA, TARGET_INDUSTRIES, REVIEW_CLUSTER_MIN_REVIEWS, REVIEW_CLUSTER_MAX_STARS
 from scraper.db_client import get_or_create_company, insert_signal, Session, signal_exists
-from backend.app.models import SignalType
+from app.models import SignalType
 
 API_KEY = os.getenv("GOOGLE_PLACES_API_KEY", "")
 PLACES_TEXTSEARCH_URL = "https://maps.googleapis.com/maps/api/place/textsearch/json"
@@ -116,9 +116,11 @@ def run() -> dict:
                         ),
                         "place_id": place.get("place_id"),
                     },
+                    session=session,
                 )
                 if sid:
                     created += 1
+                session.commit()
 
     return {"source": "google_reviews", "signals_created": created, "signals_skipped": skipped, "places_inspected": inspected}
 

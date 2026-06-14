@@ -10,7 +10,7 @@ from urllib.parse import urlencode, quote_plus
 from bs4 import BeautifulSoup
 from scraper.config import OMAHA, HIRING_SPIKE_MIN_NEW_JOBS
 from scraper.db_client import get_or_create_company, insert_signal
-from backend.app.models import SignalType
+from app.models import SignalType
 
 
 BASE_RSS = "https://rss.indeed.com/rss"

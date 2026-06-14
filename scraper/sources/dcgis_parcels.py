@@ -9,7 +9,7 @@ from typing import List
 
 from scraper.config import DCGIS_OMaha_BBOX_WGS84
 from scraper.db_client import get_or_create_company, insert_signal, Session, signal_exists
-from backend.app.models import SignalType
+from app.models import SignalType
 
 BASE_URL = "https://dcgis.org/server/rest/services/vector/Parcels_public/FeatureServer/0"
 QUERY_URL = f"{BASE_URL}/query"
@@ -84,7 +84,8 @@ def run() -> dict:
         if not address:
             continue
 
-        with Session() as session:
+        session = Session()
+        try:
             company = get_or_create_company(
                 session,
                 owner,
@@ -96,39 +97,43 @@ def run() -> dict:
             headline = f"Commercial property record: {address} ({acres:.2f} ac / {sqft:,.0f} sf)"
             if signal_exists(session, company.id, SignalType.parcel_change, headline):
                 skipped += 1
-                continue
-            summary_lines = [
-                f"PIN: {parcel_id}",
-                f"Address: {address}",
-                f"Owner: {owner}",
-                f"Acres: {acres}",
-                f"Sq Ft: {sqft:,.0f}" if sqft else "",
-                f"Class: {parcel.get('CLASS', 'N/A')}",
-                f"Tax District: {parcel.get('TAX_DIST', 'N/A')}",
-                f"Building Year Built: {int(bldg_yr) if bldg_yr else 'N/A'}",
-                f"Building Description: {parcel.get('BLDG_DESC', 'N/A')}",
-            ]
-            sid = insert_signal(
-                company_id=company.id,
-                signal_type=SignalType.parcel_change,
-                severity=3 if (acres >= 2.0 or sqft >= 15000) else 2,
-                headline=headline,
-                summary="\n".join(line for line in summary_lines if line),
-                source_url=BASE_URL,
-                source_api="dcgis_parcels",
-                location_name=address,
-                metadata={
-                    "pin": parcel_id,
-                    "acres": acres,
-                    "sq_feet": sqft,
-                    "class": parcel.get("CLASS"),
-                    "tax_dist": parcel.get("TAX_DIST"),
-                    "bldg_year_built": bldg_yr,
-                    "bldg_desc": parcel.get("BLDG_DESC"),
-                },
-            )
-            if sid:
-                created += 1
+            else:
+                summary_lines = [
+                    f"PIN: {parcel_id}",
+                    f"Address: {address}",
+                    f"Owner: {owner}",
+                    f"Acres: {acres}",
+                    f"Sq Ft: {sqft:,.0f}" if sqft else "",
+                    f"Class: {parcel.get('CLASS', 'N/A')}",
+                    f"Tax District: {parcel.get('TAX_DIST', 'N/A')}",
+                    f"Building Year Built: {int(bldg_yr) if bldg_yr else 'N/A'}",
+                    f"Building Description: {parcel.get('BLDG_DESC', 'N/A')}",
+                ]
+                sid = insert_signal(
+                    company_id=company.id,
+                    signal_type=SignalType.parcel_change,
+                    severity=3 if (acres >= 2.0 or sqft >= 15000) else 2,
+                    headline=headline,
+                    summary="\n".join(line for line in summary_lines if line),
+                    source_url=BASE_URL,
+                    source_api="dcgis_parcels",
+                    location_name=address,
+                    metadata={
+                        "pin": parcel_id,
+                        "acres": acres,
+                        "sq_feet": sqft,
+                        "class": parcel.get("CLASS"),
+                        "tax_dist": parcel.get("TAX_DIST"),
+                        "bldg_year_built": bldg_yr,
+                        "bldg_desc": parcel.get("BLDG_DESC"),
+                    },
+                    session=session,
+                )
+                if sid:
+                    created += 1
+            session.commit()
+        finally:
+            session.close()
 
     return {
         "source": "dcgis_parcels",

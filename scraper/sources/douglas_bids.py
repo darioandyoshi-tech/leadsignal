@@ -17,7 +17,7 @@ from decimal import Decimal, InvalidOperation
 
 from scraper.config import DOUGLAS_BIDS_MIN_VALUE
 from scraper.db_client import get_or_create_company, insert_signal, Session, signal_exists
-from backend.app.models import SignalType
+from app.models import SignalType
 
 
 URL = "https://douglascountypurchasing.ionwave.net/SourcingEvents.aspx?SourceType=3"
@@ -132,9 +132,11 @@ def run() -> dict:
                     "award_date": award_date.isoformat() if award_date else None,
                     "detail_automation_needed": True,
                 },
+                session=session,
             )
             if sid:
                 created += 1
+            session.commit()
 
     return {
         "source": "douglas_bids",

@@ -9,7 +9,7 @@ from typing import List
 
 from scraper.config import DOUGLAS_BIDS_MIN_VALUE
 from scraper.db_client import get_or_create_company, insert_signal, Session, signal_exists
-from backend.app.models import SignalType
+from app.models import SignalType
 
 
 URL = "https://api.usaspending.gov/api/v2/search/spending_by_award/"
@@ -101,9 +101,11 @@ def run() -> dict:
                     "start_date": start.isoformat() if start else None,
                     "end_date": end.isoformat() if end else None,
                 },
+                session=session,
             )
             if sid:
                 created += 1
+            session.commit()
 
     return {"source": "usaspending_omaha", "signals_created": created, "signals_skipped": skipped, "awards_inspected": inspected}
 

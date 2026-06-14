@@ -17,7 +17,7 @@ import openpyxl
 
 from scraper.config import DOR_DELINQ_MIN_BALANCE, DOR_DELINQ_COUNTIES
 from scraper.db_client import get_or_create_company, insert_signal, Session, signal_exists
-from backend.app.models import SignalType
+from app.models import SignalType
 
 
 BASE_PAGE = "https://revenue.nebraska.gov/PAD/real-property/nebraska-delinquent-real-property-list"
@@ -162,9 +162,11 @@ def _parse_county(workbook: openpyxl.Workbook, min_balance: int, source_url: str
                     "zip": zip_code,
                     "delinquent_balance": balance,
                 },
+                session=session,
             )
             if sid:
                 created += 1
+            session.commit()
 
     return {
         "source": "ne_dor_delinquency",

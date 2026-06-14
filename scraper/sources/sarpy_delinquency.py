@@ -14,7 +14,7 @@ import openpyxl
 
 from scraper.config import DOR_DELINQ_MIN_BALANCE
 from scraper.db_client import get_or_create_company, insert_signal, Session, signal_exists
-from backend.app.models import SignalType
+from app.models import SignalType
 
 
 BASE_URL = "https://ne-sarpycounty.civicplus.com/981/Tax-Sale-Information"
@@ -128,9 +128,11 @@ def _parse_rows(rows: List[List[str]], min_balance: int, source_url: str) -> dic
                     "address": address,
                     "delinquent_balance": balance,
                 },
+                session=session,
             )
             if sid:
                 created += 1
+            session.commit()
 
     return {"source": "sarpy_delinquency", "signals_created": created, "signals_skipped": skipped, "inspected": inspected}
 
