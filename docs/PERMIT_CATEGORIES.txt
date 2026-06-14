@@ -1,44 +1,43 @@
-LeadSignal Permit Categories Currently Captured
-===============================================
-Generated: 2026-06-14
-Source: PermitStack Omaha API (https://api.permit-stack.com/v1/permits/search)
+LeadSignal Permit Coverage
+==========================
 
-PermitStack returns the following permit categories for Omaha, NE right now.
-LeadSignal captures all of them except cancelled permits.
+Active Sources
+--------------
+- permitstack_omaha        : Commercial live permit API for Omaha metro.
+- civicdata_inspections    : ~883K inspection history records (FAIL/PASS events with contractor/address).
+- civicdata_permits        : Historical 2006-2007 Omaha permit backfill.
+- accela_omaha             : Seed-data stub; real Accela portal needs browser automation.
+- odr_feeds                : RSS feeds for building/electrical/mechanical/plumbing/wreck permits + public notices.
+- sarpy_smartgov           : Placeholder for Sarpy County Citizenserve portal.
 
-CATEGORIES
-----------
-PLUMBING           - 9 permits  (e.g. PLB-26-03960, BOARD waivers)
-OTHER              - 6 permits  (miscellaneous city permits / waivers)
-HVAC               - 1 permit   (MEC-26-04580 - installing HVAC system, ductwork, etc.)
-FIRE_ALARM         - 1 permit   (MEC-26-04472 - wet system arm-over)
-MECHANICAL         - 1 permit   (MEC-26-04290 - boiler report)
-FENCE              - 1 permit   (BLD-26-04986 - R5 zoning fences)
-RENOVATION         - 1 permit   (BLD-26-04275 - Nori Maki Sushi tenant improvement)
-NEW_CONSTRUCTION   - 1 permit   (BLD-26-02438 - Concrete Supply Northwest Plant, 11,500 SF)
-SIGN               - 1 permit   (SGN-26-02303 - Walmart signs, 1602 S 72 St)
-
-Total returned: 22 permits
-
-TRADE-SPECIFIC PERMITS
+Permit Types by Signal
 ----------------------
-Building permits:    YES (NEW_CONSTRUCTION, RENOVATION, FENCE, OTHER building permits)
-Mechanical permits:  YES (MECHANICAL, HVAC)
-Wreck permits:       NOT returned by PermitStack in current sample
-Electrical permits:  NOT returned by PermitStack in current sample (no ELECTRICAL category seen)
-Plumbing permits:    YES (PLUMBING, BOARD waivers)
+SignalType.permit_filing includes:
+  - New building / construction permits
+  - Electrical, mechanical, plumbing, wrecking permits
+  - Inspection events (passed/failed/re-inspection)
+  - Additions, remodels, tenant improvements
 
-Note: PermitStack's Omaha feed is the live source we currently have. The
-sample is small (22 permits) and may not include every trade every day. ODR
-RSS feeds provide additional public notices for building, mechanical,
-wreck, electrical, and plumbing categories even when PermitStack has gaps.
+Permit Trade Coverage
+---------------------
+- Electrical
+- Mechanical / HVAC
+- Plumbing
+- Wrecking / demolition
+- General building / construction
+- Roofing / siding (when listed in description)
+- Landscaping / excavation (when listed in description)
+- Commercial tenant improvements
 
-ODR RSS permit feeds wired in scraper/sources/odr_feeds.py:
-- Building Permits:    https://www.omahadailyrecord.com/taxonomy/term/3701/all/feed
-- Electrical Permits:  https://www.omahadailyrecord.com/taxonomy/term/3702/all/feed
-- Plumbing Permits:    https://www.omahadailyrecord.com/taxonomy/term/3704/all/feed
-- Mechanical Permits:    https://www.omahadailyrecord.com/taxonomy/term/3807/all/feed
-- Wreck Permits:       https://www.omahadailyrecord.com/taxonomy/term/3735/all/feed
+Data Gaps
+---------
+- Live current City of Omaha permits are only available through Accela JS portal or PermitStack (limited sample).
+- Sarpy County live permits require Citizenserve login/session automation.
+- Historical CivicData current datastores (2016–present) are empty; rely on inspection history for recent activity.
 
-So LeadSignal covers all five trade permit categories through the combination
-of PermitStack live API + ODR public RSS feeds.
+Next Additions
+--------------
+- Accela live browser-automation scraper.
+- Sarpy SmartGov Playwright / Apify actor.
+- PDF parsing for Sarpy delinquent property sales.
+- Additional Apify actors: `jungle_synthesizer/building-permits-national-aggregator` for multi-metro coverage.

@@ -2,96 +2,80 @@ LeadSignal Data Sources
 =======================
 Generated: 2026-06-14
 
-This document lists every data source currently wired into the LeadSignal
-scraper pipeline. Each row maps to a module under scraper/sources/.
-
 STATUS KEY
 ----------
-LIVE      = Module fetches/ parses live public data on every run.
+LIVE        = Module fetches/ parses live public data on every run.
 PLACEHOLDER = Source documented but requires paid account, API key, or browser automation.
-STUB      = Uses seed/ fallback data until a live feed is available.
-BLOCKED   = Public site blocks scraping; module uses an approved bypass/ alternative.
+STUB        = Uses seed/ fallback data until a live feed is available.
 
 SOURCE TABLE
 ------------
-
-SOURCE_API              | STATUS      | SIGNAL_TYPES                  | URL
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-apify_indeed            | LIVE        | hiring_spike                  | https://api.apify.com/v2/acts/borderline~indeed-scraper/runs
-                        |             |                               | Bypasses Indeed 403 block via Apify Actor. Requires APIFY_TOKEN.
-
-apify_google_reviews    | LIVE        | negative_review_cluster       | https://api.apify.com/v2/acts/compass~Google-Maps-Reviews-Scraper/runs
-                        |             |                               | Bypasses Google Maps anti-bot via Apify Actor. Requires APIFY_TOKEN.
-
-google_places           | LIVE        | negative_review_cluster       | https://maps.googleapis.com/maps/api/place/textsearch/json
-                        |             |                               | Direct Google Places API; requires GOOGLE_PLACES_API_KEY.
-
-civicdata_permits       | STUB        | permit_filing (historical)    | https://www.civicdata.com/api/3/action/datastore_search?id=efecb9f2-b254-4e34-90ce-4097fbe82322
-                        |             |                               | Historical 2006-2007 Omaha permit backfill (~60,859 rows). Current datastores are empty.
-
-dcgis_parcels           | LIVE        | parcel_change                 | https://dcgis.org/server/rest/services/vector/Parcels_public/FeatureServer/0/query
-                        |             |                               | Live ArcGIS REST feed for Douglas County parcels; 43 fields returned.
-
-douglas_bids            | LIVE        | gov_contract_award            | https://douglascountypurchasing.ionwave.net/SourcingEvents.aspx?SourceType=3
-                        |             |                               | Parses Ionwave awarded-bid list page. Vendor + amount are NOT on the list page; detail-page automation still needed.
-
-ne_dor_delinquency      | LIVE        | tax_delinquency               | https://revenue.nebraska.gov/sites/default/files/doc/pad/delinquent_real_prop/2026/
-                        |             |                               | Downloads county Excel workbooks from Nebraska DOR. Currently pulls all counties; needs Douglas-only filter.
-
-sarpy_delinquency       | PLACEHOLDER | tax_delinquency               | https://ne-sarpycounty.civicplus.com/981/Tax-Sale-Information
-                        |             |                               | Sarpy County tax-sale PDF. Needs PDF table extraction library (PyMuPDF or similar).
-
-nlcc_licenses           | LIVE        | business_license              | https://lcc.nebraska.gov/sites/default/files/licensing/Active%20Licensing/Active%20Roster%206.12.26.xlsx
-                        |             |                               | Nebraska Liquor Control Commission active license roster Excel.
-
-usaspending_omaha       | LIVE        | gov_contract_award            | https://api.usaspending.gov/api/v2/search/spending_by_award/
-                        |             |                               | Federal awards performed in Omaha metro. Returns real award data (Raytheon, CACI, etc.).
-
-permits_omaha           | STUB        | permit_filing                 | https://data.omaha.gov
-                        |             |                               | Seed-data stub for city permit filings until Accela or PermitStack fills the gap.
-
-accela_omaha            | STUB        | permit_filing                 | https://aca-prod.accela.com/OMAHA/Cap/CapHome.aspx
-                        |             |                               | Accela browser-automation stub; falls back to seed data. Live Accela requires JS session automation.
-
-permitstack_omaha       | LIVE        | permit_filing                 | https://api.permit-stack.com/v1/permits/search
-                        |             |                               | Commercial live permit API for Omaha. Currently returns small recent set; API key configured.
-
-odr_feeds               | LIVE        | permit_filing, gov_contract_award, new_business_registration, tax_delinquency, parcel_change
-                        |             |                               | https://www.omahadailyrecord.com/taxonomy/term/3701/all/feed
-                        |             |                               | Public RSS feeds from Omaha Daily Record used as a discovery layer, not as a paywalled data owner.
-
-ne_sos_batch            | PLACEHOLDER | new_business_registration     | https://www.nebraska.gov/SpecialRequestSearches/index.cgi
-                        |             |                               | Nebraska SOS entity search is reCAPTCHA-gated. Paid batch portal is $15 per 1,000 records.
-
-ne_ucc                  | PLACEHOLDER | ucc_filing                    | https://sos.nebraska.gov/business-services/uccefs-search-and-filing-center
-                        |             |                               | Nebraska UCC search is a paid interactive web form; no free bulk API found.
-
-ne_hhs_licenses         | PLACEHOLDER | business_license              | https://www.nebraska.gov/LISSearch/search.cgi
-                        |             |                               | DHHS license search requires JavaScript; paid bulk lists available at nebraska.gov/hhs/lists/.
-
-bbb_omaha               | PLACEHOLDER | negative_review_cluster       | https://www.bbb.org/us/ne/omaha
-                        |             |                               | BBB.org blocks raw scraping. Use Parse.bot API or Apify BBB scraper actor.
-
-osha_omaha              | PLACEHOLDER | business_license            | https://www.osha.gov/ords/imis/establishment.html
-                        |             |                               | OSHA Oracle APEX form returns results via JS; needs Apify/browser automation.
-
-landmarkweb_deeds       | PLACEHOLDER | parcel_change                 | https://landmarkweb.douglascounty-ne.gov/LandmarkWeb/AlphaSearchM2/AlphaSearchIndexM2
-                        |             |                               | Requires JS disclaimer acceptance and paid document access. ODR/DGIS used as alternatives.
-
-nadc_bulk               | LIVE        | gov_contract_award, new_business_registration
-                        |             |                               | https://www.nebraska.gov/nadc_data/nadc_data.zip
-                        |             |                               | Nebraska Accountability and Disclosure Commission bulk campaign-finance ZIP. Not yet wired as a scheduled scraper.
+SOURCE_API                   | STATUS       | SIGNAL_TYPES                                                 | URL
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+apify_indeed                 | LIVE         | hiring_spike                                                 | https://api.apify.com/v2/acts/borderline~indeed-scraper/runs
+                             |              | Bypasses Indeed 403 via Apify actor. Requires APIFY_TOKEN.   |
+apify_google_reviews         | LIVE         | negative_review_cluster                                      | https://api.apify.com/v2/acts/compass~Google-Maps-Reviews-Scraper/runs
+                             |              | Bypasses Google Maps anti-bot via Apify actor. Requires APIFY_TOKEN. |
+apify_business_licenses      | PLACEHOLDER  | business_license                                             | https://apify.com/intelscrape/business-license-scraper
+                             |              | Paid actor; pull new business licenses by city/state.        |
+google_places                | LIVE         | negative_review_cluster                                      | https://maps.googleapis.com/maps/api/place/textsearch/json
+                             |              | Direct Google Places API; requires GOOGLE_PLACES_API_KEY.    |
+civicdata_permits            | STUB         | permit_filing (historical)                                   | https://www.civicdata.com/api/3/action/datastore_search?id=efecb9f2-b254-4e34-90ce-4097fbe82322
+                             |              | Historical 2006-2007 Omaha permit backfill. Current datastores empty. |
+civicdata_inspections        | LIVE         | permit_filing                                                | https://www.civicdata.com/api/3/action/datastore_search?id=2483a53a-b400-4f25-bac7-1bb7045e70b2
+                             |              | ~883K inspection records; captures FAIL/PASS events with contractor/address. |
+dcgis_parcels                | LIVE         | parcel_change                                                | https://dcgis.org/server/rest/services/vector/Parcels_public/FeatureServer/0/query
+                             |              | Live ArcGIS REST feed for Douglas County parcels.            |
+douglas_bids                 | LIVE         | gov_contract_award                                           | https://douglascountypurchasing.ionwave.net/SourcingEvents.aspx?SourceType=3
+                             |              | Ionwave awarded-bid list. Vendor/amount need detail-page automation. |
+ne_dor_delinquency           | LIVE         | tax_delinquency                                              | https://revenue.nebraska.gov/sites/default/files/doc/pad/delinquent_real_prop/2026/
+                             |              | Nebraska DOR county Excel workbooks; currently pulls all counties. |
+sarpy_delinquency            | PLACEHOLDER  | tax_delinquency                                              | https://ne-sarpycounty.civicplus.com/981/Tax-Sale-Information
+                             |              | Sarpy County tax-sale PDF. Needs PDF table extraction.       |
+sarpy_smartgov               | PLACEHOLDER  | permit_filing                                                | https://co-sarpy-ne.smartgovcommunity.com/Public/Home
+                             |              | Citizenserve portal; needs browser automation or Apify actor. |
+nlcc_licenses                | LIVE         | business_license                                             | https://lcc.nebraska.gov/sites/default/files/licensing/Active%20Licensing/Active%20Roster%206.12.26.xlsx
+                             |              | Nebraska Liquor Control Commission active license roster.    |
+usaspending_omaha            | LIVE         | gov_contract_award                                           | https://api.usaspending.gov/api/v2/search/spending_by_award/
+                             |              | Federal awards performed in Omaha metro.                     |
+permits_omaha                | STUB         | permit_filing                                                | https://data.omaha.gov
+                             |              | Seed-data stub for city permit filings.                      |
+accela_omaha                 | STUB         | permit_filing                                                | https://aca-prod.accela.com/OMAHA/Cap/CapHome.aspx
+                             |              | Accela browser-automation stub; falls back to seed data.     |
+permitstack_omaha            | LIVE         | permit_filing                                                | https://api.permit-stack.com/v1/permits/search
+                             |              | Commercial live permit API for Omaha.                        |
+odr_feeds                    | LIVE         | permit_filing, gov_contract_award, new_business_registration, tax_delinquency, parcel_change, business_license | https://www.omahadailyrecord.com
+                             |              | 27 RSS feeds used as public-notice discovery layer.          |
+ne_sos_batch                 | PLACEHOLDER  | new_business_registration                                    | https://www.nebraska.gov/SpecialRequestSearches/index.cgi
+                             |              | reCAPTCHA-gated; paid batch portal $15/1000 records.         |
+ne_ucc                       | PLACEHOLDER  | ucc_filing                                                   | https://sos.nebraska.gov/business-services/uccefs-search-and-filing-center
+                             |              | Paid interactive UCC search.                                 |
+ne_hhs_licenses              | PLACEHOLDER  | business_license                                             | https://www.nebraska.gov/LISSearch/search.cgi
+                             |              | JS-driven search; paid bulk lists available.                 |
+ne_dol_contractors           | LIVE         | business_license                                             | https://dol.nebraska.gov/conreg/Search
+                             |              | Nebraska Department of Labor contractor registration roster. |
+nadc_vendors                 | LIVE         | gov_contract_award                                           | https://www.nebraska.gov/nadc_data/nadc_data.zip
+                             |              | Campaign-finance bulk ZIP; extracts Omaha-metro contributors/payees. |
+bbb_omaha                    | PLACEHOLDER  | negative_review_cluster                                      | https://www.bbb.org/us/ne/omaha
+                             |              | BBB blocks raw scraping; use Parse.bot or Apify actor.       |
+osha_omaha                   | PLACEHOLDER  | business_license                                             | https://www.osha.gov/ords/imis/establishment.html
+                             |              | Oracle APEX form; needs Apify/browser automation.            |
+landmarkweb_deeds            | PLACEHOLDER  | parcel_change                                                | https://landmarkweb.douglascounty-ne.gov/
+                             |              | JS disclaimer + paid docs; ODR/DGIS used as alternatives.    |
 
 SUMMARY
 -------
-LIVE sources:        9  (apify_indeed, apify_google_reviews, google_places, dcgis_parcels, douglas_bids, ne_dor_delinquency, nlcc_licenses, usaspending_omaha, permitstack_omaha, odr_feeds)
-PLACEHOLDER sources: 7  (ne_sos_batch, ne_ucc, ne_hhs_licenses, bbb_omaha, osha_omaha, landmarkweb_deeds, sarpy_delinquency)
-STUB sources:        3  (civicdata_permits, permits_omaha, accela_omaha)
+LIVE sources:        13
+PLACEHOLDER sources: 9
+STUB sources:        3
 
 Next steps to activate placeholders:
+  - apify_business_licenses: subscribe to intelscrape/business-license-scraper on Apify.
+  - sarpy_delinquency: add PyMuPDF / pdfplumber dependency and parse PDF tables.
+  - sarpy_smartgov: implement Playwright/Apify actor for Citizenserve portal.
   - ne_sos_batch: open Nebraska SOS paid subscriber account.
-  - permitstack_omaha: already live; monitor volume growth.
-  - sarpy_delinquency: add PyMuPDF dependency and parse PDF tables.
+  - ne_ucc: open Nebraska UCC subscriber account or commercial provider.
+  - ne_hhs_licenses: purchase bulk license list or automate JS search.
   - bbb_omaha: subscribe to Parse.bot or Apify BBB actor.
-  - osha_omaha: implement Apify web-scraper pageFunction.
-  - ne_hhs_licenses / ne_ucc: purchase bulk exports or browser-automation credits.
+  - osha_omaha: implement Apify web-scraper pageFunction for Oracle APEX form.
+  - landmarkweb_deeds: subscribe to LandmarkWeb or rely on ODR/DGIS signals.

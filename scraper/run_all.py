@@ -8,12 +8,14 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 
 from scraper.sources import (
     apify_jobs_reviews,
+    apify_business_licenses,
     google_reviews,
     permits_omaha,
     accela_omaha,
     dcgis_parcels,
     ne_dor_delinquency,
     sarpy_delinquency,
+    sarpy_smartgov,
     douglas_bids,
     civicdata_permits,
     civicdata_inspections,
@@ -28,16 +30,20 @@ from scraper.sources import (
     landmarkweb_deeds,
     permitstack_omaha,
     ne_dol_contractors,
+    nadc_vendors,
 )
 
 
 SOURCES = [
     apify_jobs_reviews,
+    apify_business_licenses,
     odr_feeds,
+    nadc_vendors,
     dcgis_parcels,
     douglas_bids,
     ne_dor_delinquency,
     sarpy_delinquency,
+    sarpy_smartgov,
     nlcc_licenses,
     usaspending_omaha,
     permits_omaha,
