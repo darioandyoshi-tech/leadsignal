@@ -21,6 +21,12 @@ class SignalType(str, enum.Enum):
     hiring_spike = "hiring_spike"
     negative_review_cluster = "negative_review_cluster"
     permit_filing = "permit_filing"
+    parcel_change = "parcel_change"
+    tax_delinquency = "tax_delinquency"
+    gov_contract_award = "gov_contract_award"
+    business_license = "business_license"
+    ucc_filing = "ucc_filing"
+    new_business_registration = "new_business_registration"
 
 
 class AlertChannel(str, enum.Enum):

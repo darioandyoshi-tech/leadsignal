@@ -49,4 +49,19 @@ REVIEW_CLUSTER_MAX_STARS = 2.0
 # Permit thresholds
 PERMIT_MIN_PROJECT_VALUE = 50000
 
-DATABASE_URL = os.getenv("DATABASE_URL_SYNC", "postgresql://leadsignal:leadsignal@localhost:5432/leadsignal")
+DATABASE_URL = os.getenv(
+    "DATABASE_URL_SYNC",
+    os.getenv("DATABASE_URL", "sqlite:///./leadsignal.db"),
+)
+
+# Thresholds and constants for the expanded Omaha signal set
+DOR_DELINQ_MIN_BALANCE = 500
+DOR_DELINQ_COUNTIES = ["28"]  # Douglas County FIPS code in NE
+
+DCGIS_OMaha_BBOX_WGS84 = "-96.05,41.16,-95.85,41.33"
+
+DOUGLAS_BIDS_MIN_VALUE = 1000
+
+CIVICDATA_HISTORICAL_PACKAGE = "blds_permitcore_historical_aa_14757"
+CIVICDATA_HISTORICAL_RESOURCE = "efecb9f2-b254-4e34-90ce-4097fbe82322"
+CIVICDATA_API_BASE = "https://www.civicdata.com/api/3/action"

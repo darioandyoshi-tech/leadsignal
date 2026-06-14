@@ -1,11 +1,12 @@
-
 """Google Places API review monitoring for Omaha businesses."""
 
 import os
+import time
 import requests
 from datetime import datetime, timedelta
+
 from scraper.config import OMAHA, TARGET_INDUSTRIES, REVIEW_CLUSTER_MIN_REVIEWS, REVIEW_CLUSTER_MAX_STARS
-from scraper.db_client import get_or_create_company, insert_signal
+from scraper.db_client import get_or_create_company, insert_signal, Session, signal_exists
 from backend.app.models import SignalType
 
 API_KEY = os.getenv("GOOGLE_PLACES_API_KEY", "")
@@ -36,7 +37,7 @@ def search_places(query: str, location: str = "Omaha, NE", radius: int = 25000, 
         next_token = data.get("next_page_token")
         if next_token:
             params = {"pagetoken": next_token, "key": API_KEY}
-            __import__("time").sleep(2)
+            time.sleep(2)
         else:
             next_token = False
         page += 1
@@ -76,27 +77,29 @@ def run() -> dict:
             details = get_place_details(place.get("place_id"))
             reviews = details.get("reviews", [])
             bad_recent = [
-                r for r in reviews
-                if r.get("rating", 5) <= REVIEW_CLUSTER_MAX_STARS
-                and _review_time(r) >= cutoff
+                r
+                for r in reviews
+                if r.get("rating", 5) <= REVIEW_CLUSTER_MAX_STARS and _review_time(r) >= cutoff
             ]
             if len(bad_recent) < REVIEW_CLUSTER_MIN_REVIEWS:
                 continue
             company_name = details.get("name", place.get("name"))
-            with __import__("sqlalchemy").orm.sessionmaker(bind=__import__("scraper.db_client", fromlist=["engine"]).engine)() as session:
+            with Session() as session:
                 company = get_or_create_company(
-                    session, company_name,
-                    city="Omaha", state="Nebraska",
+                    session,
+                    company_name,
+                    city="Omaha",
+                    state="Nebraska",
                     website=details.get("website"),
                     external_ids={"google_place_id": place.get("place_id")},
                 )
                 headline = f"{company_name} received {len(bad_recent)} reviews ≤2 stars in last 14 days"
-                if __import__("scraper.db_client", fromlist=["signal_exists"]).signal_exists(session, company.id, SignalType.negative_review_cluster, headline):
+                if signal_exists(session, company.id, SignalType.negative_review_cluster, headline):
                     skipped += 1
                     continue
-                snippets = [f"- {r['rating']}★: {r.get('text','')[:120]}" for r in bad_recent[:5]]
+                snippets = [f"- {r['rating']}★: {r.get('text', '')[:120]}" for r in bad_recent[:5]]
                 summary = "\n".join(snippets)
-                sid = __import__("scraper.db_client", fromlist=["insert_signal"]).insert_signal(
+                sid = insert_signal(
                     company_id=company.id,
                     signal_type=SignalType.negative_review_cluster,
                     severity=min(5, 2 + len(bad_recent)),
@@ -108,7 +111,9 @@ def run() -> dict:
                     published_at=max(_review_time(r) for r in bad_recent),
                     metadata={
                         "bad_review_count": len(bad_recent),
-                        "average_recent_rating": round(sum(r["rating"] for r in bad_recent) / len(bad_recent), 2),
+                        "average_recent_rating": round(
+                            sum(r["rating"] for r in bad_recent) / len(bad_recent), 2
+                        ),
                         "place_id": place.get("place_id"),
                     },
                 )
