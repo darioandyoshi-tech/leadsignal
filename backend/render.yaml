@@ -1,0 +1,48 @@
+services:
+  - type: web
+    name: leadsignal-api
+    env: python
+    plan: starter
+    buildCommand: |
+      pip install -r requirements.txt
+      alembic upgrade head
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: leadsignal-db
+          property: connectionString
+      - key: SYNC_DATABASE_URL
+        fromDatabase:
+          name: leadsignal-db
+          property: connectionString
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: SECRET_KEY
+        generateValue: true
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_PUBLISHABLE_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: STRIPE_PRICE_STARTER
+        sync: false
+      - key: STRIPE_PRICE_PRO
+        sync: false
+      - key: STRIPE_PRICE_GROWTH
+        sync: false
+      - key: GOOGLE_PLACES_API_KEY
+        sync: false
+      - key: AGENTMAIL_API_KEY
+        sync: false
+      - key: FRONTEND_URL
+        value: https://leadsignal-dme1.vercel.app
+      - key: REDIS_URL
+        value: none
+
+databases:
+  - name: leadsignal-db
+    plan: starter
+    databaseName: leadsignal
+    user: leadsignal
