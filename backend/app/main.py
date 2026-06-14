@@ -8,8 +8,12 @@ app = FastAPI(title="LeadSignal", version="0.1.0")
 @app.on_event("startup")
 async def startup():
     async with engine.begin() as conn:
-        # Use Alembic in production; create_all is fine for MVP local dev
         await conn.run_sync(Base.metadata.create_all)
+
+
+@app.get("/")
+async def root():
+    return {"status": "ok", "service": "LeadSignal API"}
 
 
 @app.get("/health")
