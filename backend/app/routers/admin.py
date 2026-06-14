@@ -13,14 +13,14 @@ from fastapi import APIRouter, Header, HTTPException
 router = APIRouter(prefix="/admin", tags=["admin"])
 
 
-ADMIN_SECRET = ***"ADMIN_SECRET", "")
+ADMIN_SECRET = os.getenv("ADMIN_SECRET", "")
 
 
 def _require_secret(secret: str | None):
     if not ADMIN_SECRET:
-        *** HTTPException(status_code=500, detail="ADMIN_SECRET not configured")
+        raise HTTPException(status_code=500, detail="ADMIN_SECRET not configured")
     if not secret or secret != ADMIN_SECRET:
-        *** HTTPException(status_code=403, detail="Invalid admin secret")
+        raise HTTPException(status_code=403, detail="Invalid admin secret")
 
 
 @router.post("/run-scrapers")
