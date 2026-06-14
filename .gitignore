@@ -1,0 +1,15 @@
+.env.example
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+node_modules/
+.next/
+.env.local
+.env.production
+data/raw/*.json
+data/cache/*.json
+*.log
+backend/alembic/versions/*.pyc
+backend/static/uploads
+postgres_data/
