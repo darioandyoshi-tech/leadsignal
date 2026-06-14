@@ -16,6 +16,7 @@ from scraper.sources import (
     sarpy_delinquency,
     douglas_bids,
     civicdata_permits,
+    civicdata_inspections,
     nlcc_licenses,
     usaspending_omaha,
     odr_feeds,
@@ -26,6 +27,7 @@ from scraper.sources import (
     osha_omaha,
     landmarkweb_deeds,
     permitstack_omaha,
+    ne_dol_contractors,
 )
 
 
@@ -41,6 +43,7 @@ SOURCES = [
     permits_omaha,
     accela_omaha,
     civicdata_permits,
+    civicdata_inspections,
     google_reviews,
     ne_sos_batch,
     ne_ucc,
@@ -49,6 +52,7 @@ SOURCES = [
     osha_omaha,
     landmarkweb_deeds,
     permitstack_omaha,
+    ne_dol_contractors,
 ]
 
 

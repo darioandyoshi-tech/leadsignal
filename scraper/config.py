@@ -73,4 +73,4 @@ DOUGLAS_BIDS_MIN_VALUE = 1000
 
 CIVICDATA_HISTORICAL_PACKAGE = "blds_permitcore_historical_aa_14757"
 CIVICDATA_HISTORICAL_RESOURCE = "efecb9f2-b254-4e34-90ce-4097fbe82322"
-CIVICDATA_API_BASE = "https://www.civicdata.com/api/3/action"
+CIVICDATA_API_BASE = "https://www.civicdata.com/api/3"
