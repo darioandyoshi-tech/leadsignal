@@ -18,11 +18,20 @@ from scraper.sources import (
     civicdata_permits,
     nlcc_licenses,
     usaspending_omaha,
+    odr_feeds,
+    ne_sos_batch,
+    ne_ucc,
+    ne_hhs_licenses,
+    bbb_omaha,
+    osha_omaha,
+    landmarkweb_deeds,
+    permitstack_omaha,
 )
 
 
 SOURCES = [
     apify_jobs_reviews,
+    odr_feeds,
     dcgis_parcels,
     douglas_bids,
     ne_dor_delinquency,
@@ -33,6 +42,13 @@ SOURCES = [
     accela_omaha,
     civicdata_permits,
     google_reviews,
+    ne_sos_batch,
+    ne_ucc,
+    ne_hhs_licenses,
+    bbb_omaha,
+    osha_omaha,
+    landmarkweb_deeds,
+    permitstack_omaha,
 ]
 
 
