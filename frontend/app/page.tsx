@@ -1,32 +1,55 @@
-
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { getSignals, getSignalStats, sendDigest } from '@/lib/api';
+import { getSignals, getSignalStats, sendDigest, getSubscription } from '@/lib/api';
 
 export default function Dashboard() {
+  const router = useRouter();
   const [signals, setSignals] = useState<any[]>([]);
   const [stats, setStats] = useState({ hiring_spike: 0, negative_review_cluster: 0, permit_filing: 0, total: 0 });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [user, setUser] = useState<{ email?: string; tier?: string } | null>(null);
 
   useEffect(() => {
+    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    if (!token) {
+      router.push('/auth/login');
+      return;
+    }
     load();
-  }, []);
+  }, [router]);
 
   async function load() {
     try {
       setLoading(true);
-      const [sigData, statData] = await Promise.all([getSignals({ limit: 50 }), getSignalStats()]);
+      const [sigData, statData, subData] = await Promise.all([
+        getSignals({ limit: 50 }),
+        getSignalStats(),
+        getSubscription().catch(() => null),
+      ]);
       setSignals(sigData);
       setStats(statData);
+      setUser(subData);
     } catch (e: any) {
-      setError(e.response?.data?.detail || e.message);
+      if (e.response?.status === 401) {
+        localStorage.removeItem('token');
+        router.push('/auth/login');
+      } else {
+        setError(e.response?.data?.detail || e.message);
+      }
     } finally {
       setLoading(false);
     }
+  }
+
+  function logout() {
+    localStorage.removeItem('token');
+    router.push('/auth/login');
   }
 
   const typeLabels: Record<string, string> = {
@@ -37,9 +60,22 @@ export default function Dashboard() {
 
   return (
     <main className="max-w-5xl mx-auto p-6">
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight">LeadSignal</h1>
-        <p className="text-slate-600">Local market opportunity scanner for Omaha, Nebraska</p>
+      <header className="mb-8 flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">LeadSignal</h1>
+          <p className="text-slate-600">Local market opportunity scanner for Omaha, Nebraska</p>
+        </div>
+        <div className="flex items-center gap-3">
+          {user?.tier && (
+            <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
+              {user.tier}
+            </span>
+          )}
+          <Link href="/billing">
+            <Button variant="outline">Pricing</Button>
+          </Link>
+          <Button variant="ghost" onClick={logout}>Sign out</Button>
+        </div>
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
