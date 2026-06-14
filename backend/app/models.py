@@ -119,7 +119,7 @@ class Alert(Base):
 
     id = Column(SQLUUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     subscription_id = Column(SQLUUID(as_uuid=True), ForeignKey("subscriptions.id"), nullable=False)
-    signal_ids = Column(ARRAY(SQLUUID(as_uuid=True)), default=list)
+    signal_ids = Column(JSON, default=list)
     channel = Column(Enum(AlertChannel), nullable=False)
     status = Column(String(64), default="pending")
     sent_at = Column(DateTime, nullable=True)
