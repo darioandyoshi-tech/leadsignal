@@ -14,7 +14,7 @@ Key field mappings from API response:
 from datetime import datetime
 from typing import List, Dict
 
-import requests
+import httpx
 
 from scraper.config import (
     OMAHA,
@@ -35,15 +35,16 @@ def _search_permits(city: str, state: str, limit: int = 100, page: int = 1) -> L
         return []
     params = {"city": city, "state": state, "limit": limit, "page": page}
     try:
-        r = requests.get(
-            SEARCH_URL,
-            params=params,
-            headers={"X-API-Key": PERMITSTACK_API_KEY, "Accept": "application/json"},
-            timeout=30,
-        )
-        r.raise_for_status()
-        return r.json().get("results", [])
-    except Exception:
+        with httpx.Client(timeout=30) as client:
+            r = client.get(
+                SEARCH_URL,
+                params=params,
+                headers={"X-API-Key": PERMITSTACK_API_KEY, "Accept": "application/json"},
+            )
+            r.raise_for_status()
+            return r.json().get("results", [])
+    except Exception as e:
+        print(f"PermitStack API error: {e}")
         return []
 
 
