@@ -53,10 +53,6 @@ class SignalRead(BaseModel):
     published_at: Optional[datetime]
     metadata_: Optional[Any] = Field(default=None, serialization_alias="metadata")
 
-    @property
-    def metadata(self) -> Optional[Any]:
-        return self.metadata_
-
 
 class SignalFilter(BaseModel):
     signal_type: Optional[SignalType] = None

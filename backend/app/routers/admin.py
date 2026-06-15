@@ -13,7 +13,7 @@ import subprocess
 import sys
 import uuid
 from datetime import datetime
-from fastapi import APIRouter, Header, HTTPException, PlainTextResponse
+from fastapi import APIRouter, Header, HTTPException
 
 router = APIRouter(prefix="/admin", tags=["admin"])
 
@@ -120,46 +120,6 @@ async def list_scraper_runs(x_admin_secret: str = Header(default="")):
     """List all tracked scraper runs."""
     _require_secret(x_admin_secret)
     return {"jobs": list(_jobs.values())}
-
-
-@router.get("/debug-signal/{signal_type}")
-async def debug_signal(signal_type: str, x_admin_secret: str = Header(default="")):
-    """Serialize one signal of the given type and return any Pydantic error."""
-    _require_secret(x_admin_secret)
-    try:
-        from sqlalchemy import select
-        from app.db import async_session_maker
-        from app.models import Signal, SignalType
-        from app.schemas import SignalRead
-        try:
-            st = SignalType(signal_type)
-        except ValueError:
-            raise HTTPException(status_code=400, detail="Invalid signal_type")
-        async with async_session_maker() as db:
-            result = await db.execute(select(Signal).where(Signal.signal_type == st).limit(1))
-            sig = result.scalar_one_or_none()
-            if not sig:
-                return {"found": False, "signal_type": signal_type}
-            raw = {
-                "id": str(sig.id),
-                "company_id": str(sig.company_id),
-                "signal_type": sig.signal_type.value,
-                "severity": sig.severity,
-                "headline": sig.headline,
-                "summary": sig.summary,
-                "source_url": sig.source_url,
-                "source_api": sig.source_api,
-                "location_name": sig.location_name,
-                "detected_at": str(sig.detected_at),
-                "published_at": str(sig.published_at),
-                "metadata": sig.metadata_,
-            }
-            out = SignalRead.model_validate(sig, from_attributes=True).model_dump()
-            return {"found": True, "ok": True, "data": out, "raw": raw}
-    except Exception as e:
-        import traceback
-        tb = traceback.format_exc()
-        return PlainTextResponse(tb, status_code=200)
 
 
 def _resolve_shared_db_path(repo_root: str) -> str:
