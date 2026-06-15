@@ -9,14 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@stripe/stripe-js": "^4.0.0",
+    "@types/leaflet": "^1.9.21",
+    "axios": "^1.7.2",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.4.0",
+    "leaflet": "^1.9.4",
+    "lucide-react": "^0.396.0",
     "next": "^14.2.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "@stripe/stripe-js": "^4.0.0",
-    "axios": "^1.7.2",
-    "lucide-react": "^0.396.0",
-    "class-variance-authority": "^0.7.0",
-    "clsx": "^2.1.1",
+    "react-leaflet": "^4.2.1",
+    "recharts": "^3.8.1",
     "tailwind-merge": "^2.3.0"
   },
   "devDependencies": {
