@@ -1,9 +1,14 @@
 {
   "lastChecks": {
-    "email": 1781486654,
-    "calendar": 1781391389,
-    "weather": null,
-    "heartbeat": 1781458338,
-    "pulsewatch": 1781458338
+    "email": 1781526324,
+    "calendar": 1781526324,
+    "weather": 1781526324,
+    "pulsewatch": 1781526324
+  },
+  "notes": {
+    "email": "No email integration configured in workspace yet.",
+    "calendar": "No calendar CLI/tool configured (gcalcli/vdirsyncer not installed).",
+    "weather": "Omaha: Sunny +54°F, wind 4mph NE, humidity 88%, no precip.",
+    "pulsewatch": "9 open incidents; Elastic Security major. OpenAI operational."
   }
 }
