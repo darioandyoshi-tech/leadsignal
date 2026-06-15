@@ -128,10 +128,14 @@ async def debug_signal(signal_type: str, x_admin_secret: str = Header(default=""
     _require_secret(x_admin_secret)
     from sqlalchemy import select
     from app.db import async_session_maker
-    from app.models import Signal
+    from app.models import Signal, SignalType
     from app.schemas import SignalRead
+    try:
+        st = SignalType(signal_type)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid signal_type")
     async with async_session_maker() as db:
-        result = await db.execute(select(Signal).where(Signal.signal_type == signal_type).limit(1))
+        result = await db.execute(select(Signal).where(Signal.signal_type == st).limit(1))
         sig = result.scalar_one_or_none()
         if not sig:
             return {"found": False, "signal_type": signal_type}
