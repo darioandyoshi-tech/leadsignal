@@ -8,6 +8,20 @@ from app.config import get_settings
 
 settings = get_settings()
 
+import logging
+logger = logging.getLogger(__name__)
+
+
+def _redact_url(url: str) -> str:
+    """Return a connection string with the password removed for safe logging."""
+    parsed = urlparse(url)
+    if parsed.password:
+        netloc = f"{parsed.username}:***@{parsed.hostname}"
+        if parsed.port:
+            netloc += f":{parsed.port}"
+        return urlunparse(parsed._replace(netloc=netloc))
+    return url
+
 
 def _strip_sslmode(url: str) -> str:
     """Remove sslmode query param from a URL so asyncpg doesn't receive it."""
@@ -38,7 +52,15 @@ else:
     database_url = settings.database_url
     sync_database_url = settings.sync_database_url
 
-    if not _is_local_postgres(settings.database_url_raw):
+    is_local = _is_local_postgres(settings.database_url_raw)
+    logger.warning(
+        "DB startup: raw=%s, parsed=%s, local=%s, sync=%s",
+        _redact_url(settings.database_url_raw),
+        _redact_url(database_url),
+        is_local,
+        _redact_url(sync_database_url),
+    )
+    if not is_local:
         ctx = ssl_module.create_default_context()
         # Managed providers may use certs whose CN/SAN doesn't match the private
         # hostname; disabling verification avoids TLS handshake failures.
