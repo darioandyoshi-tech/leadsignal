@@ -26,6 +26,7 @@ export default function Dashboard() {
     tax_delinquency: 0,
     gov_contract_award: 0,
     business_license: 0,
+    land_bank_property: 0,
     ucc_filing: 0,
     new_business_registration: 0,
   });
@@ -68,6 +69,7 @@ export default function Dashboard() {
     tax_delinquency: '💰 Tax Delinquency',
     gov_contract_award: '📜 Gov Contract',
     business_license: '📋 Business License',
+    land_bank_property: '🏛️ Land Bank Property',
     ucc_filing: '🏛️ UCC Filing',
     new_business_registration: '🆕 New Business',
   };
@@ -117,6 +119,7 @@ export default function Dashboard() {
         <StatCard title="Tax Delinquency" value={stats.tax_delinquency} />
         <StatCard title="Gov Contracts" value={stats.gov_contract_award} />
         <StatCard title="Business Licenses" value={stats.business_license} />
+        <StatCard title="Land Bank Properties" value={stats.land_bank_property || 0} />
         <StatCard title="UCC Filings" value={stats.ucc_filing || 0} />
         <StatCard title="New Businesses" value={stats.new_business_registration || 0} />
       </div>
