@@ -1,5 +1,5 @@
 
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Field, ConfigDict
 from datetime import datetime
 from typing import Optional, List, Dict, Any
 from uuid import UUID
@@ -39,6 +39,8 @@ class SubscriptionRead(BaseModel):
 
 
 class SignalRead(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: UUID
     company_id: UUID
     signal_type: SignalType
