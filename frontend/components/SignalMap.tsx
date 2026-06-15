@@ -79,7 +79,6 @@ export function SignalMap({ signals, typeLabels, center = [41.252, -95.998], zoo
         ? import("react-leaflet").then((mod) => {
             const { MapContainer, TileLayer, Marker, Popup, useMap } = mod;
             const L = require("leaflet");
-            require("leaflet/dist/leaflet.css");
             const markerIcon = new L.Icon({
               iconUrl: pinSvg,
               iconSize: [28, 36],
