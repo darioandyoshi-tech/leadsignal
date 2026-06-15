@@ -215,3 +215,23 @@ async def migrate_coords(
         session.commit()
 
     return {"processed": len(rows), "updated": updated, "failed": failed, "signal_type": signal_type or "all"}
+
+
+@router.post("/cleanup-fake-permits")
+async def cleanup_fake_permits(x_admin_secret: str = Header(default="")):
+    """Delete Accela placeholder permit signals that were seeded with fake addresses."""
+    _require_secret(x_admin_secret)
+
+    from app.db import sync_engine
+    from app.models import Signal
+    from sqlalchemy.orm import Session
+
+    with Session(sync_engine) as session:
+        # Remove seeded Accela signals with the placeholder address
+        deleted = session.query(Signal).filter(
+            Signal.source_api == "accela_omaha",
+            Signal.location_name == "123 Example St, Omaha, NE",
+        ).delete(synchronize_session=False)
+        session.commit()
+
+    return {"deleted": deleted, "note": "Placeholder Accela permit signals removed"}
