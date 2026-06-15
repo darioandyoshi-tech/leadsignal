@@ -30,8 +30,10 @@ def _extract_table_rows(page_source: str) -> List[Dict]:
     try:
         from bs4 import BeautifulSoup
         soup = BeautifulSoup(page_source, "lxml")
-        for tr in soup.select("table[id*=ctl00_PlaceHolderMain_]_gvPermitList tr"):
-            tds = tr.find_all("td")
+        table = soup.select_one("table[id*='gvPermitList']")
+        if not table:
+            return rows
+        for tr in table.find_all("tr")[1:]:  # skip header row
             if len(tds) < 4:
                 continue
             texts = [td.get_text(strip=True) for td in tds]
@@ -113,8 +115,17 @@ def _seed_fallback(limit: int = 50) -> List[Dict]:
 def run(limit: int = 50) -> dict:
     rows = _run_playwright_search(limit)
     live_fetch = bool(rows)
+
     if not rows:
-        rows = _seed_fallback(limit)
+        # Don't seed fake placeholder data in production.
+        return {
+            "source": "accela_omaha",
+            "signals_created": 0,
+            "signals_skipped": 0,
+            "rows_processed": 0,
+            "live_fetch": live_fetch,
+            "note": "No rows extracted from Accela portal",
+        }
 
     created = 0
     skipped = 0
