@@ -38,15 +38,19 @@ async def run_scrapers(x_admin_secret: str = Header(default="")):
 
     repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
-    # Copy env and force a synchronous SQLite path so the scrapers do not
-    # inherit the async app database state.
     env = os.environ.copy()
     env["PYTHONPATH"] = f"{repo_root}:{repo_root}/backend"
 
-    # Force scrapers to use the same absolute SQLite DB the app uses.
-    db_path = _resolve_shared_db_path(repo_root)
-    env["DATABASE_URL_SYNC"] = f"sqlite:///{db_path}"
-    env["DATABASE_URL"] = f"sqlite+aiosqlite:///{db_path}"
+    # Ensure scrapers use the same Postgres the app uses.
+    # The scraper's db_client reads DATABASE_URL (async driver) and falls back
+    # to DATABASE_URL_SYNC for the synchronous engine.
+    for key in ("DATABASE_URL", "DATABASE_URL_SYNC"):
+        if key in env:
+            continue
+        if key == "DATABASE_URL_SYNC" and "DATABASE_URL" in env:
+            env[key] = env["DATABASE_URL"]
+        elif key == "DATABASE_URL" and "DATABASE_URL_SYNC" in env:
+            env[key] = env["DATABASE_URL_SYNC"]
 
     job_id = str(uuid.uuid4())[:8]
     log_path = os.path.join(repo_root, "scraper_run", f"run_{job_id}.log")
@@ -66,7 +70,7 @@ async def run_scrapers(x_admin_secret: str = Header(default="")):
         "pid": proc.pid,
         "returncode": None,
         "log_path": log_path,
-        "database_path": db_path,
+        "database_url": env.get("DATABASE_URL", ""),
     }
 
     asyncio.create_task(_collect_proc(job_id, proc, log_path))

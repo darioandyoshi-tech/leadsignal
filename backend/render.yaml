@@ -30,6 +30,17 @@ services:
       - key: FRONTEND_URL
         sync: false
       - key: DATABASE_URL
-        value: sqlite+aiosqlite:///./leadsignal.db
+        fromDatabase:
+          name: leadsignal-postgres
+          property: connectionString
       - key: SYNC_DATABASE_URL
-        value: sqlite:///./leadsignal.db
+        fromDatabase:
+          name: leadsignal-postgres
+          property: connectionString
+
+databases:
+  - name: leadsignal-postgres
+    plan: free
+    databaseName: leadsignal
+    user: leadsignal
+    ipAllowList: []

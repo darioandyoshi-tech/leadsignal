@@ -17,10 +17,10 @@ from scraper.config import DATABASE_URL
 from app.models import Base, Company, Signal, SignalType
 
 # SQLite: allow cross-thread usage and wait longer on write locks.
-sqlite_connect_args = {"check_same_thread": False, "timeout": 60}
+connect_args = {"check_same_thread": False, "timeout": 60} if DATABASE_URL.startswith("sqlite") else {}
 engine = create_engine(
     DATABASE_URL,
-    connect_args=sqlite_connect_args,
+    connect_args=connect_args,
     poolclass=NullPool,
 )
 try:

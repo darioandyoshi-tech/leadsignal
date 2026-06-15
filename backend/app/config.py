@@ -21,10 +21,12 @@ class Settings(BaseSettings):
             url = "postgresql" + url.removeprefix("postgres")
         if ".flycast:5432" in url:
             url = url.replace(":5432", ":5433")
-        if "?" in url:
-            base, query = url.split("?", 1)
-            params = [p for p in query.split("&") if not p.startswith("sslmode")]
-            url = base + ("?" + "&".join(params) if params else "")
+            # Fly Postgres uses a self-signed cert over the internal network;
+            # disable SSL verification and strip sslmode params.
+            if "?" in url:
+                base, query = url.split("?", 1)
+                params = [p for p in query.split("&") if not p.startswith("sslmode")]
+                url = base + ("?" + "&".join(params) if params else "")
         if "+asyncpg" not in url and "postgresql://" in url:
             url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
         return url
@@ -38,6 +40,10 @@ class Settings(BaseSettings):
             url = "postgresql" + url.removeprefix("postgres")
         if ".flycast:5432" in url:
             url = url.replace(":5432", ":5433")
+            if "?" in url:
+                base, query = url.split("?", 1)
+                params = [p for p in query.split("&") if not p.startswith("sslmode")]
+                url = base + ("?" + "&".join(params) if params else "")
         if "+psycopg2" not in url and "+asyncpg" not in url and "postgresql://" in url:
             url = url.replace("postgresql://", "postgresql+psycopg2://", 1)
         return url

@@ -66,11 +66,17 @@ def _default_db_path() -> str:
 
 DATABASE_URL = os.getenv("DATABASE_URL_SYNC") or os.getenv("DATABASE_URL") or f"sqlite:///{_default_db_path()}"
 # The scraper uses synchronous SQLAlchemy sessions, so async driver URLs
-# (e.g., sqlite+aiosqlite) must be converted to their sync equivalent.
+# (e.g., sqlite+aiosqlite or postgresql+asyncpg) must be converted to their sync equivalent.
 if DATABASE_URL.startswith("sqlite+aiosqlite:///"):
     DATABASE_URL = DATABASE_URL.replace("sqlite+aiosqlite:///", "sqlite:///")
 if DATABASE_URL.startswith("sqlite:///./"):
     DATABASE_URL = f"sqlite:///{_default_db_path()}"
+if DATABASE_URL.startswith("postgresql+asyncpg://"):
+    DATABASE_URL = DATABASE_URL.replace("postgresql+asyncpg://", "postgresql+psycopg2://", 1)
+if DATABASE_URL.startswith("postgresql://") and "+" not in DATABASE_URL.split("://", 1)[0]:
+    DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+psycopg2://", 1)
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = "postgresql+psycopg2" + DATABASE_URL.removeprefix("postgres")
 
 # PermitStack API
 PERMITSTACK_API_KEY = os.getenv("PERMITSTACK_API_KEY", "")
