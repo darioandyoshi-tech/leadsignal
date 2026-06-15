@@ -59,7 +59,7 @@ export default function MapPage() {
   const [filters, setFilters] = useState<Filters>(DEFAULT_FILTERS);
 
   useEffect(() => {
-    getSignals({ limit: 1000 })
+    getSignals({ limit: 100 })
       .then((data) => setSignals(data || []))
       .catch((e) => setError(e.response?.data?.detail || e.message))
       .finally(() => setLoading(false));

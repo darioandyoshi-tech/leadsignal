@@ -40,7 +40,7 @@ async def list_signals(
     min_severity: int = Query(1, ge=1, le=5),
     city: Optional[str] = None,
     zip_code: Optional[str] = None,
-    limit: int = Query(50, le=100),
+    limit: int = Query(100, le=2000),
     offset: int = Query(0, ge=0),
     user: Optional[User] = Depends(get_current_user_optional),
     db: AsyncSession = Depends(get_db),

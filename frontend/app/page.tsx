@@ -70,7 +70,7 @@ function useSignalsData() {
     setError("");
     try {
       const [sigData, statData] = await Promise.all([
-        getSignals({ limit: 1000 }),
+        getSignals({ limit: 100 }),
         getSignalStats(),
       ]);
       setSignals(sigData || []);
