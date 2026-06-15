@@ -1,5 +1,5 @@
 
-from pydantic import BaseModel, EmailStr, Field, ConfigDict, field_validator
+from pydantic import BaseModel, EmailStr, Field, ConfigDict
 from datetime import datetime
 from typing import Optional, List, Dict, Any
 from uuid import UUID
@@ -51,14 +51,11 @@ class SignalRead(BaseModel):
     location_name: Optional[str]
     detected_at: datetime
     published_at: Optional[datetime]
-    metadata: Optional[Any] = None
+    metadata_: Optional[Any] = Field(default=None, serialization_alias="metadata")
 
-    @field_validator('metadata', mode='before')
-    @classmethod
-    def coerce_metadata(cls, v):
-        if v is None:
-            return {}
-        return v
+    @property
+    def metadata(self) -> Optional[Any]:
+        return self.metadata_
 
 
 class SignalFilter(BaseModel):
