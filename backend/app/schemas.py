@@ -49,7 +49,7 @@ class SignalRead(BaseModel):
     location_name: Optional[str]
     detected_at: datetime
     published_at: Optional[datetime]
-    metadata: Dict[str, Any]
+    metadata: Optional[Dict[str, Any]] = None
 
 
 class SignalFilter(BaseModel):

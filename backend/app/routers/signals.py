@@ -92,5 +92,6 @@ async def signal_stats(user: Optional[User] = Depends(get_current_user_optional)
         "business_license": counts.get("business_license", 0),
         "ucc_filing": counts.get("ucc_filing", 0),
         "new_business_registration": counts.get("new_business_registration", 0),
+        "land_bank_property": counts.get("land_bank_property", 0),
         "total": sum(counts.values()),
     }
