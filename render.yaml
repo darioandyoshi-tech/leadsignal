@@ -30,9 +30,13 @@ services:
       - key: FRONTEND_URL
         sync: false
       - key: DATABASE_URL
-        value: sqlite+aiosqlite:///./leadsignal.db
+        fromDatabase:
+          name: leadsignal-postgres
+          property: connectionString
       - key: SYNC_DATABASE_URL
-        value: sqlite:///./leadsignal.db
+        fromDatabase:
+          name: leadsignal-postgres
+          property: connectionString
       - key: PERMITSTACK_API_KEY
         sync: false
       - key: APIFY_TOKEN
@@ -49,12 +53,23 @@ services:
       - key: PYTHON_VERSION
         value: 3.12.0
       - key: DATABASE_URL
-        value: sqlite+aiosqlite:///./leadsignal.db
+        fromDatabase:
+          name: leadsignal-postgres
+          property: connectionString
       - key: SYNC_DATABASE_URL
-        value: sqlite:///./leadsignal.db
+        fromDatabase:
+          name: leadsignal-postgres
+          property: connectionString
       - key: PERMITSTACK_API_KEY
         sync: false
       - key: APIFY_TOKEN
         sync: false
       - key: GOOGLE_PLACES_API_KEY
         sync: false
+
+databases:
+  - name: leadsignal-postgres
+    plan: free
+    databaseName: leadsignal
+    user: leadsignal
+    ipAllowList: []
