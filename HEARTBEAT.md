@@ -52,6 +52,53 @@ Monitoring active.
 - Git workspace still has uncommitted changes and untracked files.
 
 ---
+## 11:02 CDT Heartbeat
+
+- Gateway healthy; model `ollama/kimi-k2.7-code:cloud`.
+- PulseWatch watchlist-only open incidents: **6** (up from 4 at 10:40 CDT).
+  - **New:** GitHub / GitHub Actions — increased latency with webhooks (started 10:37 CDT).
+  - **Major:** Google Cloud — network latency/packet loss from Delhi, Chennai, Mumbai and surrounding areas (since 2026-06-09).
+  - **Minor:** Anthropic — suspended access to Claude Mythos 5 and Claude Fable 5 (monitoring, since 2026-06-13); Twilio — SMS delivery failures from Brazil to a subset of Twilio short codes (investigating); Cloudflare — possible degraded performance (investigating).
+- Global critical/major incidents (non-watchlist): **17**, including **Fly.io** (critical — Macaroon Auth + Machines API issues, new since 10:40 CDT) and **Snowflake** (critical — INC20000034), plus the previously noted Elastic Security, Elastic Cloud, Litmus, Grafana Cloud/k6, Autotask PSA / Datto RMM / Kaseya VSA Endpoint Backup v2, Grain, Mono, Tenable/Tenable.io, Predibase, and Google Cloud.
+- Dario-owned services: `pulsewatch.us` UP (HTTP 200, ~225 ms). `api.pulsewatch.us` still **unresolved/NXDOMAIN** (~7 ms, getaddrinfo ENOTFOUND) — remains top outstanding item.
+- Weather: Omaha sunny +74°F, wind 7mph NE, humidity 38%, no precip.
+- Calendar/email: no integrated provider.
+- Status: NOMINAL with outstanding notes (API DNS still unresolved, global incidents active, watchlist incident count increased).
+
+---
+## 10:40 CDT Heartbeat
+
+- Gateway healthy; model `ollama/kimi-k2.7-code:cloud`.
+- PulseWatch watchlist-only open incidents: **4** (stable since 10:30 CDT).
+  - **Major:** Google Cloud — network latency/packet loss from Delhi, Chennai, Mumbai and surrounding areas (since 2026-06-09).
+  - **Minor:** Anthropic — suspended access to Claude Mythos 5 and Claude Fable 5 (monitoring, since 2026-06-13); Twilio — SMS delivery failures from Brazil to a subset of Twilio short codes (investigating, new since 10:30 CDT); Cloudflare — possible degraded performance (investigating).
+  - Note: earlier Opus 4.8 incident no longer on watchlist (likely resolved/closed).
+- Global critical/major incidents (non-watchlist): **5**, including the **critical Snowflake INC20000034** (identified, started 09:30 CDT), plus Elastic Security, Elastic Cloud, Litmus, Grafana Cloud (major).
+- Dario-owned services: `pulsewatch.us` UP (HTTP 200, ~115 ms). `api.pulsewatch.us` still **unresolved/NXDOMAIN** (~7 ms, connection refused/000) — remains top outstanding item.
+- Weather: Omaha sunny +74°F, wind 7mph NE, humidity 38%, no precip.
+- Calendar/email: no integrated provider.
+- Workspace git: still has uncommitted changes in DREAMS.md, alert_state.json, leadsignal, ecc-installation/ECC; untracked `skills/superpowers`, `skills/apify/`, and `media/`.
+- Status: NOMINAL with outstanding notes (API DNS, git cleanup, Snowflake global incident).
+
+---
+## 10:30 CDT Heartbeat
+
+- Gateway healthy; model `ollama/kimi-k2.7-code:cloud`.
+- PulseWatch watchlist-only open incidents: **4** (down from 5 earlier).
+  - **Major:** Google Cloud — network latency/packet loss from Delhi, Chennai, Mumbai and surrounding areas (since 2026-06-09).
+  - **Minor:** Anthropic — suspended access to Claude Mythos 5 and Claude Fable 5 (monitoring, since 2026-06-13); Twilio — possible degraded performance (investigating); Cloudflare — possible degraded performance (investigating).
+  - Note: earlier Opus 4.8 incident no longer on watchlist (likely resolved/closed).
+- Global open incidents (non-watchlist): **20**, including new/critical ones since earlier:
+  - **Critical:** Snowflake — INC20000034 (investigating, started 09:30 CDT).
+  - **Major:** Elastic Security, Elastic Cloud, Litmus (carried over).
+  - **Minor/notable:** Oracle NetSuite, Knock, Scaleway, Personio, Kaseya VSA, EBANX, DocuSign, dLocal (Nequi/Bancolombia), Jamf, UpCloud, Mercado Pago, Tricentis Tosca, Talkdesk, Helius, Infura, Fivetran.
+- Dario-owned services: `pulsewatch.us` UP (HTTP 200, ~124 ms). `api.pulsewatch.us` still **NXDOMAIN** — remains top outstanding item.
+- Weather/calendar/email: no integrated provider.
+- Workspace git: still uncommitted changes in DREAMS.md, alert_state.json, leadsignal, ecc-installation/ECC; untracked `skills/superpowers`, `skills/apify/`, and `media/`.
+- Status: NOMINAL with outstanding notes (API DNS, git cleanup, Snowflake global incident).
+
+---
+
 ## 08:34 CDT Heartbeat
 
 - Gateway healthy; model `ollama/kimi-k2.7-code:cloud`.

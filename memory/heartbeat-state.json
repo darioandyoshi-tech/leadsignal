@@ -1,14 +1,14 @@
 {
   "lastChecks": {
-    "email": 1760552040,
-    "calendar": 1760552040,
-    "weather": 1760552040,
-    "pulsewatch": 1760552040
+    "email": 1760588700,
+    "calendar": 1760588700,
+    "weather": 1760588820,
+    "pulsewatch": 1760588820
   },
   "notes": {
     "email": "No email integration configured in workspace yet.",
     "calendar": "No calendar CLI/tool configured (gcalcli/vdirsyncer not installed).",
-    "weather": "Omaha: Sunny +54°F, wind 4mph NE, humidity 88%, no precip. (stale, from 08:25 CDT fetch)",
-    "pulsewatch": "5 open watchlist incidents; Google Cloud major (India). Anthropic Opus 4.8 and Mythos/Fable 5 issues. Twilio and Cloudflare minor. pulsewatch.us UP. api.pulsewatch.us still NXDOMAIN."
+    "weather": "Omaha: sunny +74°F, wind 7mph NE, humidity 38%, no precip.",
+    "pulsewatch": "6 watchlist open incidents (up from 4): new GitHub/GitHub Actions webhook latency, carried Twilio Brazil short-code SMS, Cloudflare, Anthropic Mythos/Fable 5 suspended, Google Cloud major India. pulsewatch.us UP. api.pulsewatch.us still NXDOMAIN. Global critical: Fly.io + Snowflake. Global major: Elastic Security, Elastic Cloud, Litmus, Grafana Cloud/k6, Autotask/Datto/Kaseya backup v2, Grain, Mono, Tenable/Tenable.io, Predibase, Google Cloud."
   }
 }
