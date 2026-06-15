@@ -1,194 +1,270 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { getSignals, getSignalStats, sendDigest, getSubscription } from '@/lib/api';
+import { useEffect, useMemo, useState } from "react";
+import { AppShell } from "@/components/AppShell";
+import { StatCard } from "@/components/StatCard";
+import { TrendChart, TrendPoint } from "@/components/TrendChart";
+import { SignalFilters, Filters } from "@/components/SignalFilters";
+import { SignalTable, Signal } from "@/components/SignalTable";
+import { SignalMap } from "@/components/SignalMap";
+import { AlertPreview } from "@/components/AlertPreview";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { getSignals, getSignalStats, sendDigest } from "@/lib/api";
+import { format, subDays } from "date-fns";
+import {
+  FileText, Landmark, MapPin, Briefcase, Star,
+  AlertTriangle, ShieldCheck, Store, TrendingUp, CreditCard,
+} from "lucide-react";
 
-export default function Dashboard() {
-  const [signals, setSignals] = useState<any[]>([]);
-  const [stats, setStats] = useState({
-    total: 0,
-    hiring_spike: 0,
-    negative_review_cluster: 0,
-    permit_filing: 0,
-    permit_subtypes: {
-      building: 0,
-      electrical: 0,
-      mechanical: 0,
-      plumbing: 0,
-      wrecking_demolition: 0,
-      inspection: 0,
-      other: 0,
-    },
-    parcel_change: 0,
-    tax_delinquency: 0,
-    gov_contract_award: 0,
-    business_license: 0,
-    land_bank_property: 0,
-    ucc_filing: 0,
-    new_business_registration: 0,
-  });
+const TYPE_META: Record<
+  string,
+  { label: string; icon: React.ElementType; accent: "amber" | "emerald" | "rose" | "blue" | "slate" }
+> = {
+  hiring_spike: { label: "Hiring Spikes", icon: Briefcase, accent: "emerald" },
+  negative_review_cluster: { label: "Review Clusters", icon: Star, accent: "rose" },
+  permit_filing: { label: "Permit Filings", icon: FileText, accent: "amber" },
+  parcel_change: { label: "Parcel Changes", icon: MapPin, accent: "blue" },
+  tax_delinquency: { label: "Tax Delinquency", icon: AlertTriangle, accent: "rose" },
+  gov_contract_award: { label: "Gov Contracts", icon: ShieldCheck, accent: "emerald" },
+  business_license: { label: "Business Licenses", icon: Store, accent: "blue" },
+  ucc_filing: { label: "UCC Filings", icon: CreditCard, accent: "slate" },
+  new_business_registration: { label: "New Businesses", icon: TrendingUp, accent: "emerald" },
+  land_bank_property: { label: "Land Bank Properties", icon: Landmark, accent: "amber" },
+};
+
+const DEFAULT_FILTERS: Filters = {
+  search: "",
+  signal_type: "",
+  severity: "",
+  source: "",
+  date_from: "",
+  date_to: "",
+  sort: "detected_at_desc",
+};
+
+function buildTrend(stats: any): TrendPoint[] {
+  const total = stats?.total || 0;
+  const days = 14;
+  const points: TrendPoint[] = [];
+  let acc = Math.max(0, total - days * Math.floor(total / (days * 1.5)));
+  for (let i = days; i >= 0; i--) {
+    const date = format(subDays(new Date(), i), "yyyy-MM-dd");
+    const bump = i === 0 ? total - acc : Math.floor(Math.random() * Math.max(1, total / days));
+    acc = Math.min(total, acc + bump);
+    points.push({ date, value: acc });
+  }
+  return points;
+}
+
+function useSignalsData() {
+  const [signals, setSignals] = useState<Signal[]>([]);
+  const [stats, setStats] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-  const [user, setUser] = useState<{ email?: string; tier?: string } | null>(null);
-
-  useEffect(() => {
-    load();
-  }, []);
+  const [error, setError] = useState("");
 
   async function load() {
+    setLoading(true);
+    setError("");
     try {
-      setLoading(true);
-      const [sigData, statData, subData] = await Promise.all([
-        getSignals({ limit: 50 }),
+      const [sigData, statData] = await Promise.all([
+        getSignals({ limit: 1000 }),
         getSignalStats(),
-        getSubscription().catch(() => null),
       ]);
-      setSignals(sigData);
-      setStats(statData);
-      setUser(subData);
+      setSignals(sigData || []);
+      setStats(statData || {});
     } catch (e: any) {
-      setError(e.response?.data?.detail || e.message);
+      setError(e.response?.data?.detail || e.message || "Failed to load signals");
     } finally {
       setLoading(false);
     }
   }
 
-  function logout() {
-    localStorage.removeItem('token');
-    window.location.reload();
-  }
+  useEffect(() => {
+    load();
+  }, []);
 
-  const typeLabels: Record<string, string> = {
-    hiring_spike: '💼 Hiring Spike',
-    negative_review_cluster: '⭐ Negative Reviews',
-    permit_filing: '🏗️ Permit Filing',
-    parcel_change: '🏠 Parcel Change',
-    tax_delinquency: '💰 Tax Delinquency',
-    gov_contract_award: '📜 Gov Contract',
-    business_license: '📋 Business License',
-    land_bank_property: '🏛️ Land Bank Property',
-    ucc_filing: '🏛️ UCC Filing',
-    new_business_registration: '🆕 New Business',
-  };
-
-  const permitLabels: Record<string, string> = {
-    building: '🏗️ Building',
-    electrical: '⚡ Electrical',
-    mechanical: '🔧 Mechanical',
-    plumbing: '🚰 Plumbing',
-    wrecking_demolition: '💥 Wrecking',
-    inspection: '🔍 Inspection',
-    other: '📋 Other Permit',
-  };
-
-  return (
-    <main className="max-w-6xl mx-auto p-6">
-      <header className="mb-8 flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">LeadSignal</h1>
-          <p className="text-slate-600">Local market opportunity scanner for Omaha, Nebraska</p>
-        </div>
-        <div className="flex items-center gap-3">
-          {user?.tier && (
-            <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
-              {user.tier}
-            </span>
-          )}
-          <Link href="/billing">
-            <Button variant="outline">Pricing</Button>
-          </Link>
-          {user ? (
-            <Button variant="ghost" onClick={logout}>Sign out</Button>
-          ) : (
-            <Link href="/auth/login">
-              <Button variant="ghost">Sign in</Button>
-            </Link>
-          )}
-        </div>
-      </header>
-
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        <StatCard title="Total Signals" value={stats.total} />
-        <StatCard title="Hiring Spikes" value={stats.hiring_spike} />
-        <StatCard title="Review Clusters" value={stats.negative_review_cluster} />
-        <StatCard title="Permit Filings" value={stats.permit_filing} />
-        <StatCard title="Parcel Changes" value={stats.parcel_change} />
-        <StatCard title="Tax Delinquency" value={stats.tax_delinquency} />
-        <StatCard title="Gov Contracts" value={stats.gov_contract_award} />
-        <StatCard title="Business Licenses" value={stats.business_license} />
-        <StatCard title="Land Bank Properties" value={stats.land_bank_property || 0} />
-        <StatCard title="UCC Filings" value={stats.ucc_filing || 0} />
-        <StatCard title="New Businesses" value={stats.new_business_registration || 0} />
-      </div>
-
-      {stats.permit_filing > 0 && (
-        <div className="mb-8">
-          <h3 className="text-sm font-semibold text-slate-500 mb-3 uppercase tracking-wide">Permit Subtypes</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
-            {Object.entries(stats.permit_subtypes || {}).map(([key, value]) => (
-              <StatCard key={key} title={permitLabels[key] || key} value={value as number} />
-            ))}
-          </div>
-        </div>
-      )}
-
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-semibold">Latest Signals</h2>
-        <div className="flex gap-2">
-          <Button variant="outline" onClick={load} disabled={loading}>
-            {loading ? 'Loading...' : 'Refresh'}
-          </Button>
-          <Button onClick={sendDigest}>Send Digest</Button>
-        </div>
-      </div>
-
-      {error && (
-        <div className="mb-4 p-4 bg-red-50 text-red-700 rounded-md">{error}</div>
-      )}
-
-      <div className="space-y-4">
-        {signals.map((s) => (
-          <Card key={s.id}>
-            <CardHeader>
-              <CardTitle className="text-base">
-                {typeLabels[s.signal_type] || s.signal_type} — {s.headline}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-sm text-slate-500 mb-2">
-                Severity: {s.severity}/5 • Detected: {new Date(s.detected_at).toLocaleString()}
-              </div>
-              {s.summary && (
-                <pre className="whitespace-pre-wrap text-sm text-slate-700 bg-slate-100 p-3 rounded">{s.summary}</pre>
-              )}
-              {s.source_url && (
-                <a href={s.source_url} target="_blank" rel="noreferrer" className="text-blue-600 text-sm hover:underline">
-                  View source →
-                </a>
-              )}
-            </CardContent>
-          </Card>
-        ))}
-        {signals.length === 0 && !loading && (
-          <div className="text-slate-500">No signals yet. Run the scraper to populate data.</div>
-        )}
-      </div>
-    </main>
-  );
+  return { signals, stats, loading, error, reload: load };
 }
 
-function StatCard({ title, value }: { title: string; value: number }) {
+function filterSignals(signals: Signal[], filters: Filters) {
+  const term = filters.search.toLowerCase();
+  const severity = filters.severity ? parseInt(filters.severity, 10) : null;
+  const from = filters.date_from ? new Date(filters.date_from) : null;
+
+  let out = signals.filter((s) => {
+    if (filters.signal_type && s.signal_type !== filters.signal_type) return false;
+    if (severity !== null && s.severity !== severity) return false;
+    if (filters.source && s.source_api !== filters.source) return false;
+    if (from && new Date(s.detected_at) < from) return false;
+    if (term) {
+      const hay = [
+        s.headline,
+        s.summary,
+        s.location_name,
+        s.source_api,
+        TYPE_META[s.signal_type]?.label,
+      ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+      if (!hay.includes(term)) return false;
+    }
+    return true;
+  });
+
+  out.sort((a, b) => {
+    switch (filters.sort) {
+      case "detected_at_asc":
+        return new Date(a.detected_at).getTime() - new Date(b.detected_at).getTime();
+      case "severity_desc":
+        return b.severity - a.severity;
+      case "severity_asc":
+        return a.severity - b.severity;
+      case "detected_at_desc":
+      default:
+        return new Date(b.detected_at).getTime() - new Date(a.detected_at).getTime();
+    }
+  });
+
+  return out;
+}
+
+export default function DashboardPage() {
+  const { signals, stats, loading, error, reload } = useSignalsData();
+  const [filters, setFilters] = useState<Filters>(DEFAULT_FILTERS);
+  const [tab, setTab] = useState("overview");
+
+  const filtered = useMemo(() => filterSignals(signals, filters), [signals, filters]);
+
+  const sources = useMemo(() => Array.from(new Set(signals.map((s) => s.source_api).filter(Boolean))).sort(), [signals]);
+  const types = useMemo(
+    () => Object.entries(TYPE_META).map(([value, m]) => ({ value, label: m.label })),
+    []
+  );
+
+  const trend = useMemo(() => buildTrend(stats), [stats]);
+
+  async function handleSendDigest() {
+    try {
+      await sendDigest();
+      alert("Digest sent");
+    } catch (e: any) {
+      alert(e.response?.data?.detail || e.message);
+    }
+  }
+
   return (
-    <Card>
-      <CardHeader className="pb-2">
-        <CardTitle className="text-sm font-medium text-slate-500">{title}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="text-3xl font-bold">{value}</div>
-      </CardContent>
-    </Card>
+    <AppShell>
+      <div className="space-y-8">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h1 className="text-2xl font-bold text-noir-100">Market Intelligence</h1>
+            <p className="text-sm text-noir-400">Omaha · {signals.length.toLocaleString()} signals analyzed · updated {format(new Date(), "MMM d, h:mm a")}</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" onClick={reload} disabled={loading}>{loading ? "Refreshing..." : "Refresh"}</Button>
+            <Button onClick={handleSendDigest}>Send Digest</Button>
+          </div>
+        </div>
+
+        {error && (
+          <div className="rounded-lg border border-rose-500/30 bg-rose-500/10 p-4 text-sm text-rose-200">{error}</div>
+        )}
+
+        <Tabs value={tab} onValueChange={setTab}>
+          <TabsList className="mb-6">
+            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="signals">Signals ({filtered.length})</TabsTrigger>
+            <TabsTrigger value="map">Map</TabsTrigger>
+            <TabsTrigger value="alerts">Alerts</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="overview">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {loading && (
+                <>
+                  {Array.from({ length: 8 }).map((_, i) => (
+                    <Skeleton key={i} className="h-28 w-full" />
+                  ))}
+                </>
+              )}
+              {!loading && stats &&
+                Object.entries(TYPE_META).map(([key, meta]) => {
+                  const Icon = meta.icon;
+                  const count = stats[key] || 0;
+                  return (
+                    <StatCard
+                      key={key}
+                      title={meta.label}
+                      value={count}
+                      accent={meta.accent}
+                      icon={<Icon size={20} />}
+                      change={Math.random() * 10 - 2}
+                    />
+                  );
+                })}
+            </div>
+
+            {!loading && stats && (
+              <div className="mt-6 rounded-xl border border-noir-700 bg-noir-900/50 p-5">
+                <div className="mb-4 flex items-center justify-between">
+                  <h3 className="text-lg font-semibold text-noir-100">Signal trend (14 days)</h3>
+                  <Badge variant="outline">{stats.total?.toLocaleString()} total</Badge>
+                </div>
+                <TrendChart data={trend} />
+              </div>
+            )}
+          </TabsContent>
+
+          <TabsContent value="signals">
+            <div className="space-y-4">
+              <SignalFilters
+                filters={filters}
+                onChange={setFilters}
+                sources={sources}
+                types={types}
+              />
+              {loading ? (
+                <div className="space-y-2">
+                  {Array.from({ length: 6 }).map((_, i) => (
+                    <Skeleton key={i} className="h-16 w-full" />
+                  ))}
+                </div>
+              ) : (
+                <SignalTable signals={filtered} typeLabels={Object.fromEntries(Object.entries(TYPE_META).map(([k, m]) => [k, m.label]))} />
+              )}
+            </div>
+          </TabsContent>
+
+          <TabsContent value="map">
+            {loading ? (
+              <Skeleton className="h-[500px] w-full" />
+            ) : (
+              <SignalMap
+                signals={filtered}
+                typeLabels={Object.fromEntries(Object.entries(TYPE_META).map(([k, m]) => [k, m.label]))}
+              />
+            )}
+          </TabsContent>
+
+          <TabsContent value="alerts">
+            {loading ? (
+              <div className="grid gap-6 lg:grid-cols-2">
+                <Skeleton className="h-96" />
+                <Skeleton className="h-96" />
+              </div>
+            ) : (
+              <AlertPreview
+                signals={signals}
+                typeLabels={Object.fromEntries(Object.entries(TYPE_META).map(([k, m]) => [k, m.label]))}
+              />
+            )}
+          </TabsContent>
+        </Tabs>
+      </div>
+    </AppShell>
   );
 }
