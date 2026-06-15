@@ -1,14 +1,15 @@
 {
   "lastChecks": {
-    "email": 1760588700,
-    "calendar": 1760588700,
-    "weather": 1760588820,
-    "pulsewatch": 1760588820
+    "email": null,
+    "calendar": null,
+    "weather": null,
+    "heartbeat": 1760523480,
+    "pulsewatch": 1760523480
   },
   "notes": {
     "email": "No email integration configured in workspace yet.",
-    "calendar": "No calendar CLI/tool configured (gcalcli/vdirsyncer not installed).",
-    "weather": "Omaha: sunny +74°F, wind 7mph NE, humidity 38%, no precip.",
-    "pulsewatch": "6 watchlist open incidents (up from 4): new GitHub/GitHub Actions webhook latency, carried Twilio Brazil short-code SMS, Cloudflare, Anthropic Mythos/Fable 5 suspended, Google Cloud major India. pulsewatch.us UP. api.pulsewatch.us still NXDOMAIN. Global critical: Fly.io + Snowflake. Global major: Elastic Security, Elastic Cloud, Litmus, Grafana Cloud/k6, Autotask/Datto/Kaseya backup v2, Grain, Mono, Tenable/Tenable.io, Predibase, Google Cloud."
+    "calendar": "No calendar CLI/tool configured.",
+    "weather": "Not checked this heartbeat; no provider configured.",
+    "pulsewatch": "Watchlist: 10 open sampled. New GitHub feature-flag issues (GitHub, Actions, Dependabot, Pages minor investigating). Character.AI major investigating. OpenAI OAuth issue identified but service operational. Nebius network, Mercado Pago Argentina Rapipago minor. No PulseWatch vendor slug (platform itself). pulsewatch.us UP; api.pulsewatch.us still NXDOMAIN."
   }
 }
