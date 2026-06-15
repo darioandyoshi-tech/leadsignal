@@ -68,7 +68,7 @@ export default function MapPage() {
   const filtered = useMemo(() => filterSignals(signals, filters), [signals, filters]);
 
   const sources = useMemo(
-    () => Array.from(new Set(signals.map((s) => s.source_api).filter(Boolean))).sort(),
+    () => Array.from(new Set(signals.map((s) => s.source_api).filter((s): s is string => !!s))).sort(),
     [signals]
   );
   const types = useMemo(

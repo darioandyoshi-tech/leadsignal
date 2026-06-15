@@ -139,7 +139,7 @@ export default function DashboardPage() {
 
   const filtered = useMemo(() => filterSignals(signals, filters), [signals, filters]);
 
-  const sources = useMemo(() => Array.from(new Set(signals.map((s) => s.source_api).filter(Boolean))).sort(), [signals]);
+  const sources = useMemo(() => Array.from(new Set(signals.map((s) => s.source_api).filter((s): s is string => !!s))).sort(), [signals]);
   const types = useMemo(
     () => Object.entries(TYPE_META).map(([value, m]) => ({ value, label: m.label })),
     []
