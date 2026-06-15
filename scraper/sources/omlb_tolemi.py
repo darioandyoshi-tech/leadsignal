@@ -21,7 +21,7 @@ import requests
 from typing import Dict, List, Any
 
 from scraper import config
-from scraper.db_client import get_or_create_company, insert_signal, ensure_tables
+from scraper.db_client import get_or_create_company, insert_signal, Session
 
 logger = logging.getLogger(__name__)
 
@@ -144,37 +144,39 @@ def fetch_signals() -> List[Dict[str, Any]]:
 
 def run() -> Dict[str, Any]:
     logger.info("Starting OMLB Tolemi scraper")
-    ensure_tables()
     signals = fetch_signals()
     inserted = 0
-    for sig in signals:
-        try:
-            company = get_or_create_company(
-                name=f"OMLB Property {sig['metadata']['parcel_id']}",
-                address=sig.get("address"),
-                city="Omaha",
-                state="NE",
-                zip_code=sig["metadata"].get("zip_code"),
-                latitude=sig.get("latitude"),
-                longitude=sig.get("longitude"),
-                source="omlb_tolemi",
-            )
-            insert_signal(
-                company_id=company.id,
-                external_id=sig["external_id"],
-                signal_type=sig["signal_type"],
-                title=sig["title"],
-                description=sig["description"],
-                source_url=sig["source_url"],
-                metadata=sig["metadata"],
-                latitude=sig.get("latitude"),
-                longitude=sig.get("longitude"),
-            )
-            inserted += 1
-        except Exception as e:
-            logger.error("Failed to insert OMLB signal %s: %s", sig["external_id"], e)
+    with Session() as session:
+        for sig in signals:
+            try:
+                company = get_or_create_company(
+                    session=session,
+                    name=f"OMLB Property {sig['metadata']['parcel_id']}",
+                    city="Omaha",
+                    state="NE",
+                    zip_code=sig["metadata"].get("zip_code"),
+                    latitude=sig.get("latitude"),
+                    longitude=sig.get("longitude"),
+                )
+                sid = insert_signal(
+                    session=session,
+                    company_id=company.id,
+                    signal_type=sig["signal_type"],
+                    severity=3,
+                    headline=sig["title"],
+                    summary=sig["description"],
+                    source_url=sig["source_url"],
+                    source_api="omlb_tolemi",
+                    location_name=sig.get("address"),
+                    metadata=sig["metadata"],
+                )
+                if sid:
+                    inserted += 1
+            except Exception as e:
+                logger.error("Failed to insert OMLB signal %s: %s", sig["external_id"], e)
+        session.commit()
     logger.info("OMLB Tolemi scraper complete: %d signals inserted", inserted)
-    return {"source": "omlb_tolemi", "inserted": inserted, "fetched": len(signals)}
+    return {"source": "omlb_tolemi", "signals_created": inserted, "fetched": len(signals)}
 
 
 if __name__ == "__main__":
