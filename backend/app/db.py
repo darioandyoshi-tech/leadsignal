@@ -18,6 +18,11 @@ def _strip_sslmode(url: str) -> str:
     query = urlencode(params)
     return urlunparse(parsed._replace(query=query))
 
+def _is_local_postgres(url: str) -> bool:
+    """Return True if the URL points to a local/dev Postgres instance."""
+    host = urlparse(url).hostname or ""
+    return host in ("localhost", "127.0.0.1", "::1") or host.endswith(".local")
+
 # SQLite fallback for MVP demos / local dev when no Postgres is configured
 if not settings.database_url_raw or "sqlite" in settings.database_url_raw:
     SQLITE_URL = settings.database_url
@@ -27,23 +32,18 @@ if not settings.database_url_raw or "sqlite" in settings.database_url_raw:
     sync_engine = create_engine(SYNC_SQLITE_URL, connect_args={"check_same_thread": False, "timeout": 60})
     sync_session_maker = sessionmaker(sync_engine)
 else:
-    # External Postgres (Render, Fly) requires TLS. Render's cert is signed by a
-    # public CA, so we can use the default context. Fly uses a self-signed cert
-    # over the internal network, so we disable verification for flycast hosts.
+    # Managed Postgres (Render, Fly, etc.) requires TLS. Use a permissive SSL
+    # context that works with both publicly-signed and self-signed certs.
     connect_args = {}
     database_url = settings.database_url
     sync_database_url = settings.sync_database_url
 
-    requires_ssl = (
-        "flycast" in settings.database_url_raw
-        or ".render.com" in settings.database_url_raw
-        or "sslmode" in settings.database_url_raw
-    )
-    if requires_ssl:
+    if not _is_local_postgres(settings.database_url_raw):
         ctx = ssl_module.create_default_context()
-        if "flycast" in settings.database_url_raw:
-            ctx.check_hostname = False
-            ctx.verify_mode = ssl_module.CERT_NONE
+        # Managed providers may use certs whose CN/SAN doesn't match the private
+        # hostname; disabling verification avoids TLS handshake failures.
+        ctx.check_hostname = False
+        ctx.verify_mode = ssl_module.CERT_NONE
         connect_args["ssl"] = ctx
         # asyncpg does not accept the sslmode keyword, so strip it from the async URL.
         database_url = _strip_sslmode(database_url)
