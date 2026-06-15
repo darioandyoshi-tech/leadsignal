@@ -3,13 +3,14 @@
     "email": null,
     "calendar": null,
     "weather": null,
-    "heartbeat": 1760523480,
-    "pulsewatch": 1760523480
+    "heartbeat": 1760536920,
+    "pulsewatch": 1760536920
   },
   "notes": {
     "email": "No email integration configured in workspace yet.",
     "calendar": "No calendar CLI/tool configured.",
     "weather": "Not checked this heartbeat; no provider configured.",
-    "pulsewatch": "Watchlist: 10 open sampled. New GitHub feature-flag issues (GitHub, Actions, Dependabot, Pages minor investigating). Character.AI major investigating. OpenAI OAuth issue identified but service operational. Nebius network, Mercado Pago Argentina Rapipago minor. No PulseWatch vendor slug (platform itself). pulsewatch.us UP; api.pulsewatch.us still NXDOMAIN."
+    "pulsewatch": "Watchlist: 7 open at 15:22 CDT. Major: Google Cloud India latency. Minors: OpenAI OAuth, Anthropic Claude Mythos/Fable 5, Twilio x4 (Verizon US, Canada Gateway, Brazil short codes, Mexico SMS), Cloudflare possible degraded performance, Resend inbound attachment downloads. pulsewatch.us UP; api.pulsewatch.us still NXDOMAIN.",
+    "workspace": "Git dirty: alert_state.json, memory/2026-06-15.md, memory/heartbeat-state.json, submodules ecc-installation/ECC and leadsignal, untracked skills/superpowers and skills/apify/."
   }
 }
