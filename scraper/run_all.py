@@ -32,6 +32,7 @@ from scraper.sources import (
     permitstack_omaha,
     ne_dol_contractors,
     nadc_vendors,
+    omlb_tolemi,
 )
 
 
@@ -60,6 +61,7 @@ SOURCES = [
     landmarkweb_deeds,
     permitstack_omaha,
     ne_dol_contractors,
+    omlb_tolemi,
 ]
 
 

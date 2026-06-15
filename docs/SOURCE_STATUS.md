@@ -17,6 +17,7 @@
 | Nebraska DOL contractors | DOL contractor registration search | ✅ 100 signals from 500 inspected | `scraper/sources/ne_dol_contractors.py` |
 | NADC vendor leads | Nebraska campaign-finance bulk ZIP | ✅ 521 signals from 4,500 rows | `scraper/sources/nadc_vendors.py` |
 | Public notices | Omaha Daily Record RSS feeds | ✅ 198 signals from 27 feeds | `scraper/sources/odr_feeds.py` |
+| Land bank properties | Omaha Municipal Land Bank Tolemi public map | ✅ Live 302 unique assets | `scraper/sources/omlb_tolemi.py` |
 
 ## Placeholder / Blocked Sources
 

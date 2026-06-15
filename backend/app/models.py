@@ -27,6 +27,7 @@ class SignalType(str, enum.Enum):
     business_license = "business_license"
     ucc_filing = "ucc_filing"
     new_business_registration = "new_business_registration"
+    land_bank_property = "land_bank_property"
 
 
 class AlertChannel(str, enum.Enum):
