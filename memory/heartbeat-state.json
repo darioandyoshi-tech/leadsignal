@@ -1,14 +1,14 @@
 {
   "lastChecks": {
-    "email": 1760004705,
-    "calendar": 1760004705,
-    "weather": 1760004705,
-    "pulsewatch": 1760004705
+    "email": 1760552040,
+    "calendar": 1760552040,
+    "weather": 1760552040,
+    "pulsewatch": 1760552040
   },
   "notes": {
     "email": "No email integration configured in workspace yet.",
     "calendar": "No calendar CLI/tool configured (gcalcli/vdirsyncer not installed).",
-    "weather": "Omaha: Sunny +54°F, wind 4mph NE, humidity 88%, no precip.",
-    "pulsewatch": "5 open watchlist incidents; Google Cloud major (India). Anthropic Opus 4.8 and Mythos/Fable 5 issues. Twilio and Cloudflare minor."
+    "weather": "Omaha: Sunny +54°F, wind 4mph NE, humidity 88%, no precip. (stale, from 08:25 CDT fetch)",
+    "pulsewatch": "5 open watchlist incidents; Google Cloud major (India). Anthropic Opus 4.8 and Mythos/Fable 5 issues. Twilio and Cloudflare minor. pulsewatch.us UP. api.pulsewatch.us still NXDOMAIN."
   }
 }

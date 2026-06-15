@@ -52,6 +52,19 @@ Monitoring active.
 - Git workspace still has uncommitted changes and untracked files.
 
 ---
+## 08:34 CDT Heartbeat
+
+- Gateway healthy; model `ollama/kimi-k2.7-code:cloud`.
+- PulseWatch open watchlist incidents: **5** (canonical watchlist-only count, stable).
+  - **Major:** Google Cloud — network latency/packet loss from Delhi, Chennai, Mumbai and surrounding areas (since 2026-06-09).
+  - **Minor:** Anthropic — elevated errors on Claude Opus 4.8 (investigating, since 06:20 UTC); Anthropic — suspended access to Claude Mythos 5 and Claude Fable 5 (monitoring, since 2026-06-13); Twilio — possible degraded performance (investigating); Cloudflare — possible degraded performance (investigating).
+- Dario-owned services: `pulsewatch.us` UP (HTTP 200, ~268 ms). `api.pulsewatch.us` still **NXDOMAIN** — remains top outstanding item.
+- Weather: Omaha +54°F sunny, wind 4mph NE, humidity 88%, no precip. *(stale / from 08:25 fetch)*.
+- Calendar/email: no integrated provider.
+- Workspace git: committed heartbeat log/state updates; remaining uncommitted changes in DREAMS.md, alert_state.json, leadsignal, ecc-installation/ECC, plus untracked `skills/superpowers`, `skills/apify/`, and `media/`.
+- Status: NOMINAL with outstanding notes (API DNS, git cleanup).
+
+---
 ## 08:25 CDT Heartbeat
 
 - Gateway healthy; model `ollama/kimi-k2.7-code:cloud`.
