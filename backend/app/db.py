@@ -53,12 +53,11 @@ else:
     sync_database_url = settings.sync_database_url
 
     is_local = _is_local_postgres(settings.database_url_raw)
-    logger.warning(
-        "DB startup: raw=%s, parsed=%s, local=%s, sync=%s",
-        _redact_url(settings.database_url_raw),
-        _redact_url(database_url),
-        is_local,
-        _redact_url(sync_database_url),
+    print(
+        f"DB-STARTUP raw={_redact_url(settings.database_url_raw)} "
+        f"parsed={_redact_url(database_url)} local={is_local} "
+        f"sync={_redact_url(sync_database_url)}",
+        flush=True,
     )
     if not is_local:
         ctx = ssl_module.create_default_context()
