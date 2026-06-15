@@ -1,14 +1,14 @@
 {
   "lastChecks": {
-    "email": 1781526324,
-    "calendar": 1781526324,
-    "weather": 1781526324,
-    "pulsewatch": 1781526324
+    "email": 1760004705,
+    "calendar": 1760004705,
+    "weather": 1760004705,
+    "pulsewatch": 1760004705
   },
   "notes": {
     "email": "No email integration configured in workspace yet.",
     "calendar": "No calendar CLI/tool configured (gcalcli/vdirsyncer not installed).",
     "weather": "Omaha: Sunny +54°F, wind 4mph NE, humidity 88%, no precip.",
-    "pulsewatch": "9 open incidents; Elastic Security major. OpenAI operational."
+    "pulsewatch": "5 open watchlist incidents; Google Cloud major (India). Anthropic Opus 4.8 and Mythos/Fable 5 issues. Twilio and Cloudflare minor."
   }
 }

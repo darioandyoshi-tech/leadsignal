@@ -52,6 +52,32 @@ Monitoring active.
 - Git workspace still has uncommitted changes and untracked files.
 
 ---
+## 08:25 CDT Heartbeat
+
+- Gateway healthy; model `ollama/kimi-k2.7-code:cloud`.
+- PulseWatch open watchlist incidents: **5** (canonical watchlist-only count, stable).
+  - **Major:** Google Cloud — network latency/packet loss from Delhi, Chennai, Mumbai and surrounding areas (since 2026-06-09).
+  - **Minor:** Anthropic — elevated errors on Claude Opus 4.8 (investigating, since 06:20 UTC); Anthropic — suspended access to Claude Mythos 5 and Claude Fable 5 (monitoring, since 2026-06-13); Twilio — possible degraded performance (investigating); Cloudflare — possible degraded performance (investigating).
+- Dario-owned services: `pulsewatch.us` UP (HTTP 200, ~118 ms). `api.pulsewatch.us` still **NXDOMAIN** — remains top outstanding item.
+- Weather: Omaha sunny +54°F, wind 4mph NE, humidity 88%, no precip.
+- Calendar/email: no integrated provider.
+- Workspace git still has uncommitted changes and untracked files.
+- Status: NOMINAL with outstanding notes (API DNS, git cleanup).
+
+
+## 08:10 CDT Heartbeat
+
+- Gateway healthy; model `ollama/kimi-k2.7-code:cloud`.
+- PulseWatch open watchlist incidents: **5** (canonical watchlist-only count).
+  - **Major:** Google Cloud — network latency/packet loss from Delhi, Chennai, Mumbai and surrounding areas (since 2026-06-09).
+  - **Minor:** Anthropic — elevated errors on Claude Opus 4.8 (investigating, since 06:20 UTC); Anthropic — suspended access to Claude Mythos 5 and Claude Fable 5 (monitoring, since 2026-06-13); Twilio — possible degraded performance (investigating); Cloudflare — possible degraded performance (investigating).
+- Dario-owned services: `pulsewatch.us` UP (HTTP 200, ~125 ms). `api.pulsewatch.us` still **NXDOMAIN** — remains top outstanding item.
+- Weather: Omaha sunny +54°F, wind 4mph NE, humidity 88%, no precip.
+- Calendar/email: no integrated provider.
+- Workspace git still has uncommitted changes and untracked files.
+- Status: NOMINAL with outstanding notes (API DNS, git cleanup).
+
+---
 
 ## 08:05 CDT Heartbeat
 
