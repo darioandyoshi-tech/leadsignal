@@ -80,7 +80,6 @@ async def run_scrapers(x_admin_secret: str = Header(default="")):
         "status": "started",
         "pid": proc.pid,
         "log_path": log_path,
-        "database_path": db_path,
     }
 
 
