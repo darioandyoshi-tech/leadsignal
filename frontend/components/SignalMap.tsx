@@ -38,8 +38,7 @@ export function SignalMap({ signals, typeLabels, center = [41.252, -95.998], zoo
 
   const mappable = useMemo(() => {
     return signals.filter((s) => {
-      const addr = s.location_name || s.metadata?.address || s.metadata?.property_address;
-      return !!addr;
+      return (s.lat != null && s.lng != null) || !!(s.location_name || s.metadata?.address || s.metadata?.property_address);
     });
   }, [signals]);
 
@@ -49,6 +48,10 @@ export function SignalMap({ signals, typeLabels, center = [41.252, -95.998], zoo
     async function run() {
       const next: Record<string, { lat: number; lng: number }> = {};
       for (const s of mappable) {
+        if (s.lat != null && s.lng != null) {
+          next[s.id] = { lat: s.lat, lng: s.lng };
+          continue;
+        }
         const addr = s.location_name || s.metadata?.address || s.metadata?.property_address;
         if (!addr) continue;
         const cached = localStorage.getItem(`geo:${addr}`);

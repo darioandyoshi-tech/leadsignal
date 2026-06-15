@@ -169,6 +169,8 @@ def run() -> Dict[str, Any]:
                     source_api="omlb_tolemi",
                     location_name=sig.get("address"),
                     metadata=sig["metadata"],
+                    lat=sig.get("latitude"),
+                    lng=sig.get("longitude"),
                 )
                 if sid:
                     inserted += 1

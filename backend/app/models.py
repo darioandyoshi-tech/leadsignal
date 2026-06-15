@@ -78,6 +78,8 @@ class Signal(Base):
     source_url = Column(String(1024), nullable=True)
     source_api = Column(String(128), nullable=True)
     location_name = Column(String(255), nullable=True)
+    lat = Column(Float, nullable=True)
+    lng = Column(Float, nullable=True)
     detected_at = Column(DateTime, default=datetime.utcnow, index=True)
     published_at = Column(DateTime, nullable=True)
     metadata_ = Column("metadata", JSON, default=dict)

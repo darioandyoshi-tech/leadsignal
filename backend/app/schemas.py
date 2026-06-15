@@ -49,6 +49,8 @@ class SignalRead(BaseModel):
     summary: Optional[str]
     source_url: Optional[str]
     location_name: Optional[str]
+    lat: Optional[float] = None
+    lng: Optional[float] = None
     detected_at: datetime
     published_at: Optional[datetime]
     metadata_: Optional[Any] = Field(default=None, serialization_alias="metadata")

@@ -69,7 +69,7 @@ def signal_exists(session, company_id: uuid.UUID, signal_type: SignalType, headl
 def insert_signal(company_id: uuid.UUID, signal_type: SignalType, severity: int, headline: str,
                   summary: str = None, source_url: str = None, source_api: str = None,
                   location_name: str = None, published_at: datetime = None, metadata: dict = None,
-                  session=None):
+                  lat: float = None, lng: float = None, session=None):
     """Insert a signal.  If `session` is provided, the caller must commit/close it."""
     if session is None:
         with Session() as s:
@@ -96,6 +96,8 @@ def insert_signal(company_id: uuid.UUID, signal_type: SignalType, severity: int,
         location_name=location_name,
         published_at=published_at,
         metadata=metadata or {},
+        lat=lat,
+        lng=lng,
     )
     session.add(signal)
     return signal.id

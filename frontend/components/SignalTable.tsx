@@ -20,6 +20,8 @@ export interface Signal {
   source_url?: string;
   source_api?: string;
   location_name?: string;
+  lat?: number;
+  lng?: number;
   detected_at: string;
   published_at?: string;
   metadata?: Record<string, any>;

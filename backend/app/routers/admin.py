@@ -15,6 +15,8 @@ import uuid
 from datetime import datetime
 from fastapi import APIRouter, Header, HTTPException
 
+from sqlalchemy import text
+
 router = APIRouter(prefix="/admin", tags=["admin"])
 
 
@@ -139,3 +141,77 @@ def _resolve_shared_db_path(repo_root: str) -> str:
             return os.path.abspath(os.path.join(backend_dir, url))
         return url
     return os.path.abspath(os.path.join(backend_dir, "leadsignal.db"))
+
+
+@router.post("/migrate-coords")
+async def migrate_coords(
+    x_admin_secret: str = Header(default=""),
+    signal_type: str | None = None,
+    limit: int = 500,
+):
+    """Add lat/lng columns and backfill coordinates for signals with addresses."""
+    _require_secret(x_admin_secret)
+
+    from app.db import sync_engine
+    from app.models import Signal, SignalType
+    import requests
+    import time
+
+    # 1. Ensure columns exist.
+    with sync_engine.connect() as conn:
+        conn.execute(
+            text(
+                "ALTER TABLE signals ADD COLUMN IF NOT EXISTS lat DOUBLE PRECISION, "
+                "ADD COLUMN IF NOT EXISTS lng DOUBLE PRECISION"
+            )
+        )
+        conn.commit()
+
+    api_key = os.getenv("GOOGLE_PLACES_API_KEY")
+    if not api_key:
+        raise HTTPException(status_code=500, detail="GOOGLE_PLACES_API_KEY not configured")
+
+    from sqlalchemy.orm import Session
+    with Session(sync_engine) as session:
+        stmt = session.query(Signal).filter(
+            (Signal.lat == None) | (Signal.lng == None),
+            Signal.location_name != None,
+        )
+        if signal_type:
+            try:
+                target = SignalType(signal_type)
+            except ValueError:
+                raise HTTPException(status_code=400, detail=f"Invalid signal_type: {signal_type}")
+            stmt = stmt.filter(Signal.signal_type == target)
+        stmt = stmt.limit(limit)
+        rows = stmt.all()
+
+    updated = 0
+    failed = 0
+    for s in rows:
+        address = s.location_name
+        if not address:
+            continue
+        try:
+            res = requests.get(
+                "https://maps.googleapis.com/maps/api/geocode/json",
+                params={"address": f"{address}, Omaha, NE", "key": api_key},
+                timeout=15,
+            )
+            data = res.json()
+            if data.get("status") == "OK" and data.get("results"):
+                loc = data["results"][0]["geometry"]["location"]
+                s.lat = loc["lat"]
+                s.lng = loc["lng"]
+                updated += 1
+            else:
+                failed += 1
+        except Exception:
+            failed += 1
+        time.sleep(0.05)
+
+    with Session(sync_engine) as session:
+        session.add_all(rows)
+        session.commit()
+
+    return {"processed": len(rows), "updated": updated, "failed": failed, "signal_type": signal_type or "all"}
