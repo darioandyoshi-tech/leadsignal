@@ -2,18 +2,26 @@
 
 The scrapers use synchronous SQLAlchemy.  To avoid greenlet / async
 SQLAlchemy conflicts, the admin run endpoint launches a subprocess that
-runs in a clean Python interpreter with no async engine state.
+runs in a clean Python interpreter with no async engine state.  On Render
+free tier the pipeline is long-running, so we start it in the background
+and return a job id immediately.
 """
 
+import asyncio
 import os
 import subprocess
 import sys
+import uuid
+from datetime import datetime
 from fastapi import APIRouter, Header, HTTPException
 
 router = APIRouter(prefix="/admin", tags=["admin"])
 
 
 ADMIN_SECRET = os.getenv("ADMIN_SECRET", "")
+
+# In-memory job tracking (restarts clear this, but stdout is also written to a log file).
+_jobs: dict[str, dict] = {}
 
 
 def _require_secret(secret: str | None):
@@ -25,10 +33,9 @@ def _require_secret(secret: str | None):
 
 @router.post("/run-scrapers")
 async def run_scrapers(x_admin_secret: str = Header(default="")):
-    """Trigger the scraper pipeline synchronously in a clean subprocess."""
+    """Trigger the scraper pipeline in a background subprocess."""
     _require_secret(x_admin_secret)
 
-    settings_module = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "config.py"))
     repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
     # Copy env and force a synchronous SQLite path so the scrapers do not
@@ -41,20 +48,78 @@ async def run_scrapers(x_admin_secret: str = Header(default="")):
     env["DATABASE_URL_SYNC"] = f"sqlite:///{db_path}"
     env["DATABASE_URL"] = f"sqlite+aiosqlite:///{db_path}"
 
-    proc = subprocess.run(
-        [sys.executable, "-m", "scraper.run_all"],
+    job_id = str(uuid.uuid4())[:8]
+    log_path = os.path.join(repo_root, "scraper_run", f"run_{job_id}.log")
+    os.makedirs(os.path.dirname(log_path), exist_ok=True)
+
+    proc = await asyncio.create_subprocess_exec(
+        sys.executable, "-m", "scraper.run_all",
         cwd=repo_root,
         env=env,
-        capture_output=True,
-        text=True,
-        timeout=900,
+        stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.PIPE,
     )
-    return {
-        "returncode": proc.returncode,
-        "stdout": proc.stdout[-4000:],
-        "stderr": proc.stderr[-4000:],
+
+    _jobs[job_id] = {
+        "id": job_id,
+        "started_at": datetime.utcnow().isoformat(),
+        "pid": proc.pid,
+        "returncode": None,
+        "log_path": log_path,
         "database_path": db_path,
     }
+
+    asyncio.create_task(_collect_proc(job_id, proc, log_path))
+
+    return {
+        "job_id": job_id,
+        "status": "started",
+        "pid": proc.pid,
+        "log_path": log_path,
+        "database_path": db_path,
+    }
+
+
+async def _collect_proc(job_id: str, proc: asyncio.subprocess.Process, log_path: str):
+    """Collect stdout/stderr from the background scraper process."""
+    with open(log_path, "wb") as log:
+        async def drain(stream, prefix):
+            while True:
+                line = await stream.readline()
+                if not line:
+                    break
+                log.write(prefix + line)
+                log.flush()
+        await asyncio.gather(
+            drain(proc.stdout, b"[out] "),
+            drain(proc.stderr, b"[err] "),
+        )
+    await proc.wait()
+    _jobs[job_id]["returncode"] = proc.returncode
+    _jobs[job_id]["finished_at"] = datetime.utcnow().isoformat()
+
+
+@router.get("/run-scrapers/{job_id}")
+async def get_scraper_run(job_id: str, x_admin_secret: str = Header(default="")):
+    """Return the status and tail of a scraper run."""
+    _require_secret(x_admin_secret)
+    job = _jobs.get(job_id)
+    if not job:
+        raise HTTPException(status_code=404, detail="Job not found")
+    tail = ""
+    try:
+        with open(job["log_path"], "rb") as f:
+            tail = f.read()[-4000:].decode("utf-8", errors="replace")
+    except Exception:
+        pass
+    return {"job": job, "log_tail": tail}
+
+
+@router.get("/run-scrapers")
+async def list_scraper_runs(x_admin_secret: str = Header(default="")):
+    """List all tracked scraper runs."""
+    _require_secret(x_admin_secret)
+    return {"jobs": list(_jobs.values())}
 
 
 def _resolve_shared_db_path(repo_root: str) -> str:
