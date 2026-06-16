@@ -59,11 +59,12 @@ export default function MapPage() {
   const [filters, setFilters] = useState<Filters>(DEFAULT_FILTERS);
 
   useEffect(() => {
-    getSignals({ limit: 100 })
+    setLoading(true);
+    getSignals({ signal_type: filters.signal_type || "land_bank_property", limit: 100 })
       .then((data) => setSignals(data || []))
       .catch((e) => setError(e.response?.data?.detail || e.message))
       .finally(() => setLoading(false));
-  }, []);
+  }, [filters.signal_type]);
 
   const filtered = useMemo(() => filterSignals(signals, filters), [signals, filters]);
 
