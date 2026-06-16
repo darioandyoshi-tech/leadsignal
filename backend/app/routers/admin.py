@@ -24,6 +24,7 @@ ADMIN_SECRET = os.getenv("ADMIN_SECRET", "")
 
 # In-memory job tracking (restarts clear this, but stdout is also written to a log file).
 _jobs: dict[str, dict] = {}
+_geo_jobs: dict[str, dict] = {}
 
 
 def _require_secret(secret: str | None):
@@ -33,19 +34,20 @@ def _require_secret(secret: str | None):
         raise HTTPException(status_code=403, detail="Invalid admin secret")
 
 
-@router.post("/run-scrapers")
-async def run_scrapers(x_admin_secret: str = Header(default="")):
-    """Trigger the scraper pipeline in a background subprocess."""
+async def _start_background_job(
+    x_admin_secret: str,
+    job_kind: str,
+    module: str,
+    *args: str,
+) -> tuple[str, dict, asyncio.subprocess.Process, str]:
+    """Spawn a background Python process and return a job id."""
     _require_secret(x_admin_secret)
-
     repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
     env = os.environ.copy()
     env["PYTHONPATH"] = f"{repo_root}:{repo_root}/backend"
 
     # Ensure scrapers use the same Postgres the app uses.
-    # The scraper's db_client reads DATABASE_URL (async driver) and falls back
-    # to DATABASE_URL_SYNC for the synchronous engine.
     for key in ("DATABASE_URL", "DATABASE_URL_SYNC"):
         if key in env:
             continue
@@ -55,38 +57,43 @@ async def run_scrapers(x_admin_secret: str = Header(default="")):
             env[key] = env["DATABASE_URL_SYNC"]
 
     job_id = str(uuid.uuid4())[:8]
-    log_path = os.path.join(repo_root, "scraper_run", f"run_{job_id}.log")
+    log_path = os.path.join(repo_root, "scraper_run", f"{job_kind}_{job_id}.log")
     os.makedirs(os.path.dirname(log_path), exist_ok=True)
 
     proc = await asyncio.create_subprocess_exec(
-        sys.executable, "-m", "scraper.run_all",
+        sys.executable, "-m", module,
+        *args,
         cwd=repo_root,
         env=env,
         stdout=asyncio.subprocess.PIPE,
         stderr=asyncio.subprocess.PIPE,
     )
 
-    _jobs[job_id] = {
+    job = {
         "id": job_id,
         "started_at": datetime.utcnow().isoformat(),
         "pid": proc.pid,
         "returncode": None,
         "log_path": log_path,
         "database_url": env.get("DATABASE_URL", ""),
+        "kind": job_kind,
     }
-
-    asyncio.create_task(_collect_proc(job_id, proc, log_path))
-
-    return {
-        "job_id": job_id,
-        "status": "started",
-        "pid": proc.pid,
-        "log_path": log_path,
-    }
+    return job_id, job, proc, log_path
 
 
-async def _collect_proc(job_id: str, proc: asyncio.subprocess.Process, log_path: str):
-    """Collect stdout/stderr from the background scraper process."""
+@router.post("/run-scrapers")
+async def run_scrapers(x_admin_secret: str = Header(default="")):
+    """Trigger the scraper pipeline in a background subprocess."""
+    job_id, job, proc, log_path = await _start_background_job(
+        x_admin_secret, "run", "scraper.run_all"
+    )
+    _jobs[job_id] = job
+    asyncio.create_task(_collect_proc(_jobs, job_id, proc, log_path))
+    return {"job_id": job_id, "status": "started", "pid": proc.pid, "log_path": log_path}
+
+
+async def _collect_proc(registry: dict, job_id: str, proc: asyncio.subprocess.Process, log_path: str):
+    """Collect stdout/stderr from the background process."""
     with open(log_path, "wb") as log:
         async def drain(stream, prefix):
             while True:
@@ -100,8 +107,8 @@ async def _collect_proc(job_id: str, proc: asyncio.subprocess.Process, log_path:
             drain(proc.stderr, b"[err] "),
         )
     await proc.wait()
-    _jobs[job_id]["returncode"] = proc.returncode
-    _jobs[job_id]["finished_at"] = datetime.utcnow().isoformat()
+    registry[job_id]["returncode"] = proc.returncode
+    registry[job_id]["finished_at"] = datetime.utcnow().isoformat()
 
 
 @router.get("/run-scrapers/{job_id}")
@@ -149,72 +156,42 @@ async def migrate_coords(
     signal_type: str | None = None,
     limit: int = 500,
 ):
-    """Add lat/lng columns and backfill coordinates for signals with addresses."""
+    """Start a background job that adds lat/lng columns and backfills coordinates."""
+    args = [f"--limit={limit}"]
+    if signal_type:
+        args.insert(0, f"--signal-type={signal_type}")
+    job_id, job, proc, log_path = await _start_background_job(
+        x_admin_secret,
+        "geo",
+        "scripts.migrate_coords",
+        *args,
+    )
+    _geo_jobs[job_id] = job
+    asyncio.create_task(_collect_proc(_geo_jobs, job_id, proc, log_path))
+    return {"job_id": job_id, "status": "started", "signal_type": signal_type, "limit": limit}
+
+
+@router.get("/migrate-coords/{job_id}")
+async def get_migrate_coords_run(job_id: str, x_admin_secret: str = Header(default="")):
+    """Return status and tail of a geocode migration job."""
     _require_secret(x_admin_secret)
+    job = _geo_jobs.get(job_id)
+    if not job:
+        raise HTTPException(status_code=404, detail="Job not found")
+    tail = ""
+    try:
+        with open(job["log_path"], "rb") as f:
+            tail = f.read()[-4000:].decode("utf-8", errors="replace")
+    except Exception:
+        pass
+    return {"job": job, "log_tail": tail}
 
-    from app.db import sync_engine
-    from app.models import Signal, SignalType
-    import requests
-    import time
 
-    # 1. Ensure columns exist.
-    with sync_engine.connect() as conn:
-        conn.execute(
-            text(
-                "ALTER TABLE signals ADD COLUMN IF NOT EXISTS lat DOUBLE PRECISION, "
-                "ADD COLUMN IF NOT EXISTS lng DOUBLE PRECISION"
-            )
-        )
-        conn.commit()
-
-    api_key = os.getenv("GOOGLE_PLACES_API_KEY")
-    if not api_key:
-        raise HTTPException(status_code=500, detail="GOOGLE_PLACES_API_KEY not configured")
-
-    from sqlalchemy.orm import Session
-    with Session(sync_engine) as session:
-        stmt = session.query(Signal).filter(
-            (Signal.lat == None) | (Signal.lng == None),
-            Signal.location_name != None,
-        )
-        if signal_type:
-            try:
-                target = SignalType(signal_type)
-            except ValueError:
-                raise HTTPException(status_code=400, detail=f"Invalid signal_type: {signal_type}")
-            stmt = stmt.filter(Signal.signal_type == target)
-        stmt = stmt.limit(limit)
-        rows = stmt.all()
-
-    updated = 0
-    failed = 0
-    for s in rows:
-        address = s.location_name
-        if not address:
-            continue
-        try:
-            res = requests.get(
-                "https://maps.googleapis.com/maps/api/geocode/json",
-                params={"address": f"{address}, Omaha, NE", "key": api_key},
-                timeout=15,
-            )
-            data = res.json()
-            if data.get("status") == "OK" and data.get("results"):
-                loc = data["results"][0]["geometry"]["location"]
-                s.lat = loc["lat"]
-                s.lng = loc["lng"]
-                updated += 1
-            else:
-                failed += 1
-        except Exception:
-            failed += 1
-        time.sleep(0.05)
-
-    with Session(sync_engine) as session:
-        session.add_all(rows)
-        session.commit()
-
-    return {"processed": len(rows), "updated": updated, "failed": failed, "signal_type": signal_type or "all"}
+@router.get("/migrate-coords")
+async def list_migrate_coords_runs(x_admin_secret: str = Header(default="")):
+    """List tracked geocode migration jobs."""
+    _require_secret(x_admin_secret)
+    return {"jobs": list(_geo_jobs.values())}
 
 
 @router.post("/cleanup-fake-permits")
