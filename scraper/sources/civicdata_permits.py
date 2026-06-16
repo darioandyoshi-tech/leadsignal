@@ -75,16 +75,9 @@ def _parse_date(s: str) -> datetime | None:
     return None
 
 
-def run(limit: int = 500) -> dict:
-    """Backfill-style run: returns sample records without writing signals."""
-    rows = fetch_historical_rows(limit=limit)
-    return {
-        "source": "civicdata_permits",
-        "resource_id": CIVICDATA_HISTORICAL_RESOURCE,
-        "rows_fetched": len(rows),
-        "sample_columns": list(rows[0].keys()) if rows else [],
-        "sample_rows": rows[:3],
-    }
+def run(limit: int = 1000) -> dict:
+    """Backfill-style run: emit permit_filing signals from historical records."""
+    return emit_historical_signals(limit=limit)
 
 
 def emit_historical_signals(limit: int = 500) -> dict:

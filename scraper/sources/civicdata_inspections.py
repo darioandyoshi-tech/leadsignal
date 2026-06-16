@@ -49,7 +49,7 @@ def _parse_date(value) -> datetime | None:
     return None
 
 
-def run(limit: int = 500) -> dict:
+def run(limit: int = 5000) -> dict:
     created = 0
     skipped = 0
     inspected = 0
