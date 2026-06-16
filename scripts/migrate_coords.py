@@ -37,7 +37,7 @@ def main():
     parser = argparse.ArgumentParser(description="Geocode signals without lat/lng")
     parser.add_argument("--signal-type", default=None, help="Signal type to geocode")
     parser.add_argument("--limit", type=int, default=500, help="Max rows to process")
-    parser.add_argument("--sleep", type=float, default=0.05, help="Seconds between API calls")
+    parser.add_argument("--sleep", type=float, default=0.1, help="Seconds between API calls")
     args = parser.parse_args()
 
     database_url = os.getenv("DATABASE_URL_SYNC") or os.getenv("DATABASE_URL")
