@@ -2,15 +2,19 @@
   "lastChecks": {
     "email": null,
     "calendar": null,
-    "weather": null,
-    "heartbeat": 1760536920,
-    "pulsewatch": 1760536920
+    "weather": 1781584522,
+    "heartbeat": 1781584522,
+    "pulsewatch": 1781584522
   },
   "notes": {
     "email": "No email integration configured in workspace yet.",
     "calendar": "No calendar CLI/tool configured.",
-    "weather": "Not checked this heartbeat; no provider configured.",
-    "pulsewatch": "Watchlist: 7 open at 15:22 CDT. Major: Google Cloud India latency. Minors: OpenAI OAuth, Anthropic Claude Mythos/Fable 5, Twilio x4 (Verizon US, Canada Gateway, Brazil short codes, Mexico SMS), Cloudflare possible degraded performance, Resend inbound attachment downloads. pulsewatch.us UP; api.pulsewatch.us still NXDOMAIN.",
-    "workspace": "Git dirty: alert_state.json, memory/2026-06-15.md, memory/heartbeat-state.json, submodules ecc-installation/ECC and leadsignal, untracked skills/superpowers and skills/apify/."
+    "weather": "Chicago 67°F partly cloudy, ↗7 mph, 0.00 in. No severe alerts from wttr.in.",
+    "pulsewatch": "Watchlist: 5 open on Dario's watchlist (stable since last check). Global 50 open. Minors: Twilio possible degraded performance, OpenAI FedRAMP degraded performance, Cloudflare R2 possible degraded performance, Anthropic Claude Mythos/Fable 5 suspended. Major: Google Cloud India latency/packet loss (investigating since Jun 9). No new incidents since 21:00 CDT.",
+    "workspace": "Git dirty: HEARTBEAT.md, alert_state.json, memory/2026-06-15.md, memory/heartbeat-state.json, submodules ecc-installation/ECC and leadsignal, untracked skills/superpowers, skills/apify/, media/. No commit since 16:02 CDT.",
+    "leadsignal": "Vercel frontend https://leadsignal-dme1.vercel.app UP. Render backend https://leadsignal-8y5f.onrender.com/health healthy (200 ok). Map geocoding verified for all signal types; scrapers blocked on unknown ADMIN_SECRET / missing APIFY_TOKEN & PERMITSTACK_API_KEY (need Dario).",
+    "pulsewatch.us": "https://pulsewatch.us UP (200). https://api.pulsewatch.us still NXDOMAIN/unresolved.",
+    "ai-work-market.ai": "https://ai-work-market.ai UP (307 redirect, endpoint alive).",
+    "dmeomaha.com": "https://dmeomaha.com UP (200)."
   }
 }
