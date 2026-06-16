@@ -60,7 +60,11 @@ export default function MapPage() {
 
   useEffect(() => {
     setLoading(true);
-    getSignals({ signal_type: filters.signal_type || "land_bank_property", limit: 100 })
+    const params: Record<string, any> = { limit: filters.signal_type ? 100 : 500 };
+    if (filters.signal_type) {
+      params.signal_type = filters.signal_type;
+    }
+    getSignals(params)
       .then((data) => setSignals(data || []))
       .catch((e) => setError(e.response?.data?.detail || e.message))
       .finally(() => setLoading(false));
@@ -82,7 +86,7 @@ export default function MapPage() {
       <div className="space-y-6">
         <div>
           <h1 className="text-2xl font-bold text-noir-100">Signal Map</h1>
-          <p className="text-sm text-noir-400">Geocoded opportunities around Omaha. Land bank properties are shown by default.</p>
+          <p className="text-sm text-noir-400">Geocoded opportunities around Omaha. Land bank properties are shown by default; use the filter to switch signal types.</p>
         </div>
 
         {error && (
@@ -106,7 +110,7 @@ export default function MapPage() {
         )}
 
         <div className="rounded-lg border border-noir-800 bg-noir-900/50 p-4 text-sm text-noir-400">
-          Showing {filtered.length.toLocaleString()} signals on the map. Addresses are geocoded on-demand via OpenStreetMap and cached in your browser.
+          Showing {filtered.length.toLocaleString()} signals on the map. Addresses are server-side geocoded with Google Maps and stored in the database.
         </div>
       </div>
     </AppShell>
