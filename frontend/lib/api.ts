@@ -60,3 +60,30 @@ export async function sendDigest() {
   const { data } = await api.post('/alerts/digest');
   return data;
 }
+
+export async function getSignalTrends(horizon: number = 7, bucketDays: number = 1) {
+  const { data } = await api.get('/forecast/signal-trends', {
+    params: { horizon_days: horizon, bucket_days: bucketDays },
+  });
+  return data;
+}
+
+export async function getTimesFMTrends(records: any[], horizon: number = 7, bucketDays: number = 1) {
+  const timesfmUrl = process.env.NEXT_PUBLIC_TIMESFM_URL || 'http://127.0.0.1:8001';
+  const { data } = await axios.post(`${timesfmUrl}/forecast/signal-trends`, {
+    records,
+    horizon_days: horizon,
+    bucket_days: bucketDays,
+  });
+  return data;
+}
+
+export async function getTimesFMForecast(series: number[], horizon: number = 7) {
+  const timesfmUrl = process.env.NEXT_PUBLIC_TIMESFM_URL || 'http://127.0.0.1:8001';
+  const { data } = await axios.post(`${timesfmUrl}/forecast`, {
+    series,
+    horizon,
+    return_quantiles: true,
+  });
+  return data;
+}

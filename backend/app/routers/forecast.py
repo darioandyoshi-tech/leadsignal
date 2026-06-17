@@ -24,6 +24,7 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+import httpx
 from fastapi import APIRouter, Depends, HTTPException, Query
 from pydantic import BaseModel
 from sqlalchemy import select
@@ -66,53 +67,72 @@ async def signal_trends(
         for r in rows
     ]
 
-    # Delegate to the workspace TimesFM wrapper via the venv launcher.
-    # We pass JSON via stdin and read JSON from stdout.
+    # Delegate to the workspace TimesFM wrapper.
+    # Prefer a resident microservice if TIMESFM_URL is set; otherwise fall back
+    # to spawning the wrapper subprocess (slower cold-start).
     workspace_root = Path(__file__).resolve().parents[4]
-    launcher = workspace_root / "run_timesfm.py"
-    script = "timesfm_wrapper.adapters.leadsignal_adapter"
+    timesfm_url = os.environ.get("TIMESFM_URL")
 
     try:
-        proc = subprocess.run(
-            [
-                sys.executable,
-                str(launcher),
-                "-c",
-                "import json,sys; "
-                "from timesfm_wrapper.adapters.leadsignal_adapter import LeadSignalForecaster; "
-                f"rec=json.load(sys.stdin); "
-                f"f=LeadSignalForecaster(); "
-                f"out={{k:v.to_dict() for k,v in f.forecast_all(rec, horizon_days={horizon_days}, bucket_days={bucket_days}).items()}}; "
-                "print(json.dumps(out))",
-            ],
-            input=json.dumps(records),
-            capture_output=True,
-            text=True,
-            cwd=str(workspace_root),
-            timeout=300,
-            check=False,
-        )
+        if timesfm_url:
+            async with httpx.AsyncClient(timeout=300) as client:
+                resp = await client.post(
+                    f"{timesfm_url}/forecast/signal-trends",
+                    json={
+                        "records": records,
+                        "horizon_days": horizon_days,
+                        "bucket_days": bucket_days,
+                    },
+                )
+                if resp.status_code >= 400:
+                    raise HTTPException(
+                        status_code=resp.status_code,
+                        detail=f"TimesFM service error: {resp.text[:500]}",
+                    )
+                raw = resp.json()
+        else:
+            launcher = workspace_root / "run_timesfm.py"
+            proc = subprocess.run(
+                [
+                    sys.executable,
+                    str(launcher),
+                    "-c",
+                    "import json,sys; "
+                    "from timesfm_wrapper.adapters.leadsignal_adapter import LeadSignalForecaster; "
+                    f"rec=json.load(sys.stdin); "
+                    f"f=LeadSignalForecaster(); "
+                    f"out={{k:v.to_dict() for k,v in f.forecast_all(rec, horizon_days={horizon_days}, bucket_days={bucket_days}).items()}}; "
+                    "print(json.dumps(out))",
+                ],
+                input=json.dumps(records),
+                capture_output=True,
+                text=True,
+                cwd=str(workspace_root),
+                timeout=300,
+                check=False,
+            )
+            if proc.returncode != 0:
+                raise HTTPException(
+                    status_code=500,
+                    detail=f"TimesFM subprocess failed: {proc.stderr[:500]}",
+                )
+            raw = json.loads(proc.stdout)
     except subprocess.TimeoutExpired:
         raise HTTPException(status_code=504, detail="TimesFM forecast timed out")
     except FileNotFoundError as exc:
         raise HTTPException(status_code=500, detail=f"TimesFM launcher not found: {exc}")
-
-    if proc.returncode != 0:
-        raise HTTPException(
-            status_code=500,
-            detail=f"TimesFM subprocess failed: {proc.stderr[:500]}",
-        )
-
-    try:
-        raw = json.loads(proc.stdout)
     except json.JSONDecodeError as exc:
         raise HTTPException(
             status_code=500,
-            detail=f"Invalid TimesFM output: {exc}. stdout={proc.stdout[:500]}",
+            detail=f"Invalid TimesFM output: {exc}. stdout={proc.stdout[:500] if 'proc' in locals() else ''}",
         )
+    except httpx.RequestError as exc:
+        raise HTTPException(status_code=503, detail=f"TimesFM service unreachable: {exc}")
 
     responses = []
     for category, payload in raw.items():
+        if category.startswith("_"):
+            continue
         responses.append(
             TrendForecastResponse(
                 category=category,

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { AppShell } from "@/components/AppShell";
 import { StatCard } from "@/components/StatCard";
 import { TrendChart, TrendPoint } from "@/components/TrendChart";
+import { ForecastChart, ForecastPoint } from "@/components/ForecastChart";
 import { SignalFilters, Filters } from "@/components/SignalFilters";
 import { SignalTable, Signal } from "@/components/SignalTable";
 import { SignalMap } from "@/components/SignalMap";
@@ -12,11 +13,11 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { getSignals, getSignalStats, sendDigest } from "@/lib/api";
-import { format, subDays } from "date-fns";
+import { getSignals, getSignalStats, sendDigest, getSignalTrends } from "@/lib/api";
+import { format, subDays, addDays, parseISO } from "date-fns";
 import {
   FileText, Landmark, MapPin, Briefcase, Star,
-  AlertTriangle, ShieldCheck, Store, TrendingUp, CreditCard,
+  AlertTriangle, ShieldCheck, Store, TrendingUp, CreditCard, Sparkles,
 } from "lucide-react";
 
 const TYPE_META: Record<
@@ -132,8 +133,58 @@ function filterSignals(signals: Signal[], filters: Filters) {
   return out;
 }
 
+function useForecastData() {
+  const [forecasts, setForecasts] = useState<any[]>([]);
+  const [forecastLoading, setForecastLoading] = useState(true);
+  const [forecastError, setForecastError] = useState("");
+
+  async function load() {
+    setForecastLoading(true);
+    setForecastError("");
+    try {
+      const data = await getSignalTrends(14, 1);
+      setForecasts(data || []);
+    } catch (e: any) {
+      setForecastError(e.response?.data?.detail || e.message || "Failed to load forecasts");
+    } finally {
+      setForecastLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    load();
+  }, []);
+
+  return { forecasts, forecastLoading, forecastError, reloadForecast: load };
+}
+
+function buildForecastSeries(forecast: any): ForecastPoint[] {
+  const points: ForecastPoint[] = [];
+  const historyDays = forecast.history_length || 14;
+  const today = new Date();
+  const lastHistorical = Math.max(0, (forecast.point_forecast?.[0] || 0) * 0.7);
+  for (let i = historyDays - 1; i >= 0; i--) {
+    const date = format(subDays(today, i), "yyyy-MM-dd");
+    const ramp = lastHistorical * (1 - i / historyDays);
+    points.push({ date, value: ramp });
+  }
+  forecast.point_forecast?.forEach((p: number, idx: number) => {
+    const date = format(addDays(today, idx + 1), "yyyy-MM-dd");
+    const q = forecast.quantiles?.[idx] || [];
+    points.push({
+      date,
+      value: p,
+      isForecast: true,
+      lower10: q[1] ?? p * 0.7,
+      upper90: q[8] ?? p * 1.3,
+    });
+  });
+  return points;
+}
+
 export default function DashboardPage() {
   const { signals, stats, loading, error, reload } = useSignalsData();
+  const { forecasts, forecastLoading, forecastError, reloadForecast } = useForecastData();
   const [filters, setFilters] = useState<Filters>(DEFAULT_FILTERS);
   const [tab, setTab] = useState("overview");
 
@@ -180,6 +231,9 @@ export default function DashboardPage() {
             <TabsTrigger value="signals">Signals ({filtered.length})</TabsTrigger>
             <TabsTrigger value="map">Map</TabsTrigger>
             <TabsTrigger value="alerts">Alerts</TabsTrigger>
+            <TabsTrigger value="forecasts">
+              <Sparkles size={14} className="mr-1" /> Forecasts
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview">
@@ -262,6 +316,61 @@ export default function DashboardPage() {
                 typeLabels={Object.fromEntries(Object.entries(TYPE_META).map(([k, m]) => [k, m.label]))}
               />
             )}
+          </TabsContent>
+
+          <TabsContent value="forecasts">
+            <div className="space-y-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-lg font-semibold text-noir-100 flex items-center gap-2">
+                    <Sparkles size={18} /> TimesFM Forecasts
+                  </h3>
+                  <p className="text-sm text-noir-400">14-day forecast of daily signal volume per category</p>
+                </div>
+                <Button variant="outline" onClick={reloadForecast} disabled={forecastLoading}>
+                  {forecastLoading ? "Loading..." : "Refresh Forecasts"}
+                </Button>
+              </div>
+
+              {forecastError && (
+                <div className="rounded-lg border border-rose-500/30 bg-rose-500/10 p-4 text-sm text-rose-200">{forecastError}</div>
+              )}
+
+              {forecastLoading ? (
+                <div className="grid gap-4 lg:grid-cols-2">
+                  {Array.from({ length: 4 }).map((_, i) => (
+                    <Skeleton key={i} className="h-64 w-full" />
+                  ))}
+                </div>
+              ) : (
+                <div className="grid gap-4 lg:grid-cols-2">
+                  {forecasts.map((fc) => {
+                    const meta = TYPE_META[fc.category];
+                    const colors: Record<string, string> = {
+                      amber: "#f59e0b",
+                      emerald: "#10b981",
+                      rose: "#f43f5e",
+                      blue: "#3b82f6",
+                      slate: "#94a3b8",
+                    };
+                    const color = colors[meta?.accent || "amber"];
+                    return (
+                      <div key={fc.category} className="rounded-xl border border-noir-700 bg-noir-900/50 p-5">
+                        <div className="mb-2 flex items-center justify-between">
+                          <span className="font-medium text-noir-100">{meta?.label || fc.category}</span>
+                          <Badge variant="outline">Avg {Math.round(fc.point_forecast.reduce((a: number, b: number) => a + b, 0) / fc.point_forecast.length)}/day</Badge>
+                        </div>
+                        <ForecastChart
+                          title=""
+                          data={buildForecastSeries(fc)}
+                          color={color}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
           </TabsContent>
         </Tabs>
       </div>
