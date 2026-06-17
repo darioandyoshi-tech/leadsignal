@@ -12,7 +12,8 @@ from contextlib import asynccontextmanager
 from typing import Any, Dict, List, Optional
 
 import numpy as np
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Depends, Security, status
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel, Field
 
 from timesfm_wrapper.timesfm_client import TimesFMClient
@@ -46,6 +47,27 @@ class CategoryForecastRequest(BaseModel):
 
 
 client: Optional[TimesFMClient] = None
+security = HTTPBearer(auto_error=False)
+
+API_KEY = os.environ.get("TIMESFM_API_KEY")
+
+
+def verify_api_key(credentials: Optional[HTTPAuthorizationCredentials] = Security(security)) -> str:
+    if not API_KEY:
+        # If no API key is configured, allow all requests (local dev default).
+        return ""
+    if not credentials:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Missing Authorization header",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    if credentials.credentials != API_KEY:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Invalid API key",
+        )
+    return credentials.credentials
 
 
 @asynccontextmanager
@@ -70,11 +92,12 @@ def health():
         "status": "ok",
         "model_loaded": client is not None,
         "model_name": client.model_name if client else None,
+        "auth_required": bool(API_KEY),
     }
 
 
 @app.post("/forecast", response_model=ForecastResponse)
-def forecast(req: ForecastRequest):
+def forecast(req: ForecastRequest, api_key: str = Depends(verify_api_key)):
     if client is None:
         raise HTTPException(status_code=503, detail="Model not loaded")
     start = time.time()
@@ -90,7 +113,7 @@ def forecast(req: ForecastRequest):
 
 
 @app.post("/forecast/batch", response_model=List[ForecastResponse])
-def forecast_batch(req: BatchForecastRequest):
+def forecast_batch(req: BatchForecastRequest, api_key: str = Depends(verify_api_key)):
     if client is None:
         raise HTTPException(status_code=503, detail="Model not loaded")
     start = time.time()
@@ -110,7 +133,7 @@ def forecast_batch(req: BatchForecastRequest):
 
 
 @app.post("/forecast/signal-trends")
-def signal_trends(req: CategoryForecastRequest):
+def signal_trends(req: CategoryForecastRequest, api_key: str = Depends(verify_api_key)):
     """LeadSignal-specific: forecast daily signal volume per category."""
     if client is None:
         raise HTTPException(status_code=503, detail="Model not loaded")

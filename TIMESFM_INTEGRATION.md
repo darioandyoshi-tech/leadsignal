@@ -117,18 +117,34 @@ Service runs on `http://127.0.0.1:8001`, auto-restarts on crash, uses ~1 GB RAM 
 - LeadSignal `GET /forecast/signal-trends`: live-tested locally via microservice in ~1.5 s.
 - LeadSignal dashboard: builds with new Forecasts tab.
 
-## Production / Render notes
+## Exposing the microservice publicly
 
-- The TimesFM 200M model needs ~1 GB RAM. Render free web services (512 MB) are not suitable.
-- Options for production:
-  1. Keep the microservice on this desktop/GPU box and set `TIMESFM_URL` in Render env vars (requires publicly reachable URL + auth).
-  2. Deploy to a GPU-capable host (RunPod, Vast.ai, AWS g4dn, etc.).
-  3. Use the subprocess fallback on Render (slow but works).
-- The LeadSignal backend `.env` now sets `TIMESFM_URL=http://127.0.0.1:8001` for local dev.
+For the deployed LeadSignal dashboard (Vercel → Render backend) to use the desktop microservice, the microservice needs a public HTTPS URL.
 
-## Next steps (optional)
+### Quick demo with localtunnel (temporary URL)
 
-1. Secure the microservice with an API key before exposing publicly.
-2. Cache daily forecasts in Redis/DB.
-3. Add email/Slack alerts when a category is forecasted to spike.
-4. Fine-tune on Dario-specific domain series if labeled data is collected.
+```bash
+cd /home/dario/.openclaw/workspace
+npx localtunnel --port 8001
+```
+
+This prints a public URL like `https://<random>.loca.lt`. Then set in your Render dashboard:
+
+- `TIMESFM_URL=https://<random>.loca.lt`
+- `TIMESFM_API_KEY=<key from timesfm_service/.env>`
+
+**Note:** localtunnel URLs are temporary and change on restart. Use only for demos.
+
+### Production options
+
+1. **ngrok static domain** — requires paid ngrok plan + authtoken.
+2. **Cloudflare Tunnel** — free with your own domain; requires `cloudflared` and Cloudflare account.
+3. **GPU VPS** — host the microservice on RunPod, Vast.ai, AWS g4dn, etc.
+
+The microservice endpoints are protected by bearer token auth when `TIMESFM_API_KEY` is set.
+
+## Security
+
+- Set `TIMESFM_API_KEY` in `timesfm_service/.env` before exposing the microservice.
+- The LeadSignal backend uses this key in the `Authorization: Bearer <key>` header when calling the microservice.
+- Never commit `timesfm_service/.env` or `leadsignal/backend/.env.timesfm` to git.
