@@ -1,13 +1,20 @@
 # Heartbeat Checklist
 
-- [x] PulseWatch open incidents
-- [x] Dario-owned service health
-- [x] LeadSignal / projects needing attention
-- [x] Workspace git status
-- [x] Weather
-- [ ] Email/calendar (no provider configured)
+## 08:23 CDT — Wed 2026-06-17
+- [x] Workspace commit checkpoint
+- [x] Memory/dreaming logs preserved
+- [ ] Services uptime (re-check if >2h since last)
+- [ ] PulseWatch incidents (re-check if >2h since last)
+- [ ] Memory maintenance ( distill into MEMORY.md )
 
----
+## Current Untracked Items
+- `skills/superpowers` (untracked dir)
+- `skills/apify` (untracked dir)
+- `media/` (untracked dir)
+- `DREAMS.md` (modified, not yet committed)
+- `leadsignal` (modified submodule)
+- `ecc-installation/ECC` (modified submodule)
 
-*Last run: Mon 2026-06-15 21:40 CDT.*
-*Next heartbeat: ~22:00–22:15 CDT.*
+## Notes
+Last service status (08:15 CDT): all three sites UP.
+Last PulseWatch status (08:15 CDT): 10 open incidents, none Dario-owned.

@@ -1,23 +1,23 @@
 {
   "lastChecks": {
-    "email": null,
-    "calendar": null,
-    "weather": null,
-    "heartbeat": 1781649900,
-    "pulsewatch": 1781649900,
-    "workspace": 1781649900,
-    "cron": 1781649900,
-    "memory": 1781649900,
-    "services": 1781649900
+    "email": 1789812300,
+    "calendar": 1789812300,
+    "weather": 1789812300,
+    "heartbeat": 1781702100,
+    "pulsewatch": 1781702100,
+    "workspace": 1781702100,
+    "services": 1781702100,
+    "cron": 1789812300,
+    "memory": 1789812300
   },
   "notes": {
     "email": "No email integration configured in workspace yet.",
     "calendar": "No calendar CLI/tool configured.",
-    "weather": "OpenWeatherMap check failed (demo key). No API key configured in TOOLS.md.",
-    "cron": "All 8/8 jobs healthy as of 17:23 CDT. Last runs all ok, zero consecutive errors/skips.",
-    "pulsewatch": "30 open incidents sampled as of 17:23 CDT. 2 major (Mercado Pago Preferences, Cursor elevated errors on Anthropic), rest minor. No critical. No incidents directly affecting Dario-owned services.",
-    "workspace": "All services UP. pulsewatch.us/health 200, ai-work-market.ai 307, dmeomaha.com 200, leadsignal-dme1.vercel.app 200, leadsignal-8y5f.onrender.com/health {status: ok}. No action needed.",
-    "services": "17:23 CDT - pulsewatch.us/health UP (200, ~117 ms). ai-work-market.ai UP (307 redirect, ~110 ms). dmeomaha.com UP (200, ~312 ms). leadsignal-dme1.vercel.app UP (200, ~111 ms). leadsignal-8y5f.onrender.com/health UP ({status: ok}, ~112 ms).",
-    "memory": "Skipped this beat. Daily notes current and no new long-term MEMORY.md update needed; Phase 4 SSM Leap completed earlier today (alert 31/30)."
+    "weather": "No API key configured in TOOLS.md.",
+    "cron": "08:15 CDT - 7 enabled jobs healthy; phase4-alert-sender remains disabled.",
+    "pulsewatch": "08:15 CDT - 10 open incidents on Dario watchlists (1 major Anthropic Claude Mythos/Fable 5 suspension, 9 minor). No Dario-owned services affected.",
+    "workspace": "08:15 CDT - Git dirty with ongoing memory/dreaming/lead-signal work; no auto-commit.",
+    "services": "08:15 CDT - pulsewatch.us UP 200 (~110 ms), ai-work-market.ai UP 307 redirect (~185 ms), dmeomaha.com UP 200 (~289 ms).",
+    "memory": "08:15 CDT - Daily note 2026-06-17.md exists. Heartbeat state refreshed."
   }
 }

@@ -1,5 +1,11 @@
 # Key System Insights & Learnings
 
+## Phase 4 SSM Leap Test Complete — June 16, 2026 06:19 CDT
+- **Milestone**: 30-day alert test cycle completed with `alert_count: 31/30` (one extra alert sent at cycle boundary).
+- **Final alert sent**: June 16, 2026 06:19 CDT.
+- **Status**: No further alerts required unless a new test cycle starts.
+- **System Impact**: Verified automated alert pipeline, cron scheduling, and heartbeat state tracking.
+
 ## System Status Update - June 14, 2026 03:00 CDT (Heartbeat Check)
 - **Current Incident Status**: 1 critical (Weights & Biases Web App loading issue), 1 major (AI21 Studio possible partial outage), 8+ minor incidents (including Cloudflare Stream degradation, Oracle NetSuite, Zapier, Brex, Cloudflare Registrar, Infura, dLocal)
 - **Weather Conditions**: Chicago clear skies, no precipitation
@@ -401,9 +407,35 @@ Next heartbeat check recommended in ~30 minutes or as system events warrant.
 - **Application**: System remains stable with all monitoring systems functioning normally
 - **Source**: Daily heartbeat checks and PulseWatch monitoring
 
+## LeadSignal Live — June 15, 2026
+- **Backend**: Migrated from SQLite on Fly.io to managed PostgreSQL on Render (`leadsignal-8y5f.onrender.com`). Live and healthy.
+- **Frontend**: `leadsignal-dme1.vercel.app` redesigned and operational.
+- **Signals loaded**: 3,822+ (business_license, parcel_change, gov_contract_award, land_bank_property, tax_delinquency, new_business_registration, permit_filing).
+- **Map fix**: All signal types now server-side geocoded via Google Maps Geocoding API; map renders 100–500 pins depending on filter. Removed fake placeholder permits from Accela seed.
+- **Still blocked**: more signals (hiring spikes, negative review clusters, UCC filings, additional permits) need paid credentials/API tokens (APIFY_TOKEN, PERMITSTACK_API_KEY, Nebraska SOS/UCC access).
+
 ## Skill-First Workflow (June 14, 2026)
 Before starting any non-trivial task, scan available skills, select the most relevant one, and read its SKILL.md before proceeding.
 
 ## Absolute Rule - 100% No Assumptions (June 14, 2026 10:12 CDT)
 Never assume anything. Every claim must be verified. Every fact must be checked. Every source must be tested. If I do not have 100% proof, I must say so explicitly.
 Applies to all code, deployment, data sources, business claims, and operational decisions.
+
+## Promoted From Short-Term Memory (2026-06-17)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-12-1338.md:11:13 -->
+- Conversation Summary: Let me provide one final summary and wait for your direction on whether to proceed with sending the next alert. user: ok assistant: The user has acknowledged my clarification with "ok" - they seem satisfied with the explanation about the distinction between what we actually implemented versus the future upgrade suggestions. [score=0.824 recalls=0 avg=0.620 source=memory/2026-06-12-1338.md:11-13]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-12-1338.md:15:15 -->
+- Conversation Summary: Since they said "ok" and didn't ask for any further clarification or additional work, I should wait for their next direction. They may want to proceed with sending the next alert, or they may have other instructions. [score=0.824 recalls=0 avg=0.620 source=memory/2026-06-12-1338.md:15-15]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-12-1338.md:17:18 -->
+- Conversation Summary: Let me wait for their next command before taking any further action. assistant: The user said "ok" to my clarification about the upgrade suggestions versus what we actually implemented. They appear satisfied with the explanation and are waiting for further direction. [score=0.824 recalls=0 avg=0.620 source=memory/2026-06-12-1338.md:17-18]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-12-1338.md:20:20 -->
+- Conversation Summary: Since they didn't ask for any additional action or clarification, and simply acknowledged my response with "ok", I should wait for their next instruction before proceeding. [score=0.824 recalls=0 avg=0.620 source=memory/2026-06-12-1338.md:20-20]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-12-1338.md:3:5 -->
+- Session: 2026-06-12 13:38:54 CDT: **Session Key**: agent:main:main; **Session ID**: 7c828fd9-f1be-4d12-8874-339d689c5cd0; **Source**: webchat [score=0.824 recalls=0 avg=0.620 source=memory/2026-06-12-1338.md:3-5]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-12-1338.md:9:9 -->
+- Conversation Summary: assistant: Perfect! I've clarified the distinction between what we actually implemented (the NVIDIA Model Distillation enhancement task you assigned) versus the future upgrade suggestions that were just contextual information from a previous discussion. [score=0.824 recalls=0 avg=0.620 source=memory/2026-06-12-1338.md:9-9]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-12-1339-2.md:3:5 -->
+- Session: 2026-06-12 13:39:43 CDT: **Session Key**: agent:main:main; **Session ID**: 5bfd2f53-8785-44ca-ae0f-0cd3a7d329c5; **Source**: gateway:sessions.reset [score=0.806 recalls=0 avg=0.620 source=memory/2026-06-12-1339-2.md:3-5]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-12-1339.md:3:5 -->
+- Session: 2026-06-12 13:39:30 CDT: **Session Key**: agent:main:main; **Session ID**: 7c828fd9-f1be-4d12-8874-339d689c5cd0; **Source**: webchat [score=0.806 recalls=0 avg=0.620 source=memory/2026-06-12-1339.md:3-5]
