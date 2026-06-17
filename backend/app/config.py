@@ -2,6 +2,7 @@ from pydantic_settings import BaseSettings
 from pydantic import Field
 from functools import lru_cache
 import os
+from pathlib import Path
 
 
 class Settings(BaseSettings):
@@ -79,6 +80,17 @@ class Settings(BaseSettings):
     agentmail_sender: str = "alerts@leadsignal.ai"
 
     redis_url: str = "redis://localhost:6379/0"
+
+    timesfm_url: str = ""
+    timesfm_api_key_file: str = ".env.timesfm"
+
+    @property
+    def timesfm_api_key(self) -> str:
+        try:
+            path = self.timesfm_api_key_file if os.path.isabs(self.timesfm_api_key_file) else os.path.join(os.path.dirname(__file__), "..", self.timesfm_api_key_file)
+            return Path(path).resolve().read_text().strip().split("=", 1)[1].strip().strip('"\'')
+        except Exception:
+            return os.environ.get("TIMESFM_API_KEY", "")
 
     class Config:
         env_file = ".env"

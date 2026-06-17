@@ -30,6 +30,7 @@ from pydantic import BaseModel
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.config import get_settings
 from app.db import get_db
 from app.dependencies import get_current_user_optional
 from app.models import Signal, SignalType, User
@@ -54,8 +55,7 @@ async def signal_trends(
     user: Optional[User] = Depends(get_current_user_optional),
     db: AsyncSession = Depends(get_db),
 ):
-    """Forecast future signal volume per category over the next N days."""
-    # Pull all signals (MVP: public read)
+    """Forecast future signal volume per SignalType over the next N days."""
     result = await db.execute(select(Signal))
     rows = result.scalars().all()
 
@@ -71,10 +71,13 @@ async def signal_trends(
     # Prefer a resident microservice if TIMESFM_URL is set; otherwise fall back
     # to spawning the wrapper subprocess (slower cold-start).
     workspace_root = Path(__file__).resolve().parents[4]
-    timesfm_url = os.environ.get("TIMESFM_URL")
+    settings = get_settings()
+    timesfm_url = settings.timesfm_url or os.environ.get("TIMESFM_URL")
+    timesfm_api_key = settings.timesfm_api_key
 
     try:
         if timesfm_url:
+            headers = {"Authorization": f"Bearer {timesfm_api_key}"} if timesfm_api_key else {}
             async with httpx.AsyncClient(timeout=300) as client:
                 resp = await client.post(
                     f"{timesfm_url}/forecast/signal-trends",
@@ -83,6 +86,7 @@ async def signal_trends(
                         "horizon_days": horizon_days,
                         "bucket_days": bucket_days,
                     },
+                    headers=headers,
                 )
                 if resp.status_code >= 400:
                     raise HTTPException(
