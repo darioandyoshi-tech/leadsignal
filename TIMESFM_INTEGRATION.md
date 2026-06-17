@@ -73,7 +73,9 @@ Tested on `http://127.0.0.1:8123` with seeded sample data:
 curl -s 'http://127.0.0.1:8123/forecast/signal-trends?horizon_days=7&bucket_days=1' | python3 -m json.tool
 ```
 
-Result: endpoint returns a list of trend forecasts, one per signal category (`hiring_spike`, `business_license`, `parcel_change`, etc.), each with `point_forecast` and `quantiles` arrays. First request took ~5 s because the TimesFM model loads; subsequent calls are faster.
+Result: endpoint returns a list of trend forecasts, one per signal category (`hiring_spike`, `business_license`, `parcel_change`, etc.), each with `point_forecast` and `quantiles` arrays.
+
+With the resident microservice (`TIMESFM_URL=http://127.0.0.1:8001`), the endpoint responds in ~1.5 s. Without it, the subprocess fallback takes ~5 s on first call.
 
 Also tested the cron script:
 ```bash
@@ -81,17 +83,52 @@ python3 run_timesfm.py leadsignal/backend/scripts/daily_forecast.py --horizon 7 
 ```
 Produced a JSON report with 7-day point + quantile forecasts for all categories.
 
+## Dashboard UI
+
+A new **Forecasts** tab was added to the LeadSignal dashboard (`app/page.tsx`):
+- Grid of per-category trend charts
+- 14-day forecast horizon with uncertainty bands
+- `ForecastChart` component (`components/ForecastChart.tsx`) renders history + forecast with a vertical "Forecast" marker
+- Calls `GET /forecast/signal-trends` via `getSignalTrends()` in `lib/api.ts`
+
+Frontend builds cleanly (`npm run build`).
+
+## Systemd service (24/7 desktop)
+
+Installed and enabled:
+```bash
+sudo cp timesfm_service/timesfm.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable --now timesfm
+```
+
+Status: `sudo systemctl status timesfm`
+Logs: `journalctl -u timesfm -f`
+
+Service runs on `http://127.0.0.1:8001`, auto-restarts on crash, uses ~1 GB RAM at idle.
+
 ## Verification
 
 - Sanity test: passed (CUDA, correct shapes).
 - Unit tests: 3 passed.
 - Sample forecasts (generic, LeadSignal, OEW): all produced expected JSON output.
 - CLI health check: reports `cuda_available: true`.
-- LeadSignal `GET /forecast/signal-trends`: live-tested locally and working.
+- TimesFM microservice: systemd service active and responding to `/health`.
+- LeadSignal `GET /forecast/signal-trends`: live-tested locally via microservice in ~1.5 s.
+- LeadSignal dashboard: builds with new Forecasts tab.
+
+## Production / Render notes
+
+- The TimesFM 200M model needs ~1 GB RAM. Render free web services (512 MB) are not suitable.
+- Options for production:
+  1. Keep the microservice on this desktop/GPU box and set `TIMESFM_URL` in Render env vars (requires publicly reachable URL + auth).
+  2. Deploy to a GPU-capable host (RunPod, Vast.ai, AWS g4dn, etc.).
+  3. Use the subprocess fallback on Render (slow but works).
+- The LeadSignal backend `.env` now sets `TIMESFM_URL=http://127.0.0.1:8001` for local dev.
 
 ## Next steps (optional)
 
-1. Add a dedicated TimesFM microservice with a persistent model worker.
-2. Add dashboard UI trend charts consuming `/forecast/signal-trends`.
-3. Cache daily forecast results in Redis/DB to avoid recomputation.
+1. Secure the microservice with an API key before exposing publicly.
+2. Cache daily forecasts in Redis/DB.
+3. Add email/Slack alerts when a category is forecasted to spike.
 4. Fine-tune on Dario-specific domain series if labeled data is collected.

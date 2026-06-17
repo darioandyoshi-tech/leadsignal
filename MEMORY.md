@@ -407,12 +407,42 @@ Next heartbeat check recommended in ~30 minutes or as system events warrant.
 - **Application**: System remains stable with all monitoring systems functioning normally
 - **Source**: Daily heartbeat checks and PulseWatch monitoring
 
-## LeadSignal Live — June 15, 2026
+---
+
+## TimesFM Installed, Microservice Running, Dashboard Forecasts Live — June 17, 2026 10:17 CDT
+- **Repository**: Cloned `https://github.com/google-research/timesfm` into `/home/dario/.openclaw/workspace/timesfm`.
+- **Environment**: Dedicated Python 3.14 venv at `timesfm/venv` with PyTorch 2.12 (CUDA 12.6) and `timesfm==2.0.1`.
+- **Model**: TimesFM 2.5 200M PyTorch, runs on NVIDIA RTX 3070 Ti.
+- **Wrapper**: Created `timesfm_wrapper/` with singleton client, generic/LeadSignal/OEW adapters, FastAPI router, CLI, examples, and tests.
+- **Microservice**: `timesfm_service/` FastAPI app keeps model resident and warm on `http://127.0.0.1:8001`.
+- **Systemd**: `timesfm.service` installed and enabled, auto-restart, ~1 GB RAM at idle.
+- **LeadSignal integration**:
+  - Backend router `GET /forecast/signal-trends` now prefers `TIMESFM_URL` microservice via httpx; falls back to subprocess.
+  - Cron script `scripts/daily_forecast.py` for daily trend reports.
+  - Dashboard **Forecasts** tab with per-category 14-day trend charts + uncertainty bands.
+- **OEW/Phase4 integration**: New adapter `phase4-ssm-leap/integrations/timesfm_oew_adapter.py`.
+- **Performance**: Endpoint responds in ~1.5 s via microservice vs ~5 s subprocess fallback.
+- **Verification**: Model loads, sanity test passes, unit tests pass, microservice `/health` OK, backend endpoint live-tested, frontend builds.
+- **Docs**: `TIMESFM_INTEGRATION.md` updated with setup/usage/deployment/systemd notes.
+
+## TimesFM Installed & Integrated — June 17, 2026 09:40 CDT
+- **Repository**: Cloned `https://github.com/google-research/timesfm` into `/home/dario/.openclaw/workspace/timesfm`.
+- **Environment**: Dedicated Python 3.14 venv at `timesfm/venv` with PyTorch 2.12 (CUDA 12.6) and `timesfm==2.0.1`.
+- **Model**: TimesFM 2.5 200M PyTorch, runs on NVIDIA RTX 3070 Ti.
+- **Wrapper**: Created `timesfm_wrapper/` with singleton client, generic/LeadSignal/OEW adapters, FastAPI router, CLI, examples, and tests.
+- **LeadSignal integration**: New backend router `GET /forecast/signal-trends` and cron script `scripts/daily_forecast.py`.
+- **OEW/Phase4 integration**: New adapter `phase4-ssm-leap/integrations/timesfm_oew_adapter.py` for incident rate, price, and volume forecasts.
+- **Launcher**: `run_timesfm.py` auto-activates the TimesFM venv.
+- **Verification**: Sanity test passed, unit tests passed, sample forecasts produced valid point + quantile outputs.
+- **Docs**: `TIMESFM_INTEGRATION.md` written with full setup/usage/deployment notes.
+
+## LeadSignal Live — June 15-16, 2026
 - **Backend**: Migrated from SQLite on Fly.io to managed PostgreSQL on Render (`leadsignal-8y5f.onrender.com`). Live and healthy.
 - **Frontend**: `leadsignal-dme1.vercel.app` redesigned and operational.
 - **Signals loaded**: 3,822+ (business_license, parcel_change, gov_contract_award, land_bank_property, tax_delinquency, new_business_registration, permit_filing).
 - **Map fix**: All signal types now server-side geocoded via Google Maps Geocoding API; map renders 100–500 pins depending on filter. Removed fake placeholder permits from Accela seed.
-- **Still blocked**: more signals (hiring spikes, negative review clusters, UCC filings, additional permits) need paid credentials/API tokens (APIFY_TOKEN, PERMITSTACK_API_KEY, Nebraska SOS/UCC access).
+- **Current counts (June 15)**: business_license 1681, parcel_change 1000, gov_contract_award 598, land_bank_property 302, tax_delinquency 63, new_business_registration 125, permit_filing 3, hiring_spike 0, negative_review_cluster 0, ucc_filing 0.
+- **Still blocked**: more signals (hiring spikes, negative review clusters, UCC filings, additional permits) need paid credentials/API tokens (APIFY_TOKEN, PERMITSTACK_API_KEY, Nebraska SOS/UCC access) plus a known `ADMIN_SECRET` on Render.
 
 ## Skill-First Workflow (June 14, 2026)
 Before starting any non-trivial task, scan available skills, select the most relevant one, and read its SKILL.md before proceeding.

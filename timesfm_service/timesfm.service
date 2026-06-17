@@ -1,0 +1,16 @@
+[Unit]
+Description=TimesFM Forecast Microservice
+After=network.target
+
+[Service]
+Type=simple
+User=%I
+WorkingDirectory=/home/%I/.openclaw/workspace
+Environment="TIMESFM_DEVICE=cuda"
+Environment="HF_HUB_DISABLE_SYMLINKS_WARNING=1"
+ExecStart=/home/%I/.openclaw/workspace/timesfm_service/run.sh
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
