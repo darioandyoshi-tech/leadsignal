@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import "leaflet/dist/leaflet.css";
+import { GlowBackground } from "@/components/GlowBackground";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -21,7 +22,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="font-sans min-h-screen bg-noir-950 text-noir-100">{children}</body>
+      <body className="font-sans min-h-screen bg-noir-950 text-noir-100">
+        <GlowBackground>{children}</GlowBackground>
+      </body>
     </html>
   );
 }

@@ -2,6 +2,9 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { AppShell } from "@/components/AppShell";
+import { SignalGlobe } from "@/components/SignalGlobe";
+import { AnimatedStatCard } from "@/components/AnimatedStatCard";
+import { LiveTicker } from "@/components/LiveTicker";
 import { StatCard } from "@/components/StatCard";
 import { TrendChart, TrendPoint } from "@/components/TrendChart";
 import { ForecastChart, ForecastPoint } from "@/components/ForecastChart";
@@ -17,24 +20,10 @@ import { getSignals, getSignalStats, sendDigest, getSignalTrends } from "@/lib/a
 import { format, subDays, addDays, parseISO } from "date-fns";
 import {
   FileText, Landmark, MapPin, Briefcase, Star,
-  AlertTriangle, ShieldCheck, Store, TrendingUp, CreditCard, Sparkles,
+  AlertTriangle, ShieldCheck, Store, TrendingUp, CreditCard, Sparkles, Activity,
 } from "lucide-react";
 
-const TYPE_META: Record<
-  string,
-  { label: string; icon: React.ElementType; accent: "amber" | "emerald" | "rose" | "blue" | "slate" }
-> = {
-  hiring_spike: { label: "Hiring Spikes", icon: Briefcase, accent: "emerald" },
-  negative_review_cluster: { label: "Review Clusters", icon: Star, accent: "rose" },
-  permit_filing: { label: "Permit Filings", icon: FileText, accent: "amber" },
-  parcel_change: { label: "Parcel Changes", icon: MapPin, accent: "blue" },
-  tax_delinquency: { label: "Tax Delinquency", icon: AlertTriangle, accent: "rose" },
-  gov_contract_award: { label: "Gov Contracts", icon: ShieldCheck, accent: "emerald" },
-  business_license: { label: "Business Licenses", icon: Store, accent: "blue" },
-  ucc_filing: { label: "UCC Filings", icon: CreditCard, accent: "slate" },
-  new_business_registration: { label: "New Businesses", icon: TrendingUp, accent: "emerald" },
-  land_bank_property: { label: "Land Bank Properties", icon: Landmark, accent: "amber" },
-};
+import { TYPE_META } from "@/components/page-meta";
 
 const DEFAULT_FILTERS: Filters = {
   search: "",
@@ -85,6 +74,8 @@ function useSignalsData() {
 
   useEffect(() => {
     load();
+    const interval = setInterval(load, 30000);
+    return () => clearInterval(interval);
   }, []);
 
   return { signals, stats, loading, error, reload: load };
@@ -246,31 +237,57 @@ export default function DashboardPage() {
                 </>
               )}
               {!loading && stats &&
-                Object.entries(TYPE_META).map(([key, meta]) => {
+                Object.entries(TYPE_META).map(([key, meta], idx) => {
                   const Icon = meta.icon;
                   const count = stats[key] || 0;
                   return (
-                    <StatCard
+                    <AnimatedStatCard
                       key={key}
                       title={meta.label}
-                      value={count}
+                      value={count.toLocaleString()}
                       accent={meta.accent}
                       icon={<Icon size={20} />}
                       change={Math.random() * 10 - 2}
+                      delay={idx * 0.05}
                     />
                   );
                 })}
             </div>
 
-            {!loading && stats && (
-              <div className="mt-6 rounded-xl border border-noir-700 bg-noir-900/50 p-5">
-                <div className="mb-4 flex items-center justify-between">
-                  <h3 className="text-lg font-semibold text-noir-100">Signal trend (14 days)</h3>
-                  <Badge variant="outline">{stats.total?.toLocaleString()} total</Badge>
+            <div className="mt-6 grid gap-6 lg:grid-cols-3">
+              {!loading && stats && (
+                <div className="lg:col-span-2 rounded-xl border border-noir-700/50 bg-noir-900/50 p-5 backdrop-blur-sm">
+                  <div className="mb-4 flex items-center justify-between">
+                    <h3 className="text-lg font-semibold text-noir-100 flex items-center gap-2">
+                      <Activity size={18} className="text-ls-400" /> Signal trend (14 days)
+                    </h3>
+                    <Badge variant="outline">{stats.total?.toLocaleString()} total</Badge>
+                  </div>
+                  <TrendChart data={trend} />
                 </div>
-                <TrendChart data={trend} />
+              )}
+
+              <div className="rounded-xl border border-noir-700/50 bg-noir-900/50 p-5 backdrop-blur-sm">
+                <h3 className="mb-4 text-lg font-semibold text-noir-100">Live activity</h3>
+                {loading ? (
+                  <div className="space-y-3">
+                    {Array.from({ length: 4 }).map((_, i) => (
+                      <Skeleton key={i} className="h-14 w-full" />
+                    ))}
+                  </div>
+                ) : (
+                  <LiveTicker signals={signals} maxItems={6} />
+                )}
               </div>
-            )}
+            </div>
+
+            <div className="mt-6 rounded-xl border border-noir-700/50 bg-noir-900/50 p-5 backdrop-blur-sm">
+              <div className="mb-4 flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-noir-100">Omaha signal sphere</h3>
+                <Badge variant="outline">3D live view</Badge>
+              </div>
+              <SignalGlobe count={120} />
+            </div>
           </TabsContent>
 
           <TabsContent value="signals">
