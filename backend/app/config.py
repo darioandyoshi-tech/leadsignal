@@ -82,6 +82,7 @@ class Settings(BaseSettings):
 
     class Config:
         env_file = ".env"
+        extra = "ignore"  # tolerate extra env vars in .env
 
 
 @lru_cache()
