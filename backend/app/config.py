@@ -92,6 +92,16 @@ class Settings(BaseSettings):
         except Exception:
             return os.environ.get("TIMESFM_API_KEY", "")
 
+    # Alpaca paper/live trading
+    alpaca_base_url: str = "https://paper-api.alpaca.markets/v2"
+    alpaca_api_key: str = ""
+    alpaca_secret_key: str = ""
+    alpaca_paper: bool = True
+    alpaca_auto_trade: bool = False
+    alpaca_max_open_positions: int = 5
+    alpaca_capital_per_trade: float = 2000.0
+    alpaca_max_hold_days: int = 4
+
     class Config:
         env_file = ".env"
         extra = "ignore"  # tolerate extra env vars in .env

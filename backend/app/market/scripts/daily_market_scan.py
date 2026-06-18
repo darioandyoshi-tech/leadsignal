@@ -19,6 +19,7 @@ sys.path.insert(0, str(backend_root))
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.config import get_settings
 from app.db import async_session_maker
 from app.models import MarketSnapshot, StockPick, TradeAction
 from app.market import NASDAQ100Fetcher, build_technical_features, StockScorer, StockRecommender
@@ -120,6 +121,14 @@ async def main():
         await db.commit()
 
     print(f"[{datetime.utcnow()}] Done. Persisted {len(top_picks)} top picks.")
+
+    # Optionally execute paper trades with Alpaca
+    settings = get_settings()
+    if settings.alpaca_auto_trade:
+        print("[SCAN] Auto-trade enabled; handing off to paper trade execution.")
+        from app.market.scripts.execute_paper_trades import main as execute_trades
+        await execute_trades()
+        print("[SCAN] Paper trade execution complete.")
 
 
 if __name__ == "__main__":

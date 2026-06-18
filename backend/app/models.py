@@ -45,6 +45,23 @@ class TradeAction(str, enum.Enum):
     avoid = "avoid"
 
 
+class OrderStatus(str, enum.Enum):
+    pending = "pending"
+    submitted = "submitted"
+    accepted = "accepted"
+    partially_filled = "partially_filled"
+    filled = "filled"
+    rejected = "rejected"
+    cancelled = "cancelled"
+    expired = "expired"
+
+
+class PositionStatus(str, enum.Enum):
+    open = "open"
+    closed = "closed"
+    liquidating = "liquidating"
+
+
 class SubscriptionStatus(str, enum.Enum):
     active = "active"
     trialing = "trialing"
@@ -194,3 +211,68 @@ class StockPick(Base):
     __table_args__ = (
         Index("ix_stock_picks_active", "is_active", "run_date"),
     )
+
+
+class PaperPosition(Base):
+    __tablename__ = "paper_positions"
+
+    id = Column(SQLUUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    symbol = Column(String(16), nullable=False, index=True)
+    side = Column(String(8), default="long", nullable=False)
+    status = Column(Enum(PositionStatus), default=PositionStatus.open, nullable=False, index=True)
+
+    # Entry
+    entry_price = Column(Float, nullable=True)
+    entry_date = Column(DateTime, default=datetime.utcnow, index=True)
+    shares = Column(Float, nullable=True)
+    notional = Column(Float, nullable=True)
+
+    # Exit
+    exit_price = Column(Float, nullable=True)
+    exit_date = Column(DateTime, nullable=True)
+    realized_pnl = Column(Float, nullable=True)
+    realized_return = Column(Float, nullable=True)
+
+    # Plan
+    stop_loss = Column(Float, nullable=True)
+    take_profit = Column(Float, nullable=True)
+    max_hold_days = Column(Integer, default=4)
+    planned_exit_date = Column(DateTime, nullable=True)
+
+    # Source
+    stock_pick_id = Column(SQLUUID(as_uuid=True), ForeignKey("stock_picks.id"), nullable=True, index=True)
+    notes = Column(Text, nullable=True)
+    metadata_ = Column("metadata", JSON, default=dict)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    stock_pick = relationship("StockPick")
+    orders = relationship("BrokerOrder", back_populates="position")
+
+    __table_args__ = (
+        Index("ix_paper_positions_status_symbol", "status", "symbol"),
+        Index("ix_paper_positions_status_entry_date", "status", "entry_date"),
+    )
+
+
+class BrokerOrder(Base):
+    __tablename__ = "broker_orders"
+
+    id = Column(SQLUUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    position_id = Column(SQLUUID(as_uuid=True), ForeignKey("paper_positions.id"), nullable=True, index=True)
+    broker = Column(String(32), default="alpaca", nullable=False)
+    side = Column(String(8), nullable=False)  # buy or sell
+    order_type = Column(String(16), nullable=False)  # market, limit, stop, oco
+    symbol = Column(String(16), nullable=False, index=True)
+    qty = Column(Float, nullable=True)
+    notional = Column(Float, nullable=True)
+    limit_price = Column(Float, nullable=True)
+    stop_price = Column(Float, nullable=True)
+    broker_order_id = Column(String(64), nullable=True, index=True)
+    status = Column(Enum(OrderStatus), default=OrderStatus.pending, nullable=False, index=True)
+    raw_response = Column(JSON, default=dict)
+    error_message = Column(Text, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    position = relationship("PaperPosition", back_populates="orders")

@@ -25,6 +25,22 @@ services:
         sync: false
       - key: GOOGLE_PLACES_API_KEY
         sync: false
+      - key: ALPACA_BASE_URL
+        sync: false
+      - key: ALPACA_API_KEY
+        sync: false
+      - key: ALPACA_SECRET_KEY
+        sync: false
+      - key: ALPACA_PAPER
+        sync: false
+      - key: ALPACA_AUTO_TRADE
+        sync: false
+      - key: ALPACA_MAX_OPEN_POSITIONS
+        sync: false
+      - key: ALPACA_CAPITAL_PER_TRADE
+        sync: false
+      - key: ALPACA_MAX_HOLD_DAYS
+        sync: false
       - key: AGENTMAIL_API_KEY
         sync: false
       - key: FRONTEND_URL
