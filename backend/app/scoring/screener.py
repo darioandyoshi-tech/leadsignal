@@ -1,4 +1,5 @@
 import math
+import os
 from datetime import datetime, timedelta, timezone
 from typing import Dict, List, Any, Optional, Sequence
 from collections import defaultdict
@@ -19,6 +20,36 @@ def _hours_ago(dt: datetime) -> float:
     return (datetime.now(timezone.utc) - dt).total_seconds() / 3600.0
 
 
+def _env_criteria() -> List[ScreeningCriteria]:
+    """Load custom criteria from LEADSIGNAL_SCORING_WEIGHTS env var.
+
+    Format: dimension:weight:min_value,...  e.g.
+      LEADSIGNAL_SCORING_WEIGHTS=severity:2.5:freshness:1.5:velocity:1.0
+    """
+    raw = os.environ.get("LEADSIGNAL_SCORING_WEIGHTS", "")
+    if not raw:
+        return None
+
+    parts = raw.split(":")
+    if len(parts) % 2 != 0:
+        return None
+
+    criteria: List[ScreeningCriteria] = []
+    for i in range(0, len(parts), 2):
+        dim_name = parts[i]
+        try:
+            weight = float(parts[i + 1])
+        except ValueError:
+            continue
+        try:
+            dim = ScoringDimension(dim_name)
+        except ValueError:
+            continue
+        criteria.append(ScreeningCriteria(dim, weight=weight))
+
+    return criteria if criteria else None
+
+
 class SignalScreener:
     """Composite factor screener for LeadSignal opportunities.
 
@@ -26,7 +57,7 @@ class SignalScreener:
     """
 
     def __init__(self, criteria: Optional[List[ScreeningCriteria]] = None):
-        self.criteria = criteria or self.default_criteria()
+        self.criteria = criteria or _env_criteria() or self.default_criteria()
 
     @staticmethod
     def default_criteria() -> List[ScreeningCriteria]:
@@ -81,7 +112,6 @@ class SignalScreener:
         # Proximity: count of signals within radius
         proximity_cache: Dict[UUID, int] = {}
         for s, c in rows:
-            key = (round(s.lat or 0, 2), round(s.lng or 0, 2))
             if s.id not in proximity_cache:
                 proximity_cache[s.id] = sum(
                     1
@@ -162,8 +192,9 @@ class SignalScreener:
         if dim == ScoringDimension.DIVERSITY:
             return min(1.0, company_signal_count / 4.0)
         if dim == ScoringDimension.FORECAST:
-            # Placeholder: integrate TimesFM later via metadata tag
-            return signal.metadata_.get("forecast_score", 0.5) if signal.metadata_ else 0.5
+            # Pull from signal metadata if TimesFM forecast has been attached.
+            meta = signal.metadata_ or {}
+            return meta.get("forecast_score", 0.5)
         if criteria.transform:
             return criteria.transform(signal)
         return 0.5

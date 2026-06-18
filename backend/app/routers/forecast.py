@@ -29,11 +29,13 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from pydantic import BaseModel
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm.attributes import flag_modified
+from datetime import datetime, timedelta
 
 from app.config import get_settings
 from app.db import get_db
 from app.dependencies import get_current_user_optional
-from app.models import Signal, SignalType, User
+from app.models import Signal, User
 
 router = APIRouter(prefix="/forecast", tags=["forecast"])
 
@@ -46,6 +48,20 @@ class TrendForecastResponse(BaseModel):
     quantiles: Optional[List[List[float]]] = None
     model_name: str = "google/timesfm-2.5-200m-pytorch"
     error: Optional[str] = None
+
+
+def _forecast_to_score(point_forecast: List[float], current_avg: float) -> float:
+    """Normalize a forecast into a 0..1 directional score.
+
+    Score > 0.5 means forecast is above recent average (positive momentum).
+    """
+    if not point_forecast or current_avg <= 0:
+        return 0.5
+    forecast_avg = sum(point_forecast) / len(point_forecast)
+    # Map ratio to 0..1, clamped, centered around 1.0 -> 0.5
+    ratio = forecast_avg / current_avg
+    score = 0.5 + 0.5 * min(1.0, max(-1.0, (ratio - 1.0)))
+    return round(max(0.0, min(1.0, score)), 4)
 
 
 @router.get("/signal-trends", response_model=List[TrendForecastResponse])
@@ -134,17 +150,43 @@ async def signal_trends(
         raise HTTPException(status_code=503, detail=f"TimesFM service unreachable: {exc}")
 
     responses = []
+    category_scores: Dict[str, float] = {}
     for category, payload in raw.items():
         if category.startswith("_"):
             continue
+        point = payload.get("point", [])
+        history = payload.get("input_length", 0)
+        current_avg = history / horizon_days if history else 0.0
+        category_scores[category] = _forecast_to_score(point, current_avg)
         responses.append(
             TrendForecastResponse(
                 category=category,
                 horizon_days=horizon_days,
-                history_length=payload.get("input_length", 0),
-                point_forecast=payload.get("point", []),
+                history_length=history,
+                point_forecast=point,
                 quantiles=payload.get("quantiles"),
                 model_name=payload.get("model_name", "google/timesfm-2.5-200m-pytorch"),
             )
         )
+
+    # Persist forecast scores onto recent signals so the screener can use them.
+    if category_scores:
+        cutoff = datetime.utcnow() - timedelta(days=30)
+        result = await db.execute(
+            select(Signal).where(
+                Signal.signal_type.in_(list(category_scores.keys())),
+                Signal.detected_at >= cutoff,
+            )
+        )
+        signals_to_update = result.scalars().all()
+        for s in signals_to_update:
+            score = category_scores.get(s.signal_type.value)
+            if score is None:
+                continue
+            meta = dict(s.metadata_ or {})
+            meta["forecast_score"] = score
+            s.metadata_ = meta
+            flag_modified(s, "metadata_")
+        await db.commit()
+
     return responses

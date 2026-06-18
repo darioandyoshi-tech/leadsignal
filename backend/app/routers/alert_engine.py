@@ -4,8 +4,8 @@
 import os
 import json
 import httpx
-from datetime import datetime
-from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks
+from datetime import datetime, timedelta
+from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from app.config import get_settings
@@ -13,9 +13,18 @@ from app.dependencies import get_current_user
 from app.db import get_db
 from app.models import Signal, Subscription, Alert, AlertChannel, User, SubscriptionStatus
 from app.schemas import AlertPayload
+from app.scoring import SignalScreener
 
 router = APIRouter(prefix="/alerts", tags=["alerts"])
 settings = get_settings()
+
+
+def _score_threshold() -> float:
+    """Return the composite score threshold for auto-alerts."""
+    try:
+        return float(os.environ.get("LEADSIGNAL_ALERT_SCORE_THRESHOLD", "0.65"))
+    except ValueError:
+        return 0.65
 
 
 def _email_body(signals: list) -> str:
@@ -150,7 +159,6 @@ async def send_daily_digest(background: BackgroundTasks, user: User = Depends(ge
     if not subs:
         raise HTTPException(status_code=404, detail="No active subscription")
 
-    from datetime import timedelta
     cutoff = datetime.utcnow() - timedelta(days=1)
     result = await db.execute(
         select(Signal).where(Signal.detected_at >= cutoff, Signal.is_alerted == False).order_by(Signal.detected_at.desc()).limit(50)
@@ -175,3 +183,77 @@ async def send_daily_digest(background: BackgroundTasks, user: User = Depends(ge
         s.is_alerted = True
     await db.commit()
     return {"sent": True, "signals": len(signals)}
+
+
+@router.post("/score-trigger")
+async def score_based_alert(
+    background: BackgroundTasks,
+    threshold: float = Query(default=None),
+    channel: AlertChannel = Query(default=AlertChannel.email),
+    user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Send an alert with signals whose composite score is above the threshold.
+
+    If threshold is not provided, uses LEADSIGNAL_ALERT_SCORE_THRESHOLD env var.
+    """
+    result = await db.execute(
+        select(Subscription).where(
+            Subscription.user_id == user.id,
+            Subscription.status.in_([SubscriptionStatus.active, SubscriptionStatus.trialing]),
+        )
+    )
+    subs = result.scalars().all()
+    if not subs:
+        raise HTTPException(status_code=404, detail="No active subscription")
+
+    threshold = threshold if threshold is not None else _score_threshold()
+    screener = SignalScreener()
+    screened = await screener.screen(db, days_back=7, limit=200)
+    top = [r for r in screened if r.score >= threshold]
+    if not top:
+        return {"sent": False, "reason": f"No signals above score threshold {threshold}", "threshold": threshold}
+
+    signal_ids = [r.signal_id for r in top]
+    result = await db.execute(select(Signal).where(Signal.id.in_(signal_ids)))
+    signals = result.scalars().all()
+
+    body = _email_body(signals)
+    md_body = _markdown_body(signals)
+    subject = f"LeadSignal High-Score Alert ({len(signals)} signals >= {threshold})"
+
+    if channel == AlertChannel.email:
+        background.add_task(send_email_alert, user.email, subject, body)
+    elif channel == AlertChannel.slack:
+        webhook = subs[0].settings.get("slack_webhook")
+        if not webhook:
+            raise HTTPException(status_code=400, detail="Slack webhook not configured")
+        background.add_task(send_slack_alert, webhook, md_body)
+    elif channel == AlertChannel.discord:
+        webhook = subs[0].settings.get("discord_webhook")
+        if not webhook:
+            raise HTTPException(status_code=400, detail="Discord webhook not configured")
+        background.add_task(send_discord_alert, webhook, md_body)
+    elif channel == AlertChannel.webhook:
+        target = subs[0].settings.get("custom_webhook")
+        if not target:
+            raise HTTPException(status_code=400, detail="Custom webhook not configured")
+        background.add_task(send_webhook, target, {
+            "subscription_id": str(subs[0].id),
+            "threshold": threshold,
+            "signals": [{"id": str(s.id), "type": s.signal_type.value, "headline": s.headline} for s in signals],
+        })
+
+    alert = Alert(
+        subscription_id=subs[0].id,
+        signal_ids=[s.id for s in signals],
+        channel=channel,
+        status="sent" if channel != AlertChannel.dashboard else "pending",
+        content=body,
+        sent_at=datetime.utcnow() if channel != AlertChannel.dashboard else None,
+    )
+    db.add(alert)
+    for s in signals:
+        s.is_alerted = True
+    await db.commit()
+    return {"sent": True, "channel": channel.value, "threshold": threshold, "signals": len(signals)}
