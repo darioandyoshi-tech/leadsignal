@@ -92,6 +92,17 @@ class AlpacaBroker:
         except Exception:
             return {"serialization_error": str(raw)[:500]}
 
+    def get_pending_sell_symbols(self) -> set[str]:
+        """Return symbols that have pending/held/open sell orders (e.g. liquidation in progress)."""
+        try:
+            from alpaca.trading.requests import GetOrdersRequest
+            from alpaca.trading.enums import QueryOrderStatus
+            req = GetOrdersRequest(status=QueryOrderStatus.OPEN)
+            orders = self.client.get_orders(req)
+            return {o.symbol for o in orders if o.side == OrderSide.SELL}
+        except APIError:
+            return set()
+
     def get_account(self) -> Dict:
         """Return Alpaca account summary."""
         try:

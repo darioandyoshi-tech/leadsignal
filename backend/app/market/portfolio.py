@@ -83,17 +83,16 @@ class PaperPortfolioManager:
     def select_picks_to_buy(
         self,
         picks: List[StockRecommendation],
-        current_open_positions: List[Dict],
+        blocked_symbols: set[str],
     ) -> List[TradePlan]:
         """Select which buy picks to execute today, respecting limits."""
-        open_symbols = {p["symbol"] for p in current_open_positions}
         plans: List[TradePlan] = []
-        slots_remaining = max(0, self.max_open_positions - len(current_open_positions))
+        slots_remaining = max(0, self.max_open_positions - len(blocked_symbols))
 
         for pick in picks:
             if len(plans) >= slots_remaining:
                 break
-            if pick.symbol in open_symbols:
+            if pick.symbol in blocked_symbols:
                 continue
             plan = self.build_plan(pick)
             if plan:

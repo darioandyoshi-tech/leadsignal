@@ -45,6 +45,13 @@ async def main():
 
     open_positions = broker.get_positions()
     print(f"[EXEC] Current Alpaca open positions: {len(open_positions)}")
+    open_symbols = {p["symbol"] for p in open_positions}
+
+    # Also skip symbols with pending sell orders (liquidation in progress)
+    pending_sell_symbols = broker.get_pending_sell_symbols()
+    print(f"[EXEC] Symbols with pending sells: {len(pending_sell_symbols)}")
+    skip_symbols = open_symbols | pending_sell_symbols
+    print(f"[EXEC] Skipping {len(skip_symbols)} symbols: {sorted(skip_symbols)}")
 
     async with async_session_maker() as db:
         result = await db.execute(
@@ -76,7 +83,7 @@ async def main():
         for p in buy_picks
     ]
     manager = PaperPortfolioManager(broker=broker)
-    plans = manager.select_picks_to_buy(recommendations, open_positions)
+    plans = manager.select_picks_to_buy(recommendations, skip_symbols)
     print(f"[EXEC] Trade plans created: {len(plans)}")
 
     async with async_session_maker() as db:
