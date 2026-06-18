@@ -216,7 +216,7 @@ class StockPick(Base):
 class PaperPosition(Base):
     __tablename__ = "paper_positions"
 
-    id = Column(SQLUUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     symbol = Column(String(16), nullable=False, index=True)
     side = Column(String(8), default="long", nullable=False)
     status = Column(Enum(PositionStatus), default=PositionStatus.open, nullable=False, index=True)
@@ -240,7 +240,7 @@ class PaperPosition(Base):
     planned_exit_date = Column(DateTime, nullable=True)
 
     # Source
-    stock_pick_id = Column(SQLUUID(as_uuid=True), ForeignKey("stock_picks.id"), nullable=True, index=True)
+    stock_pick_id = Column(String(36), ForeignKey("stock_picks.id"), nullable=True, index=True)
     notes = Column(Text, nullable=True)
     metadata_ = Column("metadata", JSON, default=dict)
     created_at = Column(DateTime, default=datetime.utcnow)
@@ -258,11 +258,11 @@ class PaperPosition(Base):
 class BrokerOrder(Base):
     __tablename__ = "broker_orders"
 
-    id = Column(SQLUUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    position_id = Column(SQLUUID(as_uuid=True), ForeignKey("paper_positions.id"), nullable=True, index=True)
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    position_id = Column(String(36), ForeignKey("paper_positions.id"), nullable=True, index=True)
     broker = Column(String(32), default="alpaca", nullable=False)
     side = Column(String(8), nullable=False)  # buy or sell
-    order_type = Column(String(16), nullable=False)  # market, limit, stop, oco
+    order_type = Column(String(16), nullable=False)  # market, limit, stop, oco, bracket
     symbol = Column(String(16), nullable=False, index=True)
     qty = Column(Float, nullable=True)
     notional = Column(Float, nullable=True)

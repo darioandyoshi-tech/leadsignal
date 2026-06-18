@@ -272,7 +272,7 @@ class AlpacaBroker:
                 symbol=symbol,
                 qty=qty,
                 side=OrderSide.BUY,
-                time_in_force=TimeInForce.DAY,
+                time_in_force=TimeInForce.GTC,
                 order_class=OrderClass.BRACKET,
                 take_profit={"limit_price": round(float(take_profit_price), 2)},
                 stop_loss={"stop_price": round(float(stop_loss_price), 2)},
