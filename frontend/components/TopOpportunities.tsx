@@ -7,6 +7,14 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { TrendingUp, AlertTriangle, Star, MapPin, Clock, Activity } from "lucide-react";
 
+interface Recommendation {
+  action: "contact" | "watch" | "ignore";
+  confidence: number;
+  reasoning: string;
+  urgency: "low" | "medium" | "high";
+  playbook?: string;
+}
+
 interface Opportunity {
   signal_id: string;
   symbol_or_company: string;
@@ -17,6 +25,7 @@ interface Opportunity {
   passed_dimensions: string[];
   failed_dimensions: string[];
   dimension_scores: Record<string, number>;
+  recommendation: Recommendation;
   metadata: {
     lat?: number;
     lng?: number;
@@ -81,6 +90,13 @@ export function TopOpportunities({ limit = 8 }: { limit?: number }) {
     return "bg-rose-500/20 text-rose-300 border-rose-500/30";
   };
 
+  const badgeForAction = (action: string, urgency: string) => {
+    const base = "capitalize border";
+    if (action === "contact") return `${base} bg-rose-500/20 text-rose-300 border-rose-500/30`;
+    if (action === "watch") return `${base} bg-amber-500/20 text-amber-300 border-amber-500/30`;
+    return `${base} bg-noir-700/50 text-noir-400 border-noir-600`;
+  };
+
   return (
     <div className="space-y-3">
       {results.map((opp, idx) => (
@@ -118,6 +134,18 @@ export function TopOpportunities({ limit = 8 }: { limit?: number }) {
                 {Math.round(opp.score * 100)}
               </Badge>
               <span className="text-[10px] text-noir-500">#{opp.rank}</span>
+            </div>
+          </div>
+
+          <div className="mt-3 flex items-start gap-2 rounded-lg border border-noir-700/50 bg-noir-900/50 p-2">
+            <Badge className={badgeForAction(opp.recommendation.action, opp.recommendation.urgency)}>
+              {opp.recommendation.action}
+            </Badge>
+            <div className="min-w-0 text-xs text-noir-300">
+              <p className="truncate">{opp.recommendation.reasoning}</p>
+              {opp.recommendation.playbook && (
+                <p className="mt-1 truncate text-noir-500">{opp.recommendation.playbook}</p>
+              )}
             </div>
           </div>
 

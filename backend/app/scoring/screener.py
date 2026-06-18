@@ -165,8 +165,11 @@ class SignalScreener:
             )
 
         results.sort(key=lambda r: r.score, reverse=True)
+        from app.recommend import SignalPolicyEngine
+        policy = SignalPolicyEngine()
         for i, r in enumerate(results, start=1):
             r.rank = i
+            r.recommendation = policy.recommend(r)
         return results[:limit]
 
     def _score_dimension(

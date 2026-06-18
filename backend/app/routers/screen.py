@@ -7,14 +7,21 @@ from typing import Optional, List
 from app.db import get_db
 from app.dependencies import get_current_user_optional
 from app.models import User
-from app.scoring import SignalScreener, ScreeningResult, ScoringDimension, ScreeningCriteria
+from app.scoring import SignalScreener, ScreeningResult, ScoringDimension, ScreeningCriteria, Recommendation
 from app.schemas import SignalType
 
 router = APIRouter(prefix="/screen", tags=["screen"])
 
 
+class RecommendationRead(Recommendation):
+    class Config:
+        from_attributes = True
+
+
 class ScreeningResultRead(ScreeningResult):
     """Pydantic model reusing the dataclass for response serialization."""
+
+    recommendation: Optional[RecommendationRead] = None
 
     class Config:
         from_attributes = True
