@@ -6,9 +6,10 @@ Uses OCO orders to bracket exits at take-profit / stop-loss.
 """
 
 import asyncio
+import argparse
 import os
 import sys
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 # Ensure backend package imports work when run as script
@@ -24,7 +25,7 @@ from app.market import AlpacaBroker, PaperPortfolioManager
 from app.models import StockPick, TradeAction, PaperPosition, BrokerOrder, OrderStatus, PositionStatus
 
 
-async def main():
+async def main(dry_run: bool = False):
     settings = get_settings()
     if not settings.alpaca_api_key or not settings.alpaca_secret_key:
         print("[EXEC] Alpaca credentials not configured. Skipping paper trade execution.")
@@ -34,7 +35,9 @@ async def main():
         print("[EXEC] ALPACA_AUTO_TRADE=false. Skipping execution.")
         return
 
-    print(f"[{datetime.utcnow()}] Starting paper trade execution...")
+    print(f"[{datetime.now(timezone.utc)}] Starting paper trade execution...")
+    if dry_run:
+        print("[EXEC] DRY RUN - no orders will be submitted")
 
     broker = AlpacaBroker()
     account = broker.get_account()
@@ -42,6 +45,33 @@ async def main():
         print(f"[EXEC] Alpaca account error: {account['error']}")
         return
     print(f"[EXEC] Account cash: ${account['cash']:.2f} | equity: ${account['equity']:.2f}")
+
+    # Circuit breaker: daily max loss
+    async with async_session_maker() as db:
+        today_start = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
+        from sqlalchemy import func
+        daily_pnl_result = await db.execute(
+            select(func.coalesce(func.sum(PaperPosition.realized_pnl), 0.0)).where(
+                PaperPosition.status == PositionStatus.closed,
+                PaperPosition.exit_date >= today_start,
+            )
+        )
+        daily_realized_pnl = float(daily_pnl_result.scalar() or 0.0)
+        print(f"[EXEC] Today's realized P/L: ${daily_realized_pnl:.2f}")
+        if daily_realized_pnl <= -settings.alpaca_daily_max_loss:
+            print(f"[EXEC] CIRCUIT BREAKER: daily max loss ${settings.alpaca_daily_max_loss:.2f} hit. No new trades.")
+            return
+
+        # Circuit breaker: portfolio heat (cash deployed)
+        open_positions_value = sum(p.notional or 0 for p in (
+            await db.execute(select(PaperPosition).where(PaperPosition.status == PositionStatus.open))
+        ).scalars().all())
+        cash = float(account.get("cash", 0))
+        heat = open_positions_value / cash if cash > 0 else 0
+        print(f"[EXEC] Portfolio heat: {heat:.2%} (${open_positions_value:.2f} deployed / ${cash:.2f} cash)")
+        if heat >= settings.alpaca_max_portfolio_heat:
+            print(f"[EXEC] CIRCUIT BREAKER: max portfolio heat {settings.alpaca_max_portfolio_heat:.2%} hit. No new trades.")
+            return
 
     open_positions = broker.get_positions()
     print(f"[EXEC] Current Alpaca open positions: {len(open_positions)}")
@@ -100,6 +130,11 @@ async def main():
                 print(f"[EXEC] Already have open position for {plan.symbol}; skip.")
                 continue
 
+            if dry_run:
+                print(f"[EXEC DRY RUN] Would buy {plan.symbol}: ${plan.notional:.2f} @ ${plan.entry_price:.2f}")
+                executed += 1
+                continue
+
             result = manager.execute_buy(plan)
             if not result["success"]:
                 print(f"[EXEC] Failed to execute {plan.symbol}: {result.get('error')}")
@@ -135,13 +170,13 @@ async def main():
                 symbol=plan.symbol,
                 status=PositionStatus.open,
                 entry_price=round(entry_price, 4),
-                entry_date=datetime.utcnow(),
+                entry_date=datetime.now(timezone.utc),
                 shares=round(shares, 6),
                 notional=round(notional, 2),
                 stop_loss=plan.stop_loss,
                 take_profit=plan.take_profit,
                 max_hold_days=plan.max_hold_days,
-                planned_exit_date=datetime.utcnow() + timedelta(days=plan.max_hold_days),
+                planned_exit_date=datetime.now(timezone.utc) + timedelta(days=plan.max_hold_days),
                 stock_pick_id=pick.id if pick else None,
                 notes=f"Auto-paper buy. Forecast: {pick.forecast_return_4d*100:.2f}%" if pick else "Auto-paper buy",
             )
@@ -172,8 +207,11 @@ async def main():
 
         await db.commit()
 
-    print(f"[{datetime.utcnow()}] Done. Executed {executed} paper trade(s).")
+    print(f"[{datetime.now(timezone.utc)}] Done. Executed {executed} paper trade(s).")
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    parser = argparse.ArgumentParser(description="Execute paper trades for daily NASDAQ-100 picks")
+    parser.add_argument("--dry-run", action="store_true", help="Print trades without submitting orders")
+    args = parser.parse_args()
+    asyncio.run(main(dry_run=args.dry_run))

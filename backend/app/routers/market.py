@@ -67,7 +67,7 @@ async def exit_pick(
     if not pick:
         raise HTTPException(status_code=404, detail="Pick not found")
     pick.is_active = False
-    pick.exited_at = datetime.utcnow()
+    pick.exited_at = datetime.now(timezone.utc)
     pick.exit_return = exit_return
     await db.commit()
     return {"status": "exited", "pick_id": pick_id}
@@ -109,7 +109,7 @@ def _enrich_position(pos_dict: Dict[str, Any], live_prices: Dict[str, float]) ->
     if current_price and entry_price and pos_dict.get("status") == "open":
         pos_dict["unrealized_pnl"] = round((current_price - entry_price) * shares, 2)
         pos_dict["unrealized_return"] = round((current_price - entry_price) / entry_price, 4)
-        pos_dict["days_held"] = (datetime.utcnow() - datetime.fromisoformat(pos_dict["entry_date"])).days if pos_dict.get("entry_date") else None
+        pos_dict["days_held"] = (datetime.now(timezone.utc) - datetime.fromisoformat(pos_dict["entry_date"])).days if pos_dict.get("entry_date") else None
     else:
         pos_dict["unrealized_pnl"] = None
         pos_dict["unrealized_return"] = None
@@ -336,7 +336,7 @@ async def get_performance(
             unrealized = round((current_price - p.entry_price) * p.shares, 2)
             unrealized_return = round((current_price - p.entry_price) / p.entry_price, 4)
             total_unrealized_pnl += unrealized
-        days_held = (datetime.utcnow() - p.entry_date).days if p.entry_date else None
+        days_held = (datetime.now(timezone.utc) - p.entry_date).days if p.entry_date else None
         open_summary.append({
             "symbol": p.symbol,
             "shares": p.shares,
@@ -406,7 +406,7 @@ async def liquidate_position(
         raise HTTPException(status_code=502, detail=sell.error or "Sell order failed")
 
     pos.status = PositionStatus.closed
-    pos.exit_date = datetime.utcnow()
+    pos.exit_date = datetime.now(timezone.utc)
     pos.exit_price = sell.filled_avg_price
     if pos.exit_price and pos.entry_price:
         pos.realized_return = (pos.exit_price - pos.entry_price) / pos.entry_price

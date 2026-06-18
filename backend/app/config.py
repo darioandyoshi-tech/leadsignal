@@ -101,6 +101,8 @@ class Settings(BaseSettings):
     alpaca_max_open_positions: int = 5
     alpaca_capital_per_trade: float = 2000.0
     alpaca_max_hold_days: int = 4
+    alpaca_daily_max_loss: float = 500.0
+    alpaca_max_portfolio_heat: float = 0.5  # max 50% of cash deployed at once
 
     class Config:
         env_file = ".env"

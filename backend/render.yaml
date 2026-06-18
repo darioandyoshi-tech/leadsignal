@@ -41,6 +41,10 @@ services:
         sync: false
       - key: ALPACA_MAX_HOLD_DAYS
         sync: false
+      - key: ALPACA_DAILY_MAX_LOSS
+        sync: false
+      - key: ALPACA_MAX_PORTFOLIO_HEAT
+        sync: false
       - key: AGENTMAIL_API_KEY
         sync: false
       - key: FRONTEND_URL

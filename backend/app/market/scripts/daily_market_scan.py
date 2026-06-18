@@ -7,7 +7,7 @@ Designed for 1-4 day swing holds. Run after market close via cron.
 import asyncio
 import os
 import sys
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import pandas as pd
@@ -65,7 +65,7 @@ async def persist_snapshots(db: AsyncSession, df):
 
 
 async def main():
-    print(f"[{datetime.utcnow()}] Starting daily NASDAQ-100 scan...")
+    print(f"[{datetime.now(timezone.utc)}] Starting daily NASDAQ-100 scan...")
 
     fetcher = NASDAQ100Fetcher(lookback_days=120)
     raw = fetcher.fetch()
@@ -99,7 +99,7 @@ async def main():
         for pick in top_picks:
             db.add(
                 StockPick(
-                    run_date=datetime.utcnow(),
+                    run_date=datetime.now(timezone.utc),
                     symbol=pick.symbol,
                     score=pick.score,
                     action=TradeAction(pick.action),
@@ -120,10 +120,17 @@ async def main():
 
         await db.commit()
 
-    print(f"[{datetime.utcnow()}] Done. Persisted {len(top_picks)} top picks.")
+    print(f"[{datetime.now(timezone.utc)}] Done. Persisted {len(top_picks)} top picks.")
+
+    # Sync actual Alpaca fills before making new trading decisions
+    settings = get_settings()
+    if settings.alpaca_api_key and settings.alpaca_secret_key:
+        print("[SCAN] Syncing Alpaca fills before trading...")
+        from app.market.scripts.sync_alpaca_fills import main as sync_fills
+        await sync_fills()
+        print("[SCAN] Alpaca sync complete.")
 
     # Optionally execute paper trades with Alpaca
-    settings = get_settings()
     if settings.alpaca_auto_trade:
         print("[SCAN] Auto-trade enabled; handing off to paper trade execution.")
         from app.market.scripts.execute_paper_trades import main as execute_trades
