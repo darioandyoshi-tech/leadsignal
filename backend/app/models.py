@@ -38,6 +38,13 @@ class AlertChannel(str, enum.Enum):
     dashboard = "dashboard"
 
 
+class TradeAction(str, enum.Enum):
+    buy = "buy"
+    hold = "hold"
+    sell = "sell"
+    avoid = "avoid"
+
+
 class SubscriptionStatus(str, enum.Enum):
     active = "active"
     trialing = "trialing"
@@ -135,3 +142,55 @@ class Alert(Base):
     opened_at = Column(DateTime, nullable=True)
     content = Column(Text, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
+
+
+class MarketSnapshot(Base):
+    __tablename__ = "market_snapshots"
+
+    id = Column(SQLUUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    symbol = Column(String(16), nullable=False, index=True)
+    date = Column(DateTime, nullable=False, index=True)
+    open = Column(Float, nullable=True)
+    high = Column(Float, nullable=True)
+    low = Column(Float, nullable=True)
+    close = Column(Float, nullable=True)
+    volume = Column(Float, nullable=True)
+    adjusted_close = Column(Float, nullable=True)
+    rsi_14 = Column(Float, nullable=True)
+    macd = Column(Float, nullable=True)
+    macd_signal = Column(Float, nullable=True)
+    bb_upper = Column(Float, nullable=True)
+    bb_lower = Column(Float, nullable=True)
+    atr_14 = Column(Float, nullable=True)
+    sma_20 = Column(Float, nullable=True)
+    sma_50 = Column(Float, nullable=True)
+    metadata_ = Column("metadata", JSON, default=dict)
+
+    __table_args__ = (
+        Index("ix_market_snapshots_symbol_date", "symbol", "date", unique=True),
+    )
+
+
+class StockPick(Base):
+    __tablename__ = "stock_picks"
+
+    id = Column(SQLUUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    run_date = Column(DateTime, default=datetime.utcnow, index=True)
+    symbol = Column(String(16), nullable=False, index=True)
+    score = Column(Float, nullable=False)
+    action = Column(Enum(TradeAction), nullable=False)
+    confidence = Column(Float, nullable=False)
+    forecast_return_4d = Column(Float, nullable=True)
+    predicted_close_4d = Column(Float, nullable=True)
+    stop_loss = Column(Float, nullable=True)
+    take_profit = Column(Float, nullable=True)
+    max_hold_days = Column(Integer, default=4)
+    reasoning = Column(Text, nullable=True)
+    features = Column(JSON, default=dict)
+    is_active = Column(Boolean, default=True, index=True)
+    exited_at = Column(DateTime, nullable=True)
+    exit_return = Column(Float, nullable=True)
+
+    __table_args__ = (
+        Index("ix_stock_picks_active", "is_active", "run_date"),
+    )

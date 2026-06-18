@@ -11,6 +11,7 @@ import { StatCard } from "@/components/StatCard";
 import { TrendChart, TrendPoint } from "@/components/TrendChart";
 import { ForecastChart, ForecastPoint } from "@/components/ForecastChart";
 import { TopOpportunities } from "@/components/TopOpportunities";
+import { StockPicks } from "@/components/StockPicks";
 import { SignalFilters, Filters } from "@/components/SignalFilters";
 import { SignalTable, Signal } from "@/components/SignalTable";
 import { SignalMap } from "@/components/SignalMap";
@@ -238,6 +239,9 @@ export default function DashboardPage() {
             <TabsTrigger value="map">3D Map</TabsTrigger>
             <TabsTrigger value="map2d">2D Map</TabsTrigger>
             <TabsTrigger value="alerts">Alerts</TabsTrigger>
+            <TabsTrigger value="market">
+              <TrendingUp size={14} className="mr-1" /> Market
+            </TabsTrigger>
             <TabsTrigger value="forecasts">
               <Sparkles size={14} className="mr-1" /> Forecasts
             </TabsTrigger>
@@ -388,6 +392,23 @@ export default function DashboardPage() {
                 typeLabels={Object.fromEntries(Object.entries(TYPE_META).map(([k, m]) => [k, m.label]))}
               />
             )}
+          </TabsContent>
+
+          <TabsContent value="market">
+            <div className="rounded-xl border border-noir-700/50 bg-noir-900/50 p-5 backdrop-blur-sm">
+              <div className="mb-4 flex items-center justify-between">
+                <div>
+                  <h3 className="text-lg font-semibold text-noir-100 flex items-center gap-2">
+                    <TrendingUp size={18} className="text-emerald-400" /> NASDAQ-100 Daily Picks
+                  </h3>
+                  <p className="text-xs text-noir-400 mt-1">
+                    1-4 day swing trades. Run daily after market close.
+                  </p>
+                </div>
+                <Badge variant="outline">Short-term</Badge>
+              </div>
+              <StockPicks limit={15} />
+            </div>
           </TabsContent>
 
           <TabsContent value="forecasts">
