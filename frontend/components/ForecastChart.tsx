@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import {
   ComposedChart,
   Line,
@@ -46,7 +47,12 @@ export function ForecastChart({
   const forecastDate = startIndex >= 0 && startIndex < data.length ? data[startIndex].date : null;
 
   return (
-    <div className="w-full">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.98 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.45, ease: "easeOut" }}
+      className="w-full"
+    >
       {title && <h4 className="mb-2 text-sm font-medium text-noir-200">{title}</h4>}
       <div className="h-48 w-full">
         <ResponsiveContainer width="100%" height="100%">
@@ -112,6 +118,6 @@ export function ForecastChart({
           </ComposedChart>
         </ResponsiveContainer>
       </div>
-    </div>
+    </motion.div>
   );
 }

@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { motion } from "framer-motion";
 import { AppShell } from "@/components/AppShell";
 import { SignalGlobe } from "@/components/SignalGlobe";
+import { SignalGlobe3DMap } from "@/components/SignalGlobe3DMap";
 import { AnimatedStatCard } from "@/components/AnimatedStatCard";
 import { LiveTicker } from "@/components/LiveTicker";
 import { StatCard } from "@/components/StatCard";
@@ -189,6 +191,18 @@ export default function DashboardPage() {
 
   const trend = useMemo(() => buildTrend(stats), [stats]);
 
+  const mappableSignals = useMemo(() => {
+    return signals.filter(
+      (s) =>
+        typeof s.lat === "number" &&
+        typeof s.lng === "number" &&
+        !isNaN(s.lat) &&
+        !isNaN(s.lng)
+    );
+  }, [signals]);
+
+  const mappableCount = mappableSignals.length;
+
   async function handleSendDigest() {
     try {
       await sendDigest();
@@ -220,7 +234,8 @@ export default function DashboardPage() {
           <TabsList className="mb-6">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="signals">Signals ({filtered.length})</TabsTrigger>
-            <TabsTrigger value="map">Map</TabsTrigger>
+            <TabsTrigger value="map">3D Map</TabsTrigger>
+            <TabsTrigger value="map2d">2D Map</TabsTrigger>
             <TabsTrigger value="alerts">Alerts</TabsTrigger>
             <TabsTrigger value="forecasts">
               <Sparkles size={14} className="mr-1" /> Forecasts
@@ -312,6 +327,27 @@ export default function DashboardPage() {
 
           <TabsContent value="map">
             {loading ? (
+              <Skeleton className="h-[540px] w-full rounded-2xl" />
+            ) : (
+              <div className="space-y-4">
+                <div className="flex items-center justify-between rounded-xl border border-noir-700/50 bg-noir-900/50 p-4 backdrop-blur-sm">
+                  <div>
+                    <h3 className="text-lg font-semibold text-noir-100 flex items-center gap-2">
+                      <MapPin size={18} className="text-ls-400" /> 3D Global Signal View
+                    </h3>
+                    <p className="text-sm text-noir-400">
+                      {mappableCount} mappable signals · drag to rotate · scroll to zoom · hover pins
+                    </p>
+                  </div>
+                  <Badge variant="outline">WebGL</Badge>
+                </div>
+                <SignalGlobe3DMap signals={mappableSignals} />
+              </div>
+            )}
+          </TabsContent>
+
+          <TabsContent value="map2d">
+            {loading ? (
               <Skeleton className="h-[500px] w-full" />
             ) : (
               <SignalMap
@@ -361,7 +397,7 @@ export default function DashboardPage() {
                 </div>
               ) : (
                 <div className="grid gap-4 lg:grid-cols-2">
-                  {forecasts.map((fc) => {
+                  {forecasts.map((fc, idx) => {
                     const meta = TYPE_META[fc.category];
                     const colors: Record<string, string> = {
                       amber: "#f59e0b",
@@ -372,7 +408,14 @@ export default function DashboardPage() {
                     };
                     const color = colors[meta?.accent || "amber"];
                     return (
-                      <div key={fc.category} className="rounded-xl border border-noir-700 bg-noir-900/50 p-5">
+                      <motion.div
+                        key={fc.category}
+                        initial={{ opacity: 0, y: 24 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4, delay: idx * 0.08 }}
+                        whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                        className="rounded-xl border border-noir-700/50 bg-noir-900/50 p-5 backdrop-blur-sm"
+                      >
                         <div className="mb-2 flex items-center justify-between">
                           <span className="font-medium text-noir-100">{meta?.label || fc.category}</span>
                           <Badge variant="outline">Avg {Math.round(fc.point_forecast.reduce((a: number, b: number) => a + b, 0) / fc.point_forecast.length)}/day</Badge>
@@ -382,7 +425,7 @@ export default function DashboardPage() {
                           data={buildForecastSeries(fc)}
                           color={color}
                         />
-                      </div>
+                      </motion.div>
                     );
                   })}
                 </div>
