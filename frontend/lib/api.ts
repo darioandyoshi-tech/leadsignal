@@ -78,6 +78,11 @@ export async function getTimesFMTrends(records: any[], horizon: number = 7, buck
   return data;
 }
 
+export async function getTopOpportunities(params: Record<string, any> = {}) {
+  const { data } = await api.get('/screen/top', { params });
+  return data;
+}
+
 export async function getTimesFMForecast(series: number[], horizon: number = 7) {
   const timesfmUrl = process.env.NEXT_PUBLIC_TIMESFM_URL || 'http://127.0.0.1:8001';
   const { data } = await axios.post(`${timesfmUrl}/forecast`, {

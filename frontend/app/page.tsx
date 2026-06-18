@@ -10,6 +10,7 @@ import { LiveTicker } from "@/components/LiveTicker";
 import { StatCard } from "@/components/StatCard";
 import { TrendChart, TrendPoint } from "@/components/TrendChart";
 import { ForecastChart, ForecastPoint } from "@/components/ForecastChart";
+import { TopOpportunities } from "@/components/TopOpportunities";
 import { SignalFilters, Filters } from "@/components/SignalFilters";
 import { SignalTable, Signal } from "@/components/SignalTable";
 import { SignalMap } from "@/components/SignalMap";
@@ -292,6 +293,24 @@ export default function DashboardPage() {
                   </div>
                 ) : (
                   <LiveTicker signals={signals} maxItems={6} />
+                )}
+              </div>
+
+              <div className="rounded-xl border border-noir-700/50 bg-noir-900/50 p-5 backdrop-blur-sm lg:col-span-3">
+                <div className="mb-4 flex items-center justify-between">
+                  <h3 className="text-lg font-semibold text-noir-100 flex items-center gap-2">
+                    <TrendingUp size={18} className="text-ls-400" /> Top opportunities
+                  </h3>
+                  <Badge variant="outline">Composite score</Badge>
+                </div>
+                {loading ? (
+                  <div className="space-y-3">
+                    {Array.from({ length: 6 }).map((_, i) => (
+                      <Skeleton key={i} className="h-20 w-full" />
+                    ))}
+                  </div>
+                ) : (
+                  <TopOpportunities limit={6} />
                 )}
               </div>
             </div>
