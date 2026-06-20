@@ -281,24 +281,46 @@ class VendorIncidentSignalGenerator:
             if severity_order.get(sev, 0) < min_sev:
                 continue
 
-            # Check if we have a dependency mapping for this vendor
-            vendor_map = VENDOR_DEPENDENCY_MAP.get(slug)
-            if not vendor_map:
+            # Check precision map first (company-level, researched)
+            from app.market.vendor_precision_map import PRECISION_VENDOR_MAP
+            affected = None
+            vendor_name = slug
+            vendor_category = "Unknown"
+
+            precision = PRECISION_VENDOR_MAP.get(slug)
+            if not precision:
                 # Try partial match (e.g. "cloudflare-stream" matches "cloudflare")
-                for key, vmap in VENDOR_DEPENDENCY_MAP.items():
+                for key, syms in PRECISION_VENDOR_MAP.items():
                     if slug.startswith(key) or key in slug:
-                        vendor_map = vmap
+                        precision = syms
                         break
 
-            if not vendor_map or not vendor_map.get("affected_symbols"):
+            if precision:
+                affected = precision
+                vendor_name = slug.replace("-", " ").title()
+            else:
+                # Fall back to original VENDOR_DEPENDENCY_MAP
+                vendor_map = VENDOR_DEPENDENCY_MAP.get(slug)
+                if not vendor_map:
+                    for key, vmap in VENDOR_DEPENDENCY_MAP.items():
+                        if slug.startswith(key) or key in slug:
+                            vendor_map = vmap
+                            break
+                if vendor_map and vendor_map.get("affected_symbols"):
+                    affected = vendor_map["affected_symbols"]
+                    vendor_name = vendor_map.get("name", slug)
+                    vendor_category = vendor_map.get("category", "Unknown")
+
+            if not affected:
                 continue
 
-            affected = vendor_map["affected_symbols"]
             symbols = list(affected.keys())
             companies = [f"{sym}: {desc}" for sym, desc in affected.items()]
 
-            # Confidence based on severity and incident recency
+            # Confidence based on severity, incident recency, and mapping source
             confidence = 0.5
+            if precision:
+                confidence += 0.1  # Precision map = higher confidence
             if sev == Severity.CRITICAL:
                 confidence = 0.8
             elif sev == Severity.MAJOR:
@@ -320,14 +342,14 @@ class VendorIncidentSignalGenerator:
             signal = VendorIncidentSignal(
                 signal_type=SignalType.AVOID,
                 vendor_slug=slug,
-                vendor_name=vendor_map["name"],
+                vendor_name=vendor_name,
                 incident_severity=sev,
                 incident_title=incident.get("title", "Unknown"),
                 incident_started=started_at,
                 affected_symbols=symbols,
                 affected_companies=companies,
                 confidence=round(confidence, 2),
-                reasoning=f"{vendor_map['name']} ({vendor_map['category']}) has a {sev.value} incident: {incident.get('title', '')}. "
+                reasoning=f"{vendor_name} has a {sev.value} incident: {incident.get('title', '')}. "
                           f"{len(symbols)} S&P 500 companies may be affected. "
                           f"Avoiding new buys in affected symbols until vendor recovers.",
                 generated_at=now,
