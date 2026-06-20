@@ -479,7 +479,7 @@ class TFTForecaster:
             dropout=0.1,
         )
 
-        optimizer = torch.optim.Adam(model.parameters(), lr=self.learning_rate)
+        optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
         scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, patience=5, factor=0.5)
         criterion = nn.MSELoss()
         quantile_criterion = QuantileLossSimple()
@@ -497,7 +497,7 @@ class TFTForecaster:
         for epoch in range(self.max_epochs):
             optimizer.zero_grad()
             point_pred, quantile_pred = model(X_t, K_t)
-            loss = criterion(point_pred, Y_t) + 0.5 * quantile_criterion(quantile_pred, Y_t)
+            loss = criterion(point_pred, Y_t) + 0.1 * quantile_criterion(quantile_pred, Y_t)
             loss.backward()
             torch.nn.utils.clip_grad_norm_(model.parameters(), 0.1)
             optimizer.step()
@@ -609,6 +609,17 @@ class TFTForecaster:
         point = point_pred.squeeze(0).numpy()
         quants = quantile_pred.squeeze(0).numpy()  # (horizon, 3)
 
+        # Clamp to realistic return range (±10%)
+        point = np.clip(point, -0.10, 0.10)
+        quants = np.clip(quants, -0.15, 0.15)
+        # Ensure quantile ordering: lower <= point <= upper
+        for i in range(min(horizon, len(point))):
+            p = point[i]
+            lo = min(quants[i, 0], p - 0.001)
+            hi = max(quants[i, 2], p + 0.001)
+            quants[i, 0] = lo
+            quants[i, 2] = hi
+
         forecasts = []
         for i in range(horizon):
             if i < len(point):
@@ -623,7 +634,13 @@ class TFTForecaster:
 
         avg_return = float(np.mean(point[:horizon]))
         direction = "up" if avg_return > 0 else "down"
-        confidence = min(1.0, abs(avg_return) * 100)
+        # Confidence: based on consistency of direction across horizon days
+        # and magnitude relative to typical daily volatility
+        signs = [1 if p > 0 else -1 for p in point[:horizon]]
+        dir_sign = 1 if direction == "up" else -1
+        consistency = sum(1 for s in signs if s == dir_sign) / len(signs)
+        magnitude = min(1.0, abs(avg_return) * 20)  # scale: 5% avg return = 1.0
+        confidence = round(consistency * 0.6 + magnitude * 0.4, 4)
 
         return {
             "symbol": symbol,
@@ -742,6 +759,8 @@ class SimpleTFT(nn.Module):
         # Quantile forecast
         quantile_pred = self.quantile_head(decoded)  # (batch, horizon * 3)
         quantile_pred = quantile_pred.view(batch_size, self.horizon, 3)
+        # Sort quantiles so q0 <= q1 <= q2
+        quantile_pred, _ = torch.sort(quantile_pred, dim=-1)
 
         return point_pred, quantile_pred
 

@@ -53,7 +53,6 @@ class PairsTrader:
 
         Returns a DataFrame indexed by date with one column per symbol.
         """
-        import httpx
         end = pd.Timestamp.now(tz="UTC").tz_convert("America/New_York").date()
         start = end - pd.Timedelta(days=lookback_days + 10)  # extra buffer for holidays
 
@@ -163,8 +162,8 @@ class PairsTrader:
 
                 # OLS hedge ratio: series_a = hedge_ratio * series_b + intercept
                 X = np.column_stack([np.ones(len(series_b)), series_b])
-                beta, _ = np.linalg.lstsq(X, series_a, rcond=None)[0]
-                hedge_ratio = float(beta[1])
+                coeffs = np.linalg.lstsq(X, series_a, rcond=None)[0]
+                hedge_ratio = float(coeffs[1])
 
                 # Spread = A - hedge_ratio * B
                 spread = series_a - hedge_ratio * series_b
@@ -305,8 +304,8 @@ class PairsTrader:
 
         # OLS hedge ratio
         X = np.column_stack([np.ones(len(train)), train[symbol_b].values])
-        beta, _ = np.linalg.lstsq(X, train[symbol_a].values, rcond=None)[0]
-        hedge_ratio = float(beta[1])
+        coeffs = np.linalg.lstsq(X, train[symbol_a].values, rcond=None)[0]
+        hedge_ratio = float(coeffs[1])
 
         spread_train = train[symbol_a] - hedge_ratio * train[symbol_b]
         spread_mean = float(spread_train.mean())
@@ -458,8 +457,8 @@ class PairsTrader:
             spread_lag = spread[:-1]
             spread_diff = np.diff(spread)
             X = np.column_stack([np.ones(len(spread_diff)), spread_lag])
-            beta, _ = np.linalg.lstsq(X, spread_diff, rcond=None)[0]
-            lam = beta[1]
+            coeffs = np.linalg.lstsq(X, spread_diff, rcond=None)[0]
+            lam = float(coeffs[1])
             if lam >= 0:
                 return float("inf")
             half_life = -math.log(2) / lam
