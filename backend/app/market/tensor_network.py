@@ -247,7 +247,7 @@ def _entanglement_entropy(cores: List[np.ndarray], site: Optional[int] = None) -
 
 
 # ---------------------------------------------------------------------------
-# Mutual information between adjacent sites
+# Mutual information between sites
 # ---------------------------------------------------------------------------
 
 def _pairwise_mutual_info(cores: List[np.ndarray], n_bins: int) -> np.ndarray:
@@ -255,132 +255,88 @@ def _pairwise_mutual_info(cores: List[np.ndarray], n_bins: int) -> np.ndarray:
 
     For each pair (i, j) we contract the chain to get the 2-marginal
     P(b_i, b_j), then compute MI = H(b_i) + H(b_j) - H(b_i, b_j).
+
+    The contraction is done by building left and right environment tensors
+    and then contracting only the two target cores' physical indices.
     """
     N = len(cores)
     d = cores[0].shape[1]
-    # First reconstruct the joint, then marginalise.
-    # For N > 12 this would be too expensive, so we use a pairwise
-    # contraction approach that contracts all cores except i and j.
-    mi = np.zeros((N, N), dtype=np.float64)
-    # Pre-compute single-site marginals (cheap)
+
+    # Pre-compute left and right environments for every cut position.
+    # left_envs[k]  = contraction of cores[0..k-1] with all physical indices
+    #                  summed out → shape (r_k,)
+    # right_envs[k] = contraction of cores[k+1..N-1] → shape (r_k,)
+    left_envs = [np.ones(1)]  # left_envs[0] = scalar 1
+    for k in range(N - 1):
+        core = cores[k]  # (r_left, d, r_right)
+        # Sum physical index
+        summed = core.sum(axis=1)  # (r_left, r_right)
+        left_envs.append(left_envs[-1] @ summed)  # (r_right,)
+
+    right_envs = [np.ones(1)] * N  # right_envs[N-1] = scalar 1
+    for k in range(N - 1, 0, -1):
+        core = cores[k]
+        summed = core.sum(axis=1)  # (r_left, r_right)
+        right_envs[k - 1] = summed @ right_envs[k]  # (r_left,)
+
+    # Single-site marginals
     marginals = []
     for i in range(N):
-        m = _single_marginal(cores, i, d)
+        core = cores[i]  # (r_left, d, r_right)
+        m = np.einsum('l,ldr,r->d', left_envs[i], core, right_envs[i])
+        total = m.sum()
+        if total > 1e-15:
+            m = m / total
+        else:
+            m = np.ones(d) / d
         marginals.append(m)
+
+    # Pairwise marginals and MI
+    mi = np.zeros((N, N), dtype=np.float64)
     for i in range(N):
         for j in range(i + 1, N):
-            joint2 = _pair_marginal(cores, i, j, d, n_bins)
+            # Contract all cores between i and j (summing physical indices)
+            # to get a transfer matrix from bond after i to bond before j
+            if j == i + 1:
+                transfer = np.eye(cores[i].shape[2])  # identity if adjacent
+            else:
+                transfer = None
+                for k in range(i + 1, j):
+                    core = cores[k]
+                    summed = core.sum(axis=1)  # (r_left, r_right)
+                    if transfer is None:
+                        transfer = summed
+                    else:
+                        transfer = transfer @ summed
+                if transfer is None:
+                    transfer = np.eye(cores[i].shape[2])
+
+            # Contract: left_env[i] @ core_i[:, :, :] @ transfer @ core_j[:, :, :] @ right_env[j]
+            # Result: sum over bonds, keep physical indices i and j
+            core_i = cores[i]  # (r_li, d, r_ri)
+            core_j = cores[j]  # (r_lj, d, r_rj)
+
+            # Step 1: left_env[i] @ core_i → (d, r_ri)
+            tmp = np.einsum('l,ldr->dr', left_envs[i], core_i)
+            # Step 2: @ transfer → (d, r_lj)  [r_ri == r_lj of next, but transfer connects r_ri to r_lj]
+            tmp = tmp @ transfer  # (d, r_lj)
+            # Step 3: @ core_j → (d, d, r_rj) → then @ right_env[j] → (d, d)
+            joint2 = np.einsum('dr,rds,s->dd', tmp, core_j, right_envs[j])
+
+            total = joint2.sum()
+            if total > 1e-15:
+                joint2 = joint2 / total
+            else:
+                joint2 = np.ones((d, d)) / (d * d)
+
             p_i = marginals[i].reshape(-1, 1)
             p_j = marginals[j].reshape(1, -1)
-            # MI
-            with np.errstate(divide="ignore", invalid="ignore"):
+            with np.errstate(divide='ignore', invalid='ignore'):
                 ratio = joint2 / (p_i * p_j + 1e-15)
-                mi_val = np.sum(joint2 * np.log2(ratio + 1e-15))
+                mi_val = float(np.sum(joint2 * np.log2(ratio + 1e-15)))
             mi[i, j] = max(mi_val, 0.0)
             mi[j, i] = mi[i, j]
     return mi
-
-
-def _single_marginal(cores: List[np.ndarray], site: int, d: int) -> np.ndarray:
-    """Marginalise the MPS to a single site → distribution of shape (d,)."""
-    # Contract all cores except *site* by summing over their physical indices
-    # Build a chain of identity contractions
-    result = None
-    for i in range(len(cores)):
-        if i == site:
-            current = cores[i]  # (r_left, d, r_right)
-        else:
-            # Sum over physical index: contract with a vector of ones
-            ones = np.ones(cores[i].shape[1])
-            current = np.tensordot(cores[i], ones, axes=(1, 0))  # (r_left, r_right)
-        if result is None:
-            result = current
-        else:
-            # Contract bond
-            if result.ndim == 2 and current.ndim == 2:
-                result = result @ current
-            elif result.ndim == 1 and current.ndim == 2:
-                result = np.tensordot(result, current, axes=(-1, 0))
-            elif result.ndim == 2 and current.ndim == 1:
-                result = np.tensordot(result, current, axes=(-1, 0))
-            elif result.ndim == 1 and current.ndim == 1:
-                result = result * current
-            else:
-                result = np.tensordot(result, current, axes=(-1, 0))
-    # result should have shape (d,) or (1, d, 1)
-    result = np.asarray(result).flatten()
-    total = result.sum()
-    if total > 0:
-        result = result / total
-    return result
-
-
-def _pair_marginal(cores: List[np.ndarray], i: int, j: int, d: int, n_bins: int) -> np.ndarray:
-    """Compute the 2-site marginal P(b_i, b_j) → shape (d, d)."""
-    N = len(cores)
-    # Contract all cores except i, j by summing physical indices
-    # Build left-to-right contraction
-    result = None
-    for k in range(N):
-        if k == i or k == j:
-            current = cores[k]  # (rl, d, rr)
-        else:
-            ones = np.ones(cores[k].shape[1])
-            current = np.tensordot(cores[k], ones, axes=(1, 0))  # (rl, rr)
-        if result is None:
-            result = current
-        else:
-            if result.ndim == 2 and current.ndim == 2:
-                result = result @ current
-            elif result.ndim == 1 and current.ndim == 2:
-                result = np.tensordot(result, current, axes=(-1, 0))
-            elif result.ndim == 2 and current.ndim == 1:
-                result = np.tensordot(result, current, axes=(-1, 0))
-            elif result.ndim == 1 and current.ndim == 1:
-                result = result * current
-            elif result.ndim == 2 and current.ndim == 3:
-                result = np.tensordot(result, current, axes=(-1, 0))
-            elif result.ndim == 3 and current.ndim == 2:
-                result = np.tensordot(result, current, axes=(-1, 0))
-            elif result.ndim == 3 and current.ndim == 3:
-                result = np.tensordot(result, current, axes=(-1, 0))
-            elif result.ndim == 1 and current.ndim == 3:
-                result = np.tensordot(result, current, axes=(-1, 0))
-            elif result.ndim == 3 and current.ndim == 1:
-                result = np.tensordot(result, current, axes=(-1, 0))
-            else:
-                result = np.tensordot(result, current, axes=(-1, 0))
-    # After contracting all bonds, result should be a tensor with the two
-    # physical indices of sites i and j. The shape depends on ordering.
-    # We need to figure out which axes correspond to i and j.
-    # Because we go left to right, the physical axes appear in order of site index.
-    # If i < j, result has shape (..., d_i, ..., d_j, ...)
-    # In practice after all bond contractions, result is either (d, d) or
-    # (1, d, d, 1) etc.  Flatten and reshape.
-    result = np.asarray(result)
-    # Remove singleton dimensions
-    result = result.squeeze()
-    if result.ndim == 1:
-        # One of the sites got squeezed — reshape to (d, 1) or (1, d)
-        if result.shape[0] == d:
-            result = result.reshape(d, 1)
-        else:
-            result = result.reshape(1, d)
-    if result.ndim > 2:
-        # flatten leading/trailing singletons
-        result = result.reshape(d, d) if result.size == d * d else result.squeeze()
-    if result.shape != (d, d):
-        # Transpose or pad as needed
-        if result.shape == (d, 1):
-            result = np.tile(result, (1, d)) * (1.0 / d)
-        elif result.shape == (1, d):
-            result = np.tile(result, (d, 1)) * (1.0 / d)
-        else:
-            result = result.reshape(d, d) if result.size == d * d else np.eye(d) / d
-    total = result.sum()
-    if total > 0:
-        result = result / total
-    return result
 
 
 # ---------------------------------------------------------------------------
@@ -622,12 +578,15 @@ class TensorNetworkAnalyzer:
         # MPS mutual information (higher-order signal, may be noisy)
         mi = _pairwise_mutual_info(self.cores, self.n_bins)
 
-        # Normalise MI to [0, 1] range
-        mi_max = mi.max()
-        if mi_max > 0:
-            mi_norm = mi / mi_max
+        # Normalise MI to [0, 1] range — use max of off-diagonal entries
+        mi_offdiag = mi.copy()
+        np.fill_diagonal(mi_offdiag, 0.0)
+        mi_max = np.nanmax(mi_offdiag)
+        if mi_max > 0 and np.isfinite(mi_max):
+            mi_norm = np.nan_to_num(mi / mi_max, nan=0.0)
         else:
-            mi_norm = mi
+            mi_norm = np.zeros_like(mi)
+        np.fill_diagonal(mi_norm, 0.0)
 
         # Blend: 60% correlation, 40% normalised MI
         # Correlation captures linear dependence, MI captures non-linear
@@ -635,9 +594,11 @@ class TensorNetworkAnalyzer:
         corr_abs = np.abs(corr)
         blend = 0.6 * corr_abs + 0.4 * mi_norm
         np.fill_diagonal(blend, 0.0)
+        blend = np.nan_to_num(blend, nan=0.0)
 
         # Threshold: 75th percentile of blended scores
         upper = blend[np.triu_indices(N, k=1)]
+        upper = upper[np.isfinite(upper)]
         if len(upper) > 0:
             threshold = float(np.percentile(upper, 75))
         else:
