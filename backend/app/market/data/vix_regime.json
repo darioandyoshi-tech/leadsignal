@@ -1,0 +1,13 @@
+{
+  "regime": "steep_contango",
+  "vix_spot": 16.4,
+  "vix_3m": 20.51,
+  "spread_pct": 25.06,
+  "position_multiplier": 0.75,
+  "stop_multiplier": 1.0,
+  "vix_6m": 22.59,
+  "as_of": "2026-06-18",
+  "source_3m": "index",
+  "recommendation": "Steep contango: VIX3M > 20% above spot. Market very calm but complacency risk is elevated. Slightly reduce sizes to 75%; keep normal stops. Stay alert for sudden regime shifts.",
+  "computed_at": "2026-06-20T05:41:21.757608+00:00"
+}

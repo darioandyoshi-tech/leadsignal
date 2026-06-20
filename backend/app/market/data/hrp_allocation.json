@@ -1,0 +1,28 @@
+{
+  "timestamp": "2026-06-20T05:41:40.939412+00:00",
+  "symbols": [
+    "CRWD",
+    "AMGN",
+    "CSX",
+    "AAPL",
+    "SIRI"
+  ],
+  "weights": {
+    "CRWD": 0.097983,
+    "AMGN": 0.25,
+    "CSX": 0.25,
+    "AAPL": 0.25,
+    "SIRI": 0.152017
+  },
+  "dollar_allocation_10k": {
+    "CRWD": 979.83,
+    "AMGN": 2500.0,
+    "CSX": 2500.0,
+    "AAPL": 2500.0,
+    "SIRI": 1520.17
+  },
+  "lookback_days": 60,
+  "max_weight_pct": 0.25,
+  "weight_sum": 1.0,
+  "excluded": []
+}
