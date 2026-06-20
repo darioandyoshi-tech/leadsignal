@@ -1,0 +1,5922 @@
+{
+  "scan_timestamp": "2026-06-20T05:25:28.809900+00:00",
+  "insider_signals": [
+    {
+      "symbol": "BMBL",
+      "signal": "STRONG_SELL",
+      "cluster_count": 5,
+      "last_transaction_date": "2026-06-16",
+      "insiders": [
+        "Blackstone Holdings III GP Management L.L.C.",
+        "BTOA - NQ L.L.C.",
+        "BX Buzz ML-1 Holdco L.P.",
+        "BX Buzz ML-1 GP LLC",
+        "BCP Buzz Holdings L.P."
+      ],
+      "transactions": [
+        {
+          "symbol": "BMBL",
+          "reporting_owner": "BX Buzz ML-1 GP LLC",
+          "owner_cik": "0001870640",
+          "issuer_name": "Bumble Inc.",
+          "issuer_cik": "0001830043",
+          "transaction_code": "S",
+          "transaction_date": "2026-06-16",
+          "shares": 181343.0,
+          "price_per_share": 3.7751,
+          "acquired_disposed": "D",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001193125-26-276294",
+          "form_url": "/Archives/edgar/data/1870652/000119312526276294/0001193125-26-276294-index.htm"
+        },
+        {
+          "symbol": "BMBL",
+          "reporting_owner": "BX Buzz ML-1 GP LLC",
+          "owner_cik": "0001870640",
+          "issuer_name": "Bumble Inc.",
+          "issuer_cik": "0001830043",
+          "transaction_code": "S",
+          "transaction_date": "2026-06-16",
+          "shares": 2495189.0,
+          "price_per_share": 3.7751,
+          "acquired_disposed": "D",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001193125-26-276294",
+          "form_url": "/Archives/edgar/data/1870652/000119312526276294/0001193125-26-276294-index.htm"
+        },
+        {
+          "symbol": "BMBL",
+          "reporting_owner": "BX Buzz ML-1 GP LLC",
+          "owner_cik": "0001870640",
+          "issuer_name": "Bumble Inc.",
+          "issuer_cik": "0001830043",
+          "transaction_code": "S",
+          "transaction_date": "2026-06-16",
+          "shares": 405073.0,
+          "price_per_share": 3.7751,
+          "acquired_disposed": "D",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001193125-26-276294",
+          "form_url": "/Archives/edgar/data/1870652/000119312526276294/0001193125-26-276294-index.htm"
+        },
+        {
+          "symbol": "BMBL",
+          "reporting_owner": "BX Buzz ML-1 GP LLC",
+          "owner_cik": "0001870640",
+          "issuer_name": "Bumble Inc.",
+          "issuer_cik": "0001830043",
+          "transaction_code": "S",
+          "transaction_date": "2026-06-16",
+          "shares": 1080902.0,
+          "price_per_share": 3.7751,
+          "acquired_disposed": "D",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001193125-26-276294",
+          "form_url": "/Archives/edgar/data/1870652/000119312526276294/0001193125-26-276294-index.htm"
+        },
+        {
+          "symbol": "BMBL",
+          "reporting_owner": "BX Buzz ML-1 GP LLC",
+          "owner_cik": "0001870640",
+          "issuer_name": "Bumble Inc.",
+          "issuer_cik": "0001830043",
+          "transaction_code": "S",
+          "transaction_date": "2026-06-16",
+          "shares": 3278961.0,
+          "price_per_share": 3.7751,
+          "acquired_disposed": "D",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001193125-26-276294",
+          "form_url": "/Archives/edgar/data/1870652/000119312526276294/0001193125-26-276294-index.htm"
+        },
+        {
+          "symbol": "BMBL",
+          "reporting_owner": "BX Buzz ML-1 GP LLC",
+          "owner_cik": "0001870640",
+          "issuer_name": "Bumble Inc.",
+          "issuer_cik": "0001830043",
+          "transaction_code": "S",
+          "transaction_date": "2026-06-16",
+          "shares": 29574.0,
+          "price_per_share": 3.7751,
+          "acquired_disposed": "D",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001193125-26-276294",
+          "form_url": "/Archives/edgar/data/1870652/000119312526276294/0001193125-26-276294-index.htm"
+        },
+        {
+          "symbol": "BMBL",
+          "reporting_owner": "BX Buzz ML-1 GP LLC",
+          "owner_cik": "0001870640",
+          "issuer_name": "Bumble Inc.",
+          "issuer_cik": "0001830043",
+          "transaction_code": "S",
+          "transaction_date": "2026-06-16",
+          "shares": 6458.0,
+          "price_per_share": 3.7751,
+          "acquired_disposed": "D",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001193125-26-276294",
+          "form_url": "/Archives/edgar/data/1870652/000119312526276294/0001193125-26-276294-index.htm"
+        },
+        {
+          "symbol": "BMBL",
+          "reporting_owner": "Blackstone Holdings III GP Management L.L.C.",
+          "owner_cik": "0001478815",
+          "issuer_name": "Bumble Inc.",
+          "issuer_cik": "0001830043",
+          "transaction_code": "S",
+          "transaction_date": "2026-06-16",
+          "shares": 181343.0,
+          "price_per_share": 3.7751,
+          "acquired_disposed": "D",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001193125-26-276292",
+          "form_url": "/Archives/edgar/data/1844987/000119312526276292/0001193125-26-276292-index.htm"
+        },
+        {
+          "symbol": "BMBL",
+          "reporting_owner": "Blackstone Holdings III GP Management L.L.C.",
+          "owner_cik": "0001478815",
+          "issuer_name": "Bumble Inc.",
+          "issuer_cik": "0001830043",
+          "transaction_code": "S",
+          "transaction_date": "2026-06-16",
+          "shares": 2495189.0,
+          "price_per_share": 3.7751,
+          "acquired_disposed": "D",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001193125-26-276292",
+          "form_url": "/Archives/edgar/data/1844987/000119312526276292/0001193125-26-276292-index.htm"
+        },
+        {
+          "symbol": "BMBL",
+          "reporting_owner": "Blackstone Holdings III GP Management L.L.C.",
+          "owner_cik": "0001478815",
+          "issuer_name": "Bumble Inc.",
+          "issuer_cik": "0001830043",
+          "transaction_code": "S",
+          "transaction_date": "2026-06-16",
+          "shares": 405073.0,
+          "price_per_share": 3.7751,
+          "acquired_disposed": "D",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001193125-26-276292",
+          "form_url": "/Archives/edgar/data/1844987/000119312526276292/0001193125-26-276292-index.htm"
+        }
+      ]
+    },
+    {
+      "symbol": "CRWV",
+      "signal": "STRONG_SELL",
+      "cluster_count": 3,
+      "last_transaction_date": "2026-06-17",
+      "insiders": [
+        "Venturo Brian M",
+        "Agrawal Nitin",
+        "Intrator Michael N"
+      ],
+      "transactions": [
+        {
+          "symbol": "CRWV",
+          "reporting_owner": "Venturo Brian M",
+          "owner_cik": "0002058067",
+          "issuer_name": "CoreWeave, Inc.",
+          "issuer_cik": "0001769628",
+          "transaction_code": "S",
+          "transaction_date": "2026-06-17",
+          "shares": 12703.0,
+          "price_per_share": 115.3167,
+          "acquired_disposed": "D",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001769628-26-000294",
+          "form_url": "/Archives/edgar/data/2058067/000176962826000294/0001769628-26-000294-index.htm"
+        },
+        {
+          "symbol": "CRWV",
+          "reporting_owner": "Venturo Brian M",
+          "owner_cik": "0002058067",
+          "issuer_name": "CoreWeave, Inc.",
+          "issuer_cik": "0001769628",
+          "transaction_code": "S",
+          "transaction_date": "2026-06-17",
+          "shares": 3697.0,
+          "price_per_share": 116.2266,
+          "acquired_disposed": "D",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001769628-26-000294",
+          "form_url": "/Archives/edgar/data/2058067/000176962826000294/0001769628-26-000294-index.htm"
+        },
+        {
+          "symbol": "CRWV",
+          "reporting_owner": "Venturo Brian M",
+          "owner_cik": "0002058067",
+          "issuer_name": "CoreWeave, Inc.",
+          "issuer_cik": "0001769628",
+          "transaction_code": "S",
+          "transaction_date": "2026-06-17",
+          "shares": 2580.0,
+          "price_per_share": 117.4938,
+          "acquired_disposed": "D",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001769628-26-000294",
+          "form_url": "/Archives/edgar/data/2058067/000176962826000294/0001769628-26-000294-index.htm"
+        },
+        {
+          "symbol": "CRWV",
+          "reporting_owner": "Venturo Brian M",
+          "owner_cik": "0002058067",
+          "issuer_name": "CoreWeave, Inc.",
+          "issuer_cik": "0001769628",
+          "transaction_code": "S",
+          "transaction_date": "2026-06-17",
+          "shares": 9425.0,
+          "price_per_share": 118.6427,
+          "acquired_disposed": "D",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001769628-26-000294",
+          "form_url": "/Archives/edgar/data/2058067/000176962826000294/0001769628-26-000294-index.htm"
+        },
+        {
+          "symbol": "CRWV",
+          "reporting_owner": "Venturo Brian M",
+          "owner_cik": "0002058067",
+          "issuer_name": "CoreWeave, Inc.",
+          "issuer_cik": "0001769628",
+          "transaction_code": "S",
+          "transaction_date": "2026-06-17",
+          "shares": 21360.0,
+          "price_per_share": 119.5669,
+          "acquired_disposed": "D",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001769628-26-000294",
+          "form_url": "/Archives/edgar/data/2058067/000176962826000294/0001769628-26-000294-index.htm"
+        },
+        {
+          "symbol": "CRWV",
+          "reporting_owner": "Venturo Brian M",
+          "owner_cik": "0002058067",
+          "issuer_name": "CoreWeave, Inc.",
+          "issuer_cik": "0001769628",
+          "transaction_code": "S",
+          "transaction_date": "2026-06-17",
+          "shares": 8574.0,
+          "price_per_share": 120.4085,
+          "acquired_disposed": "D",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001769628-26-000294",
+          "form_url": "/Archives/edgar/data/2058067/000176962826000294/0001769628-26-000294-index.htm"
+        },
+        {
+          "symbol": "CRWV",
+          "reporting_owner": "Venturo Brian M",
+          "owner_cik": "0002058067",
+          "issuer_name": "CoreWeave, Inc.",
+          "issuer_cik": "0001769628",
+          "transaction_code": "S",
+          "transaction_date": "2026-06-17",
+          "shares": 3200.0,
+          "price_per_share": 121.5738,
+          "acquired_disposed": "D",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001769628-26-000294",
+          "form_url": "/Archives/edgar/data/2058067/000176962826000294/0001769628-26-000294-index.htm"
+        },
+        {
+          "symbol": "CRWV",
+          "reporting_owner": "Venturo Brian M",
+          "owner_cik": "0002058067",
+          "issuer_name": "CoreWeave, Inc.",
+          "issuer_cik": "0001769628",
+          "transaction_code": "S",
+          "transaction_date": "2026-06-17",
+          "shares": 3176.0,
+          "price_per_share": 115.3167,
+          "acquired_disposed": "D",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001769628-26-000294",
+          "form_url": "/Archives/edgar/data/2058067/000176962826000294/0001769628-26-000294-index.htm"
+        },
+        {
+          "symbol": "CRWV",
+          "reporting_owner": "Venturo Brian M",
+          "owner_cik": "0002058067",
+          "issuer_name": "CoreWeave, Inc.",
+          "issuer_cik": "0001769628",
+          "transaction_code": "S",
+          "transaction_date": "2026-06-17",
+          "shares": 925.0,
+          "price_per_share": 116.2267,
+          "acquired_disposed": "D",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001769628-26-000294",
+          "form_url": "/Archives/edgar/data/2058067/000176962826000294/0001769628-26-000294-index.htm"
+        },
+        {
+          "symbol": "CRWV",
+          "reporting_owner": "Venturo Brian M",
+          "owner_cik": "0002058067",
+          "issuer_name": "CoreWeave, Inc.",
+          "issuer_cik": "0001769628",
+          "transaction_code": "S",
+          "transaction_date": "2026-06-17",
+          "shares": 645.0,
+          "price_per_share": 117.4938,
+          "acquired_disposed": "D",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001769628-26-000294",
+          "form_url": "/Archives/edgar/data/2058067/000176962826000294/0001769628-26-000294-index.htm"
+        }
+      ]
+    },
+    {
+      "symbol": "INLX",
+      "signal": "SELL",
+      "cluster_count": 2,
+      "last_transaction_date": "2026-06-17",
+      "insiders": [
+        "TAGLICH MICHAEL N",
+        "TAGLICH ROBERT"
+      ],
+      "transactions": [
+        {
+          "symbol": "INLX",
+          "reporting_owner": "TAGLICH ROBERT",
+          "owner_cik": "0001353439",
+          "issuer_name": "INTELLINETICS, INC.",
+          "issuer_cik": "0001081745",
+          "transaction_code": "S",
+          "transaction_date": "2026-06-17",
+          "shares": 550.0,
+          "price_per_share": 6.5,
+          "acquired_disposed": "D",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001493152-26-029434",
+          "form_url": "/Archives/edgar/data/1353439/000149315226029434/0001493152-26-029434-index.htm"
+        },
+        {
+          "symbol": "INLX",
+          "reporting_owner": "TAGLICH MICHAEL N",
+          "owner_cik": "0001024533",
+          "issuer_name": "INTELLINETICS, INC.",
+          "issuer_cik": "0001081745",
+          "transaction_code": "S",
+          "transaction_date": "2026-06-17",
+          "shares": 550.0,
+          "price_per_share": 6.5,
+          "acquired_disposed": "D",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001493152-26-029432",
+          "form_url": "/Archives/edgar/data/1081745/000149315226029432/0001493152-26-029432-index.htm"
+        },
+        {
+          "symbol": "INLX",
+          "reporting_owner": "TAGLICH ROBERT",
+          "owner_cik": "0001353439",
+          "issuer_name": "INTELLINETICS, INC.",
+          "issuer_cik": "0001081745",
+          "transaction_code": "S",
+          "transaction_date": "2026-06-16",
+          "shares": 3754.0,
+          "price_per_share": 6.58,
+          "acquired_disposed": "D",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001493152-26-029434",
+          "form_url": "/Archives/edgar/data/1353439/000149315226029434/0001493152-26-029434-index.htm"
+        },
+        {
+          "symbol": "INLX",
+          "reporting_owner": "TAGLICH MICHAEL N",
+          "owner_cik": "0001024533",
+          "issuer_name": "INTELLINETICS, INC.",
+          "issuer_cik": "0001081745",
+          "transaction_code": "S",
+          "transaction_date": "2026-06-16",
+          "shares": 3754.0,
+          "price_per_share": 6.58,
+          "acquired_disposed": "D",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001493152-26-029432",
+          "form_url": "/Archives/edgar/data/1081745/000149315226029432/0001493152-26-029432-index.htm"
+        }
+      ]
+    },
+    {
+      "symbol": "EBAY",
+      "signal": "SELL",
+      "cluster_count": 2,
+      "last_transaction_date": "2026-06-18",
+      "insiders": [
+        "Rawashdeh Mazen",
+        "Sweetnam Jordan Douglas Bradley"
+      ],
+      "transactions": [
+        {
+          "symbol": "EBAY",
+          "reporting_owner": "Sweetnam Jordan Douglas Bradley",
+          "owner_cik": "0002067199",
+          "issuer_name": "EBAY INC",
+          "issuer_cik": "0001065088",
+          "transaction_code": "S",
+          "transaction_date": "2026-06-18",
+          "shares": 863.0,
+          "price_per_share": 109.17,
+          "acquired_disposed": "D",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001065088-26-000161",
+          "form_url": "/Archives/edgar/data/2067199/000106508826000161/0001065088-26-000161-index.htm"
+        },
+        {
+          "symbol": "EBAY",
+          "reporting_owner": "Rawashdeh Mazen",
+          "owner_cik": "0001754322",
+          "issuer_name": "EBAY INC",
+          "issuer_cik": "0001065088",
+          "transaction_code": "S",
+          "transaction_date": "2026-06-17",
+          "shares": 1919.0,
+          "price_per_share": 108.51,
+          "acquired_disposed": "D",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001065088-26-000159",
+          "form_url": "/Archives/edgar/data/1754322/000106508826000159/0001065088-26-000159-index.htm"
+        }
+      ]
+    },
+    {
+      "symbol": "NN",
+      "signal": "SELL",
+      "cluster_count": 2,
+      "last_transaction_date": "2026-06-16",
+      "insiders": [
+        "Sorond Mariam",
+        "Insley Susan Brasse"
+      ],
+      "transactions": [
+        {
+          "symbol": "NN",
+          "reporting_owner": "Insley Susan Brasse",
+          "owner_cik": "0002060247",
+          "issuer_name": "NEXTNAV INC.",
+          "issuer_cik": "0001865631",
+          "transaction_code": "S",
+          "transaction_date": "2026-06-16",
+          "shares": 849.0,
+          "price_per_share": 19.36,
+          "acquired_disposed": "D",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001554855-26-001374",
+          "form_url": "/Archives/edgar/data/2060247/000155485526001374/0001554855-26-001374-index.htm"
+        },
+        {
+          "symbol": "NN",
+          "reporting_owner": "Sorond Mariam",
+          "owner_cik": "0001998558",
+          "issuer_name": "NEXTNAV INC.",
+          "issuer_cik": "0001865631",
+          "transaction_code": "S",
+          "transaction_date": "2026-06-16",
+          "shares": 2830.0,
+          "price_per_share": 18.3314,
+          "acquired_disposed": "D",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001554855-26-001373",
+          "form_url": "/Archives/edgar/data/1998558/000155485526001373/0001554855-26-001373-index.htm"
+        }
+      ]
+    },
+    {
+      "symbol": "CUEN",
+      "signal": "BUY",
+      "cluster_count": 1,
+      "last_transaction_date": "2026-06-18",
+      "insiders": [
+        "OAS ENERGY LLC"
+      ],
+      "transactions": [
+        {
+          "symbol": "CUEN",
+          "reporting_owner": "OAS ENERGY LLC",
+          "owner_cik": "0002132809",
+          "issuer_name": "Cuentas Inc.",
+          "issuer_cik": "0001424657",
+          "transaction_code": "P",
+          "transaction_date": "2026-06-18",
+          "shares": 10000.0,
+          "price_per_share": 0.27,
+          "acquired_disposed": "A",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001213900-26-070264",
+          "form_url": "/Archives/edgar/data/2132809/000121390026070264/0001213900-26-070264-index.htm"
+        },
+        {
+          "symbol": "CUEN",
+          "reporting_owner": "OAS ENERGY LLC",
+          "owner_cik": "0002132809",
+          "issuer_name": "Cuentas Inc.",
+          "issuer_cik": "0001424657",
+          "transaction_code": "P",
+          "transaction_date": "2026-06-18",
+          "shares": 1000.0,
+          "price_per_share": 0.2895,
+          "acquired_disposed": "A",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001213900-26-070264",
+          "form_url": "/Archives/edgar/data/2132809/000121390026070264/0001213900-26-070264-index.htm"
+        },
+        {
+          "symbol": "CUEN",
+          "reporting_owner": "OAS ENERGY LLC",
+          "owner_cik": "0002132809",
+          "issuer_name": "Cuentas Inc.",
+          "issuer_cik": "0001424657",
+          "transaction_code": "P",
+          "transaction_date": "2026-06-18",
+          "shares": 1000.0,
+          "price_per_share": 0.3,
+          "acquired_disposed": "A",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001213900-26-070264",
+          "form_url": "/Archives/edgar/data/2132809/000121390026070264/0001213900-26-070264-index.htm"
+        },
+        {
+          "symbol": "CUEN",
+          "reporting_owner": "OAS ENERGY LLC",
+          "owner_cik": "0002132809",
+          "issuer_name": "Cuentas Inc.",
+          "issuer_cik": "0001424657",
+          "transaction_code": "P",
+          "transaction_date": "2026-06-18",
+          "shares": 4000.0,
+          "price_per_share": 0.2783,
+          "acquired_disposed": "A",
+          "filing_date": "2026-06-18",
+          "accession_number": "0001213900-26-070264",
+          "form_url": "/Archives/edgar/data/2132809/000121390026070264/0001213900-26-070264-index.htm"
+        }
+      ]
+    }
+  ],
+  "congressional_signals": [
+    {
+      "symbol": "MSFT",
+      "signal": "STRONG_SELL",
+      "politician": "Josh Gottheimer",
+      "committee": "Judiciary, Intelligence, Ways and Means",
+      "transaction_date": "2026-06-16",
+      "cluster_count": 3,
+      "conflict_score": 0.09,
+      "trades": [
+        {
+          "politician": "Matt Van Epps",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "MSFT",
+          "transaction_type": "sell",
+          "transaction_date": "2026-06-16",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-17",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Josh Gottheimer",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "MSFT",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-19",
+          "amount_range": "$250001 - $500000",
+          "filing_date": "2026-06-03",
+          "conflict_score": 0.042,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Josh Gottheimer",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "MSFT",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-19",
+          "amount_range": "$500001 - $1000000",
+          "filing_date": "2026-06-03",
+          "conflict_score": 0.09,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Jonathan L. Jackson",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "MSFT",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-12",
+          "amount_range": "$15001 - $50000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.012,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "ABT",
+      "signal": "STRONG_SELL",
+      "politician": "Josh Gottheimer",
+      "committee": "Health, Education, Labor, and Pensions, Veterans' Affairs",
+      "transaction_date": "2026-05-27",
+      "cluster_count": 3,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Josh Gottheimer",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "ABT",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-27",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-03",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "ABT",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Julie Johnson",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "ABT",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-12",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-12",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "MSFT",
+      "signal": "STRONG_BUY",
+      "politician": "Josh Gottheimer",
+      "committee": "Judiciary, Intelligence, Ways and Means",
+      "transaction_date": "2026-05-19",
+      "cluster_count": 2,
+      "conflict_score": 0.09,
+      "trades": [
+        {
+          "politician": "Josh Gottheimer",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "MSFT",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-19",
+          "amount_range": "$500001 - $1000000",
+          "filing_date": "2026-06-03",
+          "conflict_score": 0.09,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Josh Gottheimer",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "MSFT",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-19",
+          "amount_range": "$250001 - $500000",
+          "filing_date": "2026-06-03",
+          "conflict_score": 0.042,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "MSFT",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$50001 - $100000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.017,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "AAPL",
+      "signal": "STRONG_BUY",
+      "politician": "Cleo Fields",
+      "committee": "Commerce, Science, and Transportation, Judiciary, Ways and Means",
+      "transaction_date": "2026-05-14",
+      "cluster_count": 2,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Cleo Fields",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "AAPL",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-14",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-03",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Ed Case",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "AAPL",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-14",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-05-31",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "NVDA",
+      "signal": "STRONG_SELL",
+      "politician": "Sheldon Whitehouse",
+      "committee": "Science, Space, and Technology",
+      "transaction_date": "2026-06-16",
+      "cluster_count": 2,
+      "conflict_score": 0.1,
+      "trades": [
+        {
+          "politician": "Matt Van Epps",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "NVDA",
+          "transaction_type": "sell",
+          "transaction_date": "2026-06-16",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-17",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Sheldon Whitehouse",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "NVDA",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-08",
+          "amount_range": "$100001 - $250000",
+          "filing_date": "2026-06-02",
+          "conflict_score": 0.1,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Sheldon Whitehouse",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "NVDA",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-08",
+          "amount_range": "$100001 - $250000",
+          "filing_date": "2026-06-02",
+          "conflict_score": 0.1,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "GOOGL",
+      "signal": "STRONG_SELL",
+      "politician": "David J. Taylor",
+      "committee": "Commerce, Science, and Transportation, Judiciary, Ways and Means",
+      "transaction_date": "2026-06-16",
+      "cluster_count": 2,
+      "conflict_score": 0.1,
+      "trades": [
+        {
+          "politician": "Matt Van Epps",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "GOOGL",
+          "transaction_type": "sell",
+          "transaction_date": "2026-06-16",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-17",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "David J. Taylor",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "GOOGL",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$15001 - $50000",
+          "filing_date": "2026-05-28",
+          "conflict_score": 0.1,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "David J. Taylor",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "GOOGL",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-05-28",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "AMZN",
+      "signal": "STRONG_SELL",
+      "politician": "Matt Van Epps",
+      "committee": "Commerce, Science, and Transportation, Judiciary, Ways and Means",
+      "transaction_date": "2026-06-16",
+      "cluster_count": 2,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Matt Van Epps",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "AMZN",
+          "transaction_type": "sell",
+          "transaction_date": "2026-06-16",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-17",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "David J. Taylor",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "AMZN",
+          "transaction_type": "sell",
+          "transaction_date": "2026-06-05",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-12",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "AAPL",
+      "signal": "STRONG_SELL",
+      "politician": "Matt Van Epps",
+      "committee": "Commerce, Science, and Transportation, Judiciary, Ways and Means",
+      "transaction_date": "2026-06-16",
+      "cluster_count": 2,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Matt Van Epps",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "AAPL",
+          "transaction_type": "sell",
+          "transaction_date": "2026-06-16",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-17",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "David J. Taylor",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "AAPL",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-05-28",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "GOOGL",
+      "signal": "STRONG_BUY",
+      "politician": "David J. Taylor",
+      "committee": "Commerce, Science, and Transportation, Judiciary, Ways and Means",
+      "transaction_date": "2026-06-05",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "David J. Taylor",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "GOOGL",
+          "transaction_type": "buy",
+          "transaction_date": "2026-06-05",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-12",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "META",
+      "signal": "STRONG_BUY",
+      "politician": "John J. McGuire III",
+      "committee": "Commerce, Science, and Transportation, Judiciary, Ways and Means",
+      "transaction_date": "2026-06-04",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "John J. McGuire III",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "META",
+          "transaction_type": "buy",
+          "transaction_date": "2026-06-04",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-10",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "TDG",
+      "signal": "STRONG_BUY",
+      "politician": "April McClain Delaney",
+      "committee": "Armed Services",
+      "transaction_date": "2026-05-22",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "TDG",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-22",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "TDG",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-21",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "TDG",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-13",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "TDG",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-08",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "TDG",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-07",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "PLTR",
+      "signal": "STRONG_BUY",
+      "politician": "John Boozman",
+      "committee": "Intelligence",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "PLTR",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "PLTR",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "CAG",
+      "signal": "STRONG_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "Agriculture, Nutrition, and Forestry",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "CAG",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "CRWD",
+      "signal": "STRONG_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "Homeland Security and Governmental Affairs, Intelligence",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "CRWD",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "CPB",
+      "signal": "STRONG_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "Agriculture, Nutrition, and Forestry",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "CPB",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "AMD",
+      "signal": "STRONG_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "Science, Space, and Technology",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "AMD",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "AMD",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-14",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "PANW",
+      "signal": "STRONG_BUY",
+      "politician": "Josh Gottheimer",
+      "committee": "Homeland Security and Governmental Affairs, Intelligence",
+      "transaction_date": "2026-05-14",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Josh Gottheimer",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "PANW",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-14",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-03",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "QCOM",
+      "signal": "STRONG_BUY",
+      "politician": "Maria Elvira Salazar",
+      "committee": "Science, Space, and Technology",
+      "transaction_date": "2026-05-13",
+      "cluster_count": 1,
+      "conflict_score": 0.027,
+      "trades": [
+        {
+          "politician": "Maria Elvira Salazar",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "QCOM",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-13",
+          "amount_range": "$15001 - $50000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.027,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Maria Elvira Salazar",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "QCOM",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-13",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "LUV",
+      "signal": "STRONG_SELL",
+      "politician": "Matt Van Epps",
+      "committee": "Transportation and Infrastructure",
+      "transaction_date": "2026-06-16",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Matt Van Epps",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "LUV",
+          "transaction_type": "sell",
+          "transaction_date": "2026-06-16",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-17",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "META",
+      "signal": "STRONG_SELL",
+      "politician": "Matt Van Epps",
+      "committee": "Commerce, Science, and Transportation, Judiciary, Ways and Means",
+      "transaction_date": "2026-06-16",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Matt Van Epps",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "META",
+          "transaction_type": "sell",
+          "transaction_date": "2026-06-16",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-17",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "XOM",
+      "signal": "STRONG_SELL",
+      "politician": "Matt Van Epps",
+      "committee": "Energy and Natural Resources",
+      "transaction_date": "2026-06-16",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Matt Van Epps",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "XOM",
+          "transaction_type": "sell",
+          "transaction_date": "2026-06-16",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-17",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "LRCX",
+      "signal": "STRONG_SELL",
+      "politician": "David J. Taylor",
+      "committee": "Science, Space, and Technology",
+      "transaction_date": "2026-06-05",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "David J. Taylor",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "LRCX",
+          "transaction_type": "sell",
+          "transaction_date": "2026-06-05",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-12",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "PLTR",
+      "signal": "STRONG_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "Intelligence",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "PLTR",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "PLTR",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-08",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "CMCSA",
+      "signal": "STRONG_SELL",
+      "politician": "Mike Kelly",
+      "committee": "Commerce, Science, and Transportation",
+      "transaction_date": "2026-05-07",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Mike Kelly",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "CMCSA",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-07",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-11",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "BMY",
+      "signal": "STRONG_SELL",
+      "politician": "Mike Kelly",
+      "committee": "Health, Education, Labor, and Pensions",
+      "transaction_date": "2026-05-07",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Mike Kelly",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "BMY",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-07",
+          "amount_range": "$15001 - $50000",
+          "filing_date": "2026-06-11",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "QCOM",
+      "signal": "STRONG_SELL",
+      "politician": "Sara Jacobs",
+      "committee": "Science, Space, and Technology",
+      "transaction_date": "2026-05-07",
+      "cluster_count": 1,
+      "conflict_score": 0.1,
+      "trades": [
+        {
+          "politician": "Sara Jacobs",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "QCOM",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-07",
+          "amount_range": "$500001 - $1000000",
+          "filing_date": "2026-05-20",
+          "conflict_score": 0.1,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Sara Jacobs",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "QCOM",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-06",
+          "amount_range": "$500001 - $1000000",
+          "filing_date": "2026-05-20",
+          "conflict_score": 0.1,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "TMO",
+      "signal": "STRONG_SELL",
+      "politician": "Dwight Evans",
+      "committee": "Health, Education, Labor, and Pensions, Veterans' Affairs",
+      "transaction_date": "2026-05-07",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Dwight Evans",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "TMO",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-07",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-05-15",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "T",
+      "signal": "BUY",
+      "politician": "Tim Moore",
+      "committee": "",
+      "transaction_date": "2026-06-05",
+      "cluster_count": 2,
+      "conflict_score": 0.006,
+      "trades": [
+        {
+          "politician": "David J. Taylor",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "T",
+          "transaction_type": "buy",
+          "transaction_date": "2026-06-05",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-12",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Tim Moore",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "T",
+          "transaction_type": "buy",
+          "transaction_date": "2026-06-04",
+          "amount_range": "$50001 - $100000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.006,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Tim Moore",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "T",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-18",
+          "amount_range": "$15001 - $50000",
+          "filing_date": "2026-05-19",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "David J. Taylor",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "T",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-05-28",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "IBM",
+      "signal": "SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-06-16",
+      "cluster_count": 2,
+      "conflict_score": 0.003,
+      "trades": [
+        {
+          "politician": "Matt Van Epps",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "IBM",
+          "transaction_type": "sell",
+          "transaction_date": "2026-06-16",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-17",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "IBM",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$15001 - $50000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.003,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "INTC",
+      "signal": "SELL",
+      "politician": "Dwight Evans",
+      "committee": "",
+      "transaction_date": "2026-06-16",
+      "cluster_count": 2,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Matt Van Epps",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "INTC",
+          "transaction_type": "sell",
+          "transaction_date": "2026-06-16",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-17",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Dwight Evans",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "INTC",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-07",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-05-15",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "TPH",
+      "signal": "SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 2,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "TPH",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Josh Gottheimer",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "TPH",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-03",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "PWR",
+      "signal": "SELL",
+      "politician": "Dwight Evans",
+      "committee": "",
+      "transaction_date": "2026-05-14",
+      "cluster_count": 2,
+      "conflict_score": 0.1,
+      "trades": [
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "PWR",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-14",
+          "amount_range": "$15001 - $50000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.1,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "PWR",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-13",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Dwight Evans",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "PWR",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-07",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-05-15",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "ACN",
+      "signal": "SELL",
+      "politician": "Rick W. Allen",
+      "committee": "",
+      "transaction_date": "2026-05-12",
+      "cluster_count": 2,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Julie Johnson",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "ACN",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-12",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-12",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Rick W. Allen",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "ACN",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-08",
+          "amount_range": "$15001 - $50000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "AEP",
+      "signal": "WEAK_BUY",
+      "politician": "David J. Taylor",
+      "committee": "",
+      "transaction_date": "2026-06-05",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "David J. Taylor",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "AEP",
+          "transaction_type": "buy",
+          "transaction_date": "2026-06-05",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-12",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "AMGN",
+      "signal": "WEAK_BUY",
+      "politician": "David J. Taylor",
+      "committee": "",
+      "transaction_date": "2026-06-05",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "David J. Taylor",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "AMGN",
+          "transaction_type": "buy",
+          "transaction_date": "2026-06-05",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-12",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "KR",
+      "signal": "WEAK_BUY",
+      "politician": "David J. Taylor",
+      "committee": "",
+      "transaction_date": "2026-06-05",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "David J. Taylor",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "KR",
+          "transaction_type": "buy",
+          "transaction_date": "2026-06-05",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-12",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "FMAO",
+      "signal": "WEAK_BUY",
+      "politician": "Robert E. Latta",
+      "committee": "",
+      "transaction_date": "2026-06-04",
+      "cluster_count": 1,
+      "conflict_score": 0.1,
+      "trades": [
+        {
+          "politician": "Robert E. Latta",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "FMAO",
+          "transaction_type": "buy",
+          "transaction_date": "2026-06-04",
+          "amount_range": "$15001 - $50000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.1,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "SFTBF",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-06-02",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "SFTBF",
+          "transaction_type": "buy",
+          "transaction_date": "2026-06-02",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "EQT",
+      "signal": "WEAK_BUY",
+      "politician": "Thomas H. Kean, Jr.",
+      "committee": "",
+      "transaction_date": "2026-06-01",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Thomas H. Kean, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "EQT",
+          "transaction_type": "buy",
+          "transaction_date": "2026-06-01",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-18",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "INDB",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-29",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "INDB",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-29",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "BEP",
+      "signal": "WEAK_BUY",
+      "politician": "Maria Elvira Salazar",
+      "committee": "",
+      "transaction_date": "2026-05-29",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Maria Elvira Salazar",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "BEP",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-29",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "ARQT",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-29",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "ARQT",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-29",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "BSX",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-29",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "BSX",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-29",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "BSX",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-19",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "BSX",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-11",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "TEL",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-29",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "TEL",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-29",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "COO",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-29",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "COO",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-29",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "TSLA",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-29",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "TSLA",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-29",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "DASH",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-29",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "DASH",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-29",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "DASH",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-11",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "DASH",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-07",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "CIEN",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-29",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "CIEN",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-29",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "CIEN",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-14",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "TCBI",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-29",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "TCBI",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-29",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "HQY",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-29",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "HQY",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-29",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "PWP",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-29",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "PWP",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-29",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "LGND",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-29",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "LGND",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-29",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "HUBB",
+      "signal": "WEAK_BUY",
+      "politician": "April McClain Delaney",
+      "committee": "",
+      "transaction_date": "2026-05-29",
+      "cluster_count": 1,
+      "conflict_score": 0.1,
+      "trades": [
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "HUBB",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-29",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "HUBB",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-28",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "HUBB",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-21",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "HUBB",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-14",
+          "amount_range": "$15001 - $50000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.1,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "HUBB",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-13",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "MLM",
+      "signal": "WEAK_BUY",
+      "politician": "April McClain Delaney",
+      "committee": "",
+      "transaction_date": "2026-05-28",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "MLM",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-28",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "CHRW",
+      "signal": "WEAK_BUY",
+      "politician": "April McClain Delaney",
+      "committee": "",
+      "transaction_date": "2026-05-28",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "CHRW",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-28",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "AGZ",
+      "signal": "WEAK_BUY",
+      "politician": "John Boozman",
+      "committee": "",
+      "transaction_date": "2026-05-27",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "AGZ",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-27",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "AGZ",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-27",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "SCHP",
+      "signal": "WEAK_BUY",
+      "politician": "John Boozman",
+      "committee": "",
+      "transaction_date": "2026-05-27",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "SCHP",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-27",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "SCHP",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-27",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "XFIV",
+      "signal": "WEAK_BUY",
+      "politician": "John Boozman",
+      "committee": "",
+      "transaction_date": "2026-05-27",
+      "cluster_count": 1,
+      "conflict_score": 0.1,
+      "trades": [
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "XFIV",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-27",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "XFIV",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-27",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "XFIV",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-13",
+          "amount_range": "$50001 - $100000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.1,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "XFIV",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-13",
+          "amount_range": "$50001 - $100000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.1,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "JMBS",
+      "signal": "WEAK_BUY",
+      "politician": "John Boozman",
+      "committee": "",
+      "transaction_date": "2026-05-27",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "JMBS",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-27",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "JMBS",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-27",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "CMBS",
+      "signal": "WEAK_BUY",
+      "politician": "John Boozman",
+      "committee": "",
+      "transaction_date": "2026-05-27",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "CMBS",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-27",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "CMBS",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-27",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "XTWO",
+      "signal": "WEAK_BUY",
+      "politician": "John Boozman",
+      "committee": "",
+      "transaction_date": "2026-05-27",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "XTWO",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-27",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "XTWO",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-27",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "MBB",
+      "signal": "WEAK_BUY",
+      "politician": "John Boozman",
+      "committee": "",
+      "transaction_date": "2026-05-27",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "MBB",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-27",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "MBB",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-27",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "GIGB",
+      "signal": "WEAK_BUY",
+      "politician": "John Boozman",
+      "committee": "",
+      "transaction_date": "2026-05-27",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "GIGB",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-27",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "GIGB",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-27",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "GIGB",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-13",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "GIGB",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-13",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "GBIL",
+      "signal": "WEAK_BUY",
+      "politician": "John Boozman",
+      "committee": "",
+      "transaction_date": "2026-05-27",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "GBIL",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-27",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "GBIL",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-27",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "IEF",
+      "signal": "WEAK_BUY",
+      "politician": "John Boozman",
+      "committee": "",
+      "transaction_date": "2026-05-27",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "IEF",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-27",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "IEF",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-27",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "TLH",
+      "signal": "WEAK_BUY",
+      "politician": "John Boozman",
+      "committee": "",
+      "transaction_date": "2026-05-27",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "TLH",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-27",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "TLH",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-27",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "LITE",
+      "signal": "WEAK_BUY",
+      "politician": "Josh Gottheimer",
+      "committee": "",
+      "transaction_date": "2026-05-22",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Josh Gottheimer",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "LITE",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-22",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-03",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "KHC",
+      "signal": "WEAK_BUY",
+      "politician": "Gary C. Peters",
+      "committee": "",
+      "transaction_date": "2026-05-21",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gary C. Peters",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "KHC",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-21",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-12",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Gary C. Peters",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "KHC",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-21",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-11",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "IBM",
+      "signal": "WEAK_BUY",
+      "politician": "Maria Elvira Salazar",
+      "committee": "",
+      "transaction_date": "2026-05-21",
+      "cluster_count": 1,
+      "conflict_score": 0.027,
+      "trades": [
+        {
+          "politician": "Maria Elvira Salazar",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "IBM",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-21",
+          "amount_range": "$15001 - $50000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.027,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "ENTG",
+      "signal": "WEAK_BUY",
+      "politician": "April McClain Delaney",
+      "committee": "",
+      "transaction_date": "2026-05-21",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "ENTG",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-21",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "ENTG",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-21",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "ENTG",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-08",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "ENTG",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-07",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "MU",
+      "signal": "WEAK_BUY",
+      "politician": "Josh Gottheimer",
+      "committee": "",
+      "transaction_date": "2026-05-21",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Josh Gottheimer",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "MU",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-21",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-03",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "LPLA",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-19",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "LPLA",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-19",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "LPLA",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-14",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "LPLA",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-12",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "LPLA",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-07",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "DDOG",
+      "signal": "WEAK_BUY",
+      "politician": "Maria Elvira Salazar",
+      "committee": "",
+      "transaction_date": "2026-05-19",
+      "cluster_count": 1,
+      "conflict_score": 0.027,
+      "trades": [
+        {
+          "politician": "Maria Elvira Salazar",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "DDOG",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-19",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Maria Elvira Salazar",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "DDOG",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-19",
+          "amount_range": "$15001 - $50000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.027,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "ADI",
+      "signal": "WEAK_BUY",
+      "politician": "Josh Gottheimer",
+      "committee": "",
+      "transaction_date": "2026-05-19",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Josh Gottheimer",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "ADI",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-19",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-03",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "NOVT",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-18",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "NOVT",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-18",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "DCO",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-18",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "DCO",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-18",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "TOELF",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-18",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "TOELF",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-18",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "CSW",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-18",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "CSW",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-18",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "ALB",
+      "signal": "WEAK_BUY",
+      "politician": "John Boozman",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "ALB",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "John Boozman",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "ALB",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "APP",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "APP",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "DPZ",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "DPZ",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "VRSK",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "VRSK",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "EA",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "EA",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "TTD",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "TTD",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "BWXT",
+      "signal": "WEAK_BUY",
+      "politician": "April McClain Delaney",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.1,
+      "trades": [
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "BWXT",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$15001 - $50000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.1,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "BWXT",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-14",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "BWXT",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-08",
+          "amount_range": "$15001 - $50000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.1,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "BWXT",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-07",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "PG",
+      "signal": "WEAK_BUY",
+      "politician": "Lloyd Doggett",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Lloyd Doggett",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "PG",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-04",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "ARLP",
+      "signal": "WEAK_BUY",
+      "politician": "Virginia Foxx",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Virginia Foxx",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "ARLP",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-02",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "HD",
+      "signal": "WEAK_BUY",
+      "politician": "David J. Taylor",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "David J. Taylor",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "HD",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-05-28",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "PH",
+      "signal": "WEAK_BUY",
+      "politician": "David J. Taylor",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "David J. Taylor",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "PH",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-05-28",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "MEDP",
+      "signal": "WEAK_BUY",
+      "politician": "David J. Taylor",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "David J. Taylor",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "MEDP",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-05-28",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "AMCR",
+      "signal": "WEAK_BUY",
+      "politician": "Thomas H. Kean, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-14",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Thomas H. Kean, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "AMCR",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-14",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-18",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "STE",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-13",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "STE",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-13",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "STE",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-11",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "PCVX",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-13",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "PCVX",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-13",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "PCVX",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-12",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "ST",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-12",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "ST",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-12",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "ST",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-11",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "ST",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-07",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "BIIB",
+      "signal": "WEAK_BUY",
+      "politician": "Maria Elvira Salazar",
+      "committee": "",
+      "transaction_date": "2026-05-12",
+      "cluster_count": 1,
+      "conflict_score": 0.1,
+      "trades": [
+        {
+          "politician": "Maria Elvira Salazar",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "BIIB",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-12",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Maria Elvira Salazar",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "BIIB",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-11",
+          "amount_range": "$50001 - $100000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.1,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Maria Elvira Salazar",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "BIIB",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-11",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "W",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-11",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "W",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-11",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "W",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-07",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "SARO",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-11",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "SARO",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-11",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "VLTO",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-11",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "VLTO",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-11",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "BNPQF",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-11",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "BNPQF",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-11",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "FSV",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-11",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "FSV",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-11",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "FSV",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-07",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "GIL",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-11",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "GIL",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-11",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "THLEF",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-11",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "THLEF",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-11",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "BBIO",
+      "signal": "WEAK_BUY",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-11",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "BBIO",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-11",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "TSM",
+      "signal": "WEAK_BUY",
+      "politician": "Rick W. Allen",
+      "committee": "",
+      "transaction_date": "2026-05-08",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Rick W. Allen",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "TSM",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-08",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "AXP",
+      "signal": "WEAK_BUY",
+      "politician": "Rick W. Allen",
+      "committee": "",
+      "transaction_date": "2026-05-08",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Rick W. Allen",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "AXP",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-08",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-16",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "SNDK",
+      "signal": "WEAK_BUY",
+      "politician": "Josh Gottheimer",
+      "committee": "",
+      "transaction_date": "2026-05-07",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Josh Gottheimer",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "SNDK",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-07",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-03",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "RYCEY",
+      "signal": "WEAK_BUY",
+      "politician": "Tim Moore",
+      "committee": "",
+      "transaction_date": "2026-05-07",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Tim Moore",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "RYCEY",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-07",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-05-19",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "IHG",
+      "signal": "WEAK_BUY",
+      "politician": "Tim Moore",
+      "committee": "",
+      "transaction_date": "2026-05-07",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Tim Moore",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "IHG",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-07",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-05-19",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "PKG",
+      "signal": "WEAK_BUY",
+      "politician": "April McClain Delaney",
+      "committee": "",
+      "transaction_date": "2026-05-06",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "PKG",
+          "transaction_type": "buy",
+          "transaction_date": "2026-05-06",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "GEV",
+      "signal": "WEAK_SELL",
+      "politician": "Matt Van Epps",
+      "committee": "",
+      "transaction_date": "2026-06-16",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Matt Van Epps",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "GEV",
+          "transaction_type": "sell",
+          "transaction_date": "2026-06-16",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-17",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "TPR",
+      "signal": "WEAK_SELL",
+      "politician": "Matt Van Epps",
+      "committee": "",
+      "transaction_date": "2026-06-16",
+      "cluster_count": 1,
+      "conflict_score": 0.1,
+      "trades": [
+        {
+          "politician": "Matt Van Epps",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "TPR",
+          "transaction_type": "sell",
+          "transaction_date": "2026-06-16",
+          "amount_range": "$15001 - $50000",
+          "filing_date": "2026-06-17",
+          "conflict_score": 0.1,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "GE",
+      "signal": "WEAK_SELL",
+      "politician": "Matt Van Epps",
+      "committee": "",
+      "transaction_date": "2026-06-16",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Matt Van Epps",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "GE",
+          "transaction_type": "sell",
+          "transaction_date": "2026-06-16",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-17",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "PTON",
+      "signal": "WEAK_SELL",
+      "politician": "Jim Banks",
+      "committee": "",
+      "transaction_date": "2026-06-05",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Jim Banks",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "PTON",
+          "transaction_type": "sell",
+          "transaction_date": "2026-06-05",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Jim Banks",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "PTON",
+          "transaction_type": "sell",
+          "transaction_date": "2026-06-05",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-07",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "DELL",
+      "signal": "WEAK_SELL",
+      "politician": "John J. McGuire III",
+      "committee": "",
+      "transaction_date": "2026-06-04",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "John J. McGuire III",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "DELL",
+          "transaction_type": "sell",
+          "transaction_date": "2026-06-04",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-10",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "CHKP",
+      "signal": "WEAK_SELL",
+      "politician": "Thomas H. Kean, Jr.",
+      "committee": "",
+      "transaction_date": "2026-06-01",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Thomas H. Kean, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "CHKP",
+          "transaction_type": "sell",
+          "transaction_date": "2026-06-01",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-18",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "FSSL",
+      "signal": "WEAK_SELL",
+      "politician": "Tim Walberg",
+      "committee": "",
+      "transaction_date": "2026-06-01",
+      "cluster_count": 1,
+      "conflict_score": 0.025,
+      "trades": [
+        {
+          "politician": "Tim Walberg",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "FSSL",
+          "transaction_type": "sell",
+          "transaction_date": "2026-06-01",
+          "amount_range": "$15001 - $50000",
+          "filing_date": "2026-06-03",
+          "conflict_score": 0.025,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "WDAY",
+      "signal": "WEAK_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-29",
+      "cluster_count": 1,
+      "conflict_score": 0.003,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "WDAY",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-29",
+          "amount_range": "$15001 - $50000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.003,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "AZO",
+      "signal": "WEAK_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-29",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "AZO",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-29",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "WRB",
+      "signal": "WEAK_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-29",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "WRB",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-29",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "WRB",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-19",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "WRB",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-14",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "WRB",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-13",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "WRB",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-12",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "WRB",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-07",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "TSCO",
+      "signal": "WEAK_SELL",
+      "politician": "April McClain Delaney",
+      "committee": "",
+      "transaction_date": "2026-05-28",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "TSCO",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-28",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "TSCO",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-27",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "TSCO",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-26",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "TSCO",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-22",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "TSCO",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-18",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "TSCO",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "EME",
+      "signal": "WEAK_SELL",
+      "politician": "April McClain Delaney",
+      "committee": "",
+      "transaction_date": "2026-05-28",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "EME",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-28",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "VIK",
+      "signal": "WEAK_SELL",
+      "politician": "April McClain Delaney",
+      "committee": "",
+      "transaction_date": "2026-05-28",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "VIK",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-28",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "VIK",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-27",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "PINS",
+      "signal": "WEAK_SELL",
+      "politician": "Christian Menefee",
+      "committee": "",
+      "transaction_date": "2026-05-28",
+      "cluster_count": 1,
+      "conflict_score": 0.027,
+      "trades": [
+        {
+          "politician": "Christian Menefee",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "PINS",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-28",
+          "amount_range": "$15001 - $50000",
+          "filing_date": "2026-06-01",
+          "conflict_score": 0.027,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "MTSI",
+      "signal": "WEAK_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-22",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "MTSI",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-22",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "INTU",
+      "signal": "WEAK_SELL",
+      "politician": "Josh Gottheimer",
+      "committee": "",
+      "transaction_date": "2026-05-22",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Josh Gottheimer",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "INTU",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-22",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-03",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "BDX",
+      "signal": "WEAK_SELL",
+      "politician": "Thomas H. Kean, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-21",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Thomas H. Kean, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "BDX",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-21",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-18",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "T",
+      "signal": "WEAK_SELL",
+      "politician": "Tim Moore",
+      "committee": "",
+      "transaction_date": "2026-05-21",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Tim Moore",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "T",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-21",
+          "amount_range": "$15001 - $50000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "CDW",
+      "signal": "WEAK_SELL",
+      "politician": "April McClain Delaney",
+      "committee": "",
+      "transaction_date": "2026-05-19",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "CDW",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-19",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "CDW",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-18",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "CDW",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "CDW",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-14",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "STRL",
+      "signal": "WEAK_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-18",
+      "cluster_count": 1,
+      "conflict_score": 0.003,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "STRL",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-18",
+          "amount_range": "$15001 - $50000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.003,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "RNMBF",
+      "signal": "WEAK_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-18",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "RNMBF",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-18",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "SCI",
+      "signal": "WEAK_SELL",
+      "politician": "April McClain Delaney",
+      "committee": "",
+      "transaction_date": "2026-05-18",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "SCI",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-18",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "SCI",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "SCI",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-14",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "SCI",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-08",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "SCI",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-07",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "CHRW",
+      "signal": "WEAK_SELL",
+      "politician": "April McClain Delaney",
+      "committee": "",
+      "transaction_date": "2026-05-18",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "CHRW",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-18",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "CHRW",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "STT",
+      "signal": "WEAK_SELL",
+      "politician": "Jake Auchincloss",
+      "committee": "",
+      "transaction_date": "2026-05-18",
+      "cluster_count": 1,
+      "conflict_score": 0.033,
+      "trades": [
+        {
+          "politician": "Jake Auchincloss",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "STT",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-18",
+          "amount_range": "$15001 - $50000",
+          "filing_date": "2026-05-22",
+          "conflict_score": 0.033,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "REGN",
+      "signal": "WEAK_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "REGN",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "BKNG",
+      "signal": "WEAK_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "BKNG",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "CB",
+      "signal": "WEAK_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "CB",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "CLX",
+      "signal": "WEAK_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "CLX",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "FDS",
+      "signal": "WEAK_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "FDS",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "MDT",
+      "signal": "WEAK_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "MDT",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "MU",
+      "signal": "WEAK_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "MU",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "PSKY",
+      "signal": "WEAK_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "PSKY",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "PYPL",
+      "signal": "WEAK_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "PYPL",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "ROP",
+      "signal": "WEAK_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "ROP",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "TRMB",
+      "signal": "WEAK_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "TRMB",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "UBER",
+      "signal": "WEAK_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "UBER",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "TYL",
+      "signal": "WEAK_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "TYL",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "CVNA",
+      "signal": "WEAK_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "CVNA",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "STZ",
+      "signal": "WEAK_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "STZ",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "GEHCV",
+      "signal": "WEAK_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "GEHCV",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "ADBE",
+      "signal": "WEAK_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "ADBE",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "BR",
+      "signal": "WEAK_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-15",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "BR",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-15",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "MDB",
+      "signal": "WEAK_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-14",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "MDB",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-14",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "MELI",
+      "signal": "WEAK_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-14",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "MELI",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-14",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "FLEX",
+      "signal": "WEAK_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-14",
+      "cluster_count": 1,
+      "conflict_score": 0.017,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "FLEX",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-14",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "FLEX",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-12",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "FLEX",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-11",
+          "amount_range": "$50001 - $100000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.017,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "FLEX",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-07",
+          "amount_range": "$15001 - $50000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.003,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "NSRGY",
+      "signal": "WEAK_SELL",
+      "politician": "Josh Gottheimer",
+      "committee": "",
+      "transaction_date": "2026-05-14",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Josh Gottheimer",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "NSRGY",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-14",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-03",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "AESI",
+      "signal": "WEAK_SELL",
+      "politician": "Chip Roy",
+      "committee": "",
+      "transaction_date": "2026-05-13",
+      "cluster_count": 1,
+      "conflict_score": 0.035,
+      "trades": [
+        {
+          "politician": "Chip Roy",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "AESI",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-13",
+          "amount_range": "$100001 - $250000",
+          "filing_date": "2026-06-10",
+          "conflict_score": 0.035,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "SHW",
+      "signal": "WEAK_SELL",
+      "politician": "Maria Elvira Salazar",
+      "committee": "",
+      "transaction_date": "2026-05-12",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Maria Elvira Salazar",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "SHW",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-12",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "WHR",
+      "signal": "WEAK_SELL",
+      "politician": "Maria Elvira Salazar",
+      "committee": "",
+      "transaction_date": "2026-05-11",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Maria Elvira Salazar",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "WHR",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-11",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "AMT",
+      "signal": "WEAK_SELL",
+      "politician": "Dwight Evans",
+      "committee": "",
+      "transaction_date": "2026-05-11",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Dwight Evans",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "AMT",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-11",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-05-15",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "PRIM",
+      "signal": "WEAK_SELL",
+      "politician": "Gilbert Ray Cisneros, Jr.",
+      "committee": "",
+      "transaction_date": "2026-05-08",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "Gilbert Ray Cisneros, Jr.",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "PRIM",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-08",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-08",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "FBIN",
+      "signal": "WEAK_SELL",
+      "politician": "April McClain Delaney",
+      "committee": "",
+      "transaction_date": "2026-05-07",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "FBIN",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-07",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "FBIN",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-06",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "MIDD",
+      "signal": "WEAK_SELL",
+      "politician": "April McClain Delaney",
+      "committee": "",
+      "transaction_date": "2026-05-07",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "MIDD",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-07",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "ORCL",
+      "signal": "WEAK_SELL",
+      "politician": "Sheldon Whitehouse",
+      "committee": "",
+      "transaction_date": "2026-05-07",
+      "cluster_count": 1,
+      "conflict_score": 0.006,
+      "trades": [
+        {
+          "politician": "Sheldon Whitehouse",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "ORCL",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-07",
+          "amount_range": "$15001 - $50000",
+          "filing_date": "2026-06-02",
+          "conflict_score": 0.006,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Sheldon Whitehouse",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "ORCL",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-07",
+          "amount_range": "$15001 - $50000",
+          "filing_date": "2026-06-02",
+          "conflict_score": 0.006,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "PODD",
+      "signal": "WEAK_SELL",
+      "politician": "Tina Smith",
+      "committee": "",
+      "transaction_date": "2026-05-07",
+      "cluster_count": 1,
+      "conflict_score": 0.007,
+      "trades": [
+        {
+          "politician": "Tina Smith",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "PODD",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-07",
+          "amount_range": "$100001 - $250000",
+          "filing_date": "2026-05-11",
+          "conflict_score": 0.007,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Tina Smith",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "PODD",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-07",
+          "amount_range": "$100001 - $250000",
+          "filing_date": "2026-05-10",
+          "conflict_score": 0.007,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "DXCM",
+      "signal": "WEAK_SELL",
+      "politician": "Tina Smith",
+      "committee": "",
+      "transaction_date": "2026-05-07",
+      "cluster_count": 1,
+      "conflict_score": 0.007,
+      "trades": [
+        {
+          "politician": "Tina Smith",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "DXCM",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-07",
+          "amount_range": "$100001 - $250000",
+          "filing_date": "2026-05-11",
+          "conflict_score": 0.007,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Tina Smith",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "DXCM",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-07",
+          "amount_range": "$100001 - $250000",
+          "filing_date": "2026-05-10",
+          "conflict_score": 0.007,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "MORN",
+      "signal": "WEAK_SELL",
+      "politician": "April McClain Delaney",
+      "committee": "",
+      "transaction_date": "2026-05-06",
+      "cluster_count": 1,
+      "conflict_score": 0.0,
+      "trades": [
+        {
+          "politician": "April McClain Delaney",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "MORN",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-06",
+          "amount_range": "$1001 - $15000",
+          "filing_date": "2026-06-05",
+          "conflict_score": 0.0,
+          "source": "capitolexposed"
+        }
+      ]
+    },
+    {
+      "symbol": "ETOR",
+      "signal": "WEAK_SELL",
+      "politician": "Bernie Moreno",
+      "committee": "",
+      "transaction_date": "2026-05-06",
+      "cluster_count": 1,
+      "conflict_score": 0.047,
+      "trades": [
+        {
+          "politician": "Bernie Moreno",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "ETOR",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-06",
+          "amount_range": "$100001 - $250000",
+          "filing_date": "2026-05-25",
+          "conflict_score": 0.047,
+          "source": "capitolexposed"
+        },
+        {
+          "politician": "Bernie Moreno",
+          "chamber": "",
+          "party": "",
+          "committee": "",
+          "symbol": "ETOR",
+          "transaction_type": "sell",
+          "transaction_date": "2026-05-06",
+          "amount_range": "$100001 - $250000",
+          "filing_date": "2026-05-22",
+          "conflict_score": 0.047,
+          "source": "capitolexposed"
+        }
+      ]
+    }
+  ]
+}
