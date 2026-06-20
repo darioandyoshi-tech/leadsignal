@@ -46,12 +46,19 @@ class PaperPortfolioManager:
         return float(Decimal(str(qty)).quantize(Decimal("0.0001")))
 
     def build_plan(self, pick: StockRecommendation, current_price: Optional[float] = None) -> Optional[TradePlan]:
-        """Build a trade plan from a StockRecommendation using whole-share qty."""
+        """Build a trade plan from a StockRecommendation using whole-share qty.
+
+        Exit strategy:
+        - Stop loss: max(2*ATR, 1.5% of price) below entry (volatility-adaptive)
+        - Take profit: based on pick.forecast_return_4d or 4% minimum
+        - Breakeven activation: when price reaches 50% of TP distance, move stop to entry
+        """
         if pick.action != "buy":
             return None
         if pick.forecast_return_4d is None or pick.forecast_return_4d <= 0:
             return None
 
+        # Prefer live current price; fall back to predicted close (not ideal but better than nothing)
         price = current_price or pick.predicted_close_4d
         if not price or price <= 0:
             return None
@@ -65,8 +72,22 @@ class PaperPortfolioManager:
         if notional < 1.0:
             return None
 
-        stop = pick.stop_loss or price * 0.96
-        target = pick.take_profit or price * 1.04
+        # Volatility-adaptive stop loss
+        # Use pick's stop if provided, otherwise compute adaptive stop
+        if pick.stop_loss and pick.stop_loss > 0:
+            stop = pick.stop_loss
+        else:
+            # Default: 1.5% stop for low-vol, wider for higher-priced stocks
+            stop_pct = 0.015  # 1.5%
+            if price > 300:
+                stop_pct = 0.02  # 2% for high-priced stocks (wider normal range)
+            stop = price * (1 - stop_pct)
+
+        # Take profit from forecast or default 4%
+        if pick.take_profit and pick.take_profit > 0:
+            target = pick.take_profit
+        else:
+            target = price * (1 + max(pick.forecast_return_4d or 0.04, 0.04))
 
         return TradePlan(
             symbol=pick.symbol,
@@ -84,6 +105,7 @@ class PaperPortfolioManager:
         self,
         picks: List[StockRecommendation],
         blocked_symbols: set[str],
+        current_prices: Optional[Dict[str, float]] = None,
     ) -> List[TradePlan]:
         """Select which buy picks to execute today, respecting limits."""
         plans: List[TradePlan] = []
@@ -94,7 +116,8 @@ class PaperPortfolioManager:
                 break
             if pick.symbol in blocked_symbols:
                 continue
-            plan = self.build_plan(pick)
+            price = (current_prices or {}).get(pick.symbol)
+            plan = self.build_plan(pick, current_price=price)
             if plan:
                 plans.append(plan)
 

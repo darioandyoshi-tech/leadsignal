@@ -65,9 +65,9 @@ async def persist_snapshots(db: AsyncSession, df):
 
 
 async def main():
-    print(f"[{datetime.now(timezone.utc)}] Starting daily NASDAQ-100 scan...")
+    print(f"[{datetime.now(timezone.utc)}] Starting daily S&P 500 scan...")
 
-    fetcher = NASDAQ100Fetcher(lookback_days=120)
+    fetcher = NASDAQ100Fetcher(lookback_days=120, universe="sp500")
     raw = fetcher.fetch()
     if raw.empty:
         print("No data fetched. Exiting.")

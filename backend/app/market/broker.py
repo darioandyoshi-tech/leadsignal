@@ -161,9 +161,12 @@ class AlpacaBroker:
                     time_in_force=TimeInForce.DAY,
                 )
             elif qty:
+                # Use Decimal for exact fractional share quantities
+                from decimal import Decimal, ROUND_DOWN
+                d = Decimal(str(qty)).quantize(Decimal("0.000000001"), rounding=ROUND_DOWN)
                 req = MarketOrderRequest(
                     symbol=symbol,
-                    qty=round(float(qty), 8),
+                    qty=str(d),
                     side=OrderSide.BUY,
                     time_in_force=TimeInForce.DAY,
                 )
@@ -206,9 +209,11 @@ class AlpacaBroker:
     ) -> BrokerOrderResult:
         """Submit a GTC stop-limit sell order."""
         try:
+            from decimal import Decimal, ROUND_DOWN
+            q = Decimal(str(qty)).quantize(Decimal("0.000000001"), rounding=ROUND_DOWN)
             req = StopLimitOrderRequest(
                 symbol=symbol,
-                qty=round(float(qty), 8),
+                qty=str(q),
                 side=OrderSide.SELL,
                 time_in_force=TimeInForce.GTC,
                 stop_price=round(float(stop_price), 2),
@@ -242,9 +247,11 @@ class AlpacaBroker:
     ) -> BrokerOrderResult:
         """Submit a GTC limit sell order (take profit)."""
         try:
+            from decimal import Decimal, ROUND_DOWN
+            q = Decimal(str(qty)).quantize(Decimal("0.000000001"), rounding=ROUND_DOWN)
             req = LimitOrderRequest(
                 symbol=symbol,
-                qty=round(float(qty), 8),
+                qty=str(q),
                 side=OrderSide.SELL,
                 time_in_force=TimeInForce.GTC,
                 limit_price=round(float(limit_price), 2),
@@ -278,10 +285,12 @@ class AlpacaBroker:
     ) -> BrokerOrderResult:
         """Submit a bracket market buy order with attached take-profit + stop-loss legs."""
         try:
-            qty = round(float(qty), 8)
+            # Use Decimal for exact fractional share quantities
+            from decimal import Decimal, ROUND_DOWN
+            d = Decimal(str(qty)).quantize(Decimal("0.000000001"), rounding=ROUND_DOWN)
             req = MarketOrderRequest(
                 symbol=symbol,
-                qty=qty,
+                qty=str(d),
                 side=OrderSide.BUY,
                 time_in_force=TimeInForce.GTC,
                 order_class=OrderClass.BRACKET,
@@ -322,10 +331,11 @@ class AlpacaBroker:
         is a stop-limit with limit slightly below the stop to protect fills.
         """
         try:
-            qty = round(float(qty), 8)
+            from decimal import Decimal, ROUND_DOWN
+            q = Decimal(str(qty)).quantize(Decimal("0.000000001"), rounding=ROUND_DOWN)
             stop_leg = StopLimitOrderRequest(
                 symbol=symbol,
-                qty=qty,
+                qty=str(q),
                 side=OrderSide.SELL,
                 time_in_force=TimeInForce.GTC,
                 stop_price=round(float(stop_loss_price), 2),
@@ -333,7 +343,7 @@ class AlpacaBroker:
             )
             tp_leg = LimitOrderRequest(
                 symbol=symbol,
-                qty=qty,
+                qty=str(q),
                 side=OrderSide.SELL,
                 time_in_force=TimeInForce.GTC,
                 limit_price=round(float(take_profit_price), 2),
@@ -365,11 +375,20 @@ class AlpacaBroker:
     def submit_market_sell(
         self, symbol: str, qty: Optional[float] = None, notional: Optional[float] = None
     ) -> BrokerOrderResult:
-        """Submit a market sell order by qty or notional."""
+        """Submit a market sell order by qty or notional.
+
+        Uses Decimal for qty to avoid floating-point rounding mismatches with
+        Alpaca's exact position quantities (e.g. 0.005963506).
+        """
         try:
             kwargs = {"symbol": symbol, "side": OrderSide.SELL, "time_in_force": TimeInForce.DAY}
             if qty:
-                kwargs["qty"] = round(float(qty), 8)
+                # Use Decimal to preserve exact fractional share quantities
+                from decimal import Decimal, ROUND_DOWN
+                d = Decimal(str(qty))
+                # Truncate to 8 decimal places (Alpaca's max precision) WITHOUT rounding up
+                d = d.quantize(Decimal("0.000000001"), rounding=ROUND_DOWN)
+                kwargs["qty"] = str(d)
             elif notional:
                 kwargs["notional"] = round(float(notional), 2)
             else:

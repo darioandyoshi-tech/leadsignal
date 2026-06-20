@@ -62,13 +62,20 @@ async def main(dry_run: bool = False):
             print(f"[EXEC] CIRCUIT BREAKER: daily max loss ${settings.alpaca_daily_max_loss:.2f} hit. No new trades.")
             return
 
-        # Circuit breaker: portfolio heat (cash deployed)
-        open_positions_value = sum(p.notional or 0 for p in (
-            await db.execute(select(PaperPosition).where(PaperPosition.status == PositionStatus.open))
-        ).scalars().all())
-        cash = float(account.get("cash", 0))
-        heat = open_positions_value / cash if cash > 0 else 0
-        print(f"[EXEC] Portfolio heat: {heat:.2%} (${open_positions_value:.2f} deployed / ${cash:.2f} cash)")
+        # Circuit breaker: portfolio heat (cash deployed vs equity)
+        open_positions_result = await db.execute(
+            select(PaperPosition).where(PaperPosition.status == PositionStatus.open)
+        )
+        open_positions = open_positions_result.scalars().all()
+        # Use current Alpaca positions for accurate market value, fall back to notional
+        alpaca_positions = broker.get_positions()
+        alpaca_mv = {p["symbol"]: float(p.get("market_value", 0)) for p in alpaca_positions if "symbol" in p}
+        open_positions_value = sum(
+            alpaca_mv.get(p.symbol, p.notional or 0) for p in open_positions
+        )
+        equity = float(account.get("equity", account.get("portfolio_value", 0)))
+        heat = open_positions_value / equity if equity > 0 else 0
+        print(f"[EXEC] Portfolio heat: {heat:.2%} (${open_positions_value:.2f} deployed / ${equity:.2f} equity)")
         if heat >= settings.alpaca_max_portfolio_heat:
             print(f"[EXEC] CIRCUIT BREAKER: max portfolio heat {settings.alpaca_max_portfolio_heat:.2%} hit. No new trades.")
             return
@@ -95,6 +102,24 @@ async def main(dry_run: bool = False):
 
     # Convert ORM picks to recommendations for portfolio manager
     from app.market.recommender import StockRecommendation
+    import yfinance as yf
+
+    # Fetch current prices for all buy picks so position sizing uses real entry price
+    pick_symbols = [p.symbol for p in buy_picks]
+    current_prices = {}
+    if pick_symbols:
+        try:
+            tickers = yf.Tickers(" ".join(pick_symbols))
+            for sym in pick_symbols:
+                try:
+                    hist = tickers.tickers[sym].history(period="1d", interval="1m")
+                    if not hist.empty:
+                        current_prices[sym] = float(hist["Close"].iloc[-1])
+                except Exception:
+                    pass
+        except Exception as exc:
+            print(f"[EXEC] WARN fetching current prices: {exc}")
+    print(f"[EXEC] Fetched current prices for {len(current_prices)}/{len(pick_symbols)} symbols")
 
     recommendations = [
         StockRecommendation(
@@ -113,7 +138,7 @@ async def main(dry_run: bool = False):
         for p in buy_picks
     ]
     manager = PaperPortfolioManager(broker=broker)
-    plans = manager.select_picks_to_buy(recommendations, skip_symbols)
+    plans = manager.select_picks_to_buy(recommendations, skip_symbols, current_prices=current_prices)
     print(f"[EXEC] Trade plans created: {len(plans)}")
 
     async with async_session_maker() as db:

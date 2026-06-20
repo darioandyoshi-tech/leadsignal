@@ -35,6 +35,18 @@ def build_technical_features(df: pd.DataFrame) -> pd.DataFrame:
                 group["bb_upper"] = bb[upper_col]
             if lower_col:
                 group["bb_lower"] = bb[lower_col]
+            # Fallback: derive bands from SMA +/- 2 standard deviations if pandas_ta
+            # did not provide the expected columns.
+            if "bb_upper" not in group.columns or "bb_lower" not in group.columns:
+                sma = group["close"].rolling(window=20, min_periods=1).mean()
+                std = group["close"].rolling(window=20, min_periods=1).std()
+                group["bb_upper"] = sma + 2 * std
+                group["bb_lower"] = sma - 2 * std
+        else:
+            sma = group["close"].rolling(window=20, min_periods=1).mean()
+            std = group["close"].rolling(window=20, min_periods=1).std()
+            group["bb_upper"] = sma + 2 * std
+            group["bb_lower"] = sma - 2 * std
         group["atr_14"] = ta.atr(group["high"], group["low"], group["close"], length=14)
         group["sma_20"] = ta.sma(group["close"], length=20)
         group["sma_50"] = ta.sma(group["close"], length=50)
@@ -47,7 +59,12 @@ def build_technical_features(df: pd.DataFrame) -> pd.DataFrame:
         group["volume_ratio"] = group["volume"] / group["volume_sma_20"]
 
         # Position within Bollinger
-        group["bb_position"] = (group["close"] - group["bb_lower"]) / (group["bb_upper"] - group["bb_lower"])
+        bb_width = group["bb_upper"] - group["bb_lower"]
+        group["bb_position"] = np.where(
+            bb_width > 0,
+            (group["close"] - group["bb_lower"]) / bb_width,
+            0.5,
+        )
 
         rows.append(group)
 
