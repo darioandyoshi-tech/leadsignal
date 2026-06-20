@@ -103,19 +103,29 @@ def _discretise(returns: pd.DataFrame, n_bins: int = 5) -> np.ndarray:
 # MPS construction
 # ---------------------------------------------------------------------------
 
-def _build_joint_tensor(codes: np.ndarray, n_bins: int) -> np.ndarray:
+def _build_joint_tensor(codes: np.ndarray, n_bins: int, smoothing: Optional[float] = None) -> np.ndarray:
     """Build empirical joint distribution tensor from discretised codes.
+
+    A Dirichlet smoothing prior is added to every entry so the tensor is
+    not pathologically sparse.  With only T≈252 observations and d^N ≈ 9.7 M
+    entries the raw empirical tensor is almost entirely zero, so a small
+    floor per entry helps the MPS capture correlation structure.
+
+    If *smoothing* is None a per-entry prior of ``1e-6`` is used — large
+    enough to avoid zeros but small enough to not drown the signal.
 
     Returns a tensor of shape (n_bins, n_bins, ..., n_bins) with N axes
     (one per stock), normalised to sum 1.
     """
     T, N = codes.shape
     shape = (n_bins,) * N
-    tensor = np.zeros(shape, dtype=np.float64)
+    if smoothing is None:
+        smoothing = 1e-6
+    tensor = np.full(shape, smoothing, dtype=np.float64)
     for t in range(T):
         idx = tuple(int(codes[t, j]) for j in range(N))
         tensor[idx] += 1.0
-    tensor /= max(tensor.sum(), 1.0)
+    tensor /= tensor.sum()
     return tensor
 
 
@@ -547,9 +557,9 @@ class TensorNetworkAnalyzer:
         for k in range(N - 1, target_site, -1):
             core = self.cores[k]  # (r_left, d, r_right)
             fixed = core[:, bin_idx[k], :]  # (r_left, r_right)
-            right_env = fixed @ right_env  # (r_left_new,) wait — need (r_left,) @ (r_right,)
-            # Actually fixed is (r_left, r_right), right_env is (r_right,)
-            right_env = fixed @ right_env  # (r_left,)
+            # fixed is (r_left, r_right), right_env is (r_right,)
+            # result: (r_left, r_right) @ (r_right,) → (r_left,)
+            right_env = fixed @ right_env
 
         # Target core: (r_left, d, r_right)
         target_core = self.cores[target_site]
@@ -596,8 +606,9 @@ class TensorNetworkAnalyzer:
     def get_correlation_clusters(self) -> List[List[str]]:
         """Identify clusters of highly correlated stocks from the MPS.
 
-        Uses the mutual information matrix between sites and a simple
-        threshold-based connected-components clustering.
+        Combines MPS-derived mutual information with the empirical return
+        correlation matrix and uses a simple threshold-based connected-
+        components clustering.
         """
         if self.cores is None or self.symbols is None:
             raise RuntimeError("MPS not fitted")
@@ -605,14 +616,36 @@ class TensorNetworkAnalyzer:
         if N < 2:
             return [[self.symbols[0]]] if self.symbols else []
 
+        # Empirical correlation matrix (robust signal)
+        corr = self.returns_df.corr().values if self.returns_df is not None else np.eye(N)
+
+        # MPS mutual information (higher-order signal, may be noisy)
         mi = _pairwise_mutual_info(self.cores, self.n_bins)
 
-        # Threshold: mean + 0.5 * std (adaptive)
-        upper = mi[np.triu_indices(N, k=1)]
-        threshold = float(upper.mean() + 0.5 * upper.std()) if len(upper) > 0 else 0.0
+        # Normalise MI to [0, 1] range
+        mi_max = mi.max()
+        if mi_max > 0:
+            mi_norm = mi / mi_max
+        else:
+            mi_norm = mi
+
+        # Blend: 60% correlation, 40% normalised MI
+        # Correlation captures linear dependence, MI captures non-linear
+        # and higher-order dependencies from the MPS.
+        corr_abs = np.abs(corr)
+        blend = 0.6 * corr_abs + 0.4 * mi_norm
+        np.fill_diagonal(blend, 0.0)
+
+        # Threshold: 75th percentile of blended scores
+        upper = blend[np.triu_indices(N, k=1)]
+        if len(upper) > 0:
+            threshold = float(np.percentile(upper, 75))
+        else:
+            threshold = 0.3
+        threshold = max(threshold, 0.3)
 
         # Connected components via adjacency
-        adjacency = mi > max(threshold, 1e-6)
+        adjacency = blend > threshold
         visited = [False] * N
         clusters: List[List[str]] = []
         for i in range(N):
