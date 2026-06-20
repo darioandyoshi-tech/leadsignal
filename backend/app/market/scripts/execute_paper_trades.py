@@ -25,6 +25,25 @@ from app.market import AlpacaBroker, PaperPortfolioManager
 from app.models import StockPick, TradeAction, PaperPosition, BrokerOrder, OrderStatus, PositionStatus
 
 
+async def _is_market_open(broker: AlpacaBroker) -> bool:
+    """Check if Alpaca paper market is currently open."""
+    import httpx
+    headers = {
+        "APCA-API-KEY-ID": broker.api_key,
+        "APCA-API-SECRET-KEY": broker.secret_key,
+    }
+    try:
+        clock = httpx.get(
+            "https://paper-api.alpaca.markets/v2/clock",
+            headers=headers,
+            timeout=30,
+        ).json()
+        return clock.get("is_open", False)
+    except Exception as exc:
+        print(f"[EXEC] WARN: could not check market clock: {exc}. Assuming open.")
+        return True
+
+
 async def main(dry_run: bool = False):
     settings = get_settings()
     if not settings.alpaca_api_key or not settings.alpaca_secret_key:
@@ -40,6 +59,14 @@ async def main(dry_run: bool = False):
         print("[EXEC] DRY RUN - no orders will be submitted")
 
     broker = AlpacaBroker()
+
+    # Guard: check market hours (skip if market closed, unless dry_run)
+    if not dry_run:
+        market_open = await _is_market_open(broker)
+        if not market_open:
+            print("[EXEC] Market is closed. Skipping trade execution to avoid after-hours issues.")
+            return
+
     account = broker.get_account()
     if "error" in account:
         print(f"[EXEC] Alpaca account error: {account['error']}")
@@ -90,7 +117,21 @@ async def main(dry_run: bool = False):
     skip_symbols = open_symbols | pending_sell_symbols
     print(f"[EXEC] Skipping {len(skip_symbols)} symbols: {sorted(skip_symbols)}")
 
+    # Guard: same-day duplicate-trade check — skip if we already submitted buy orders today
+    today_start = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
     async with async_session_maker() as db:
+        today_buys = await db.execute(
+            select(BrokerOrder).where(
+                BrokerOrder.side == "buy",
+                BrokerOrder.created_at >= today_start,
+                BrokerOrder.status.in_([OrderStatus.pending, OrderStatus.accepted, OrderStatus.filled, OrderStatus.partially_filled]),
+            )
+        )
+        today_buy_count = len(today_buys.scalars().all())
+        if today_buy_count > 0 and not dry_run:
+            print(f"[EXEC] Already submitted {today_buy_count} buy order(s) today. Skipping to prevent duplicate trades.")
+            return
+
         result = await db.execute(
             select(StockPick)
             .where(StockPick.is_active == True)

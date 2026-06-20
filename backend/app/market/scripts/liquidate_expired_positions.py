@@ -25,6 +25,25 @@ from app.market import AlpacaBroker
 from app.models import BrokerOrder, PaperPosition, PositionStatus, OrderStatus
 
 
+async def _is_market_open(broker: AlpacaBroker) -> bool:
+    """Check if Alpaca paper market is currently open."""
+    import httpx
+    headers = {
+        "APCA-API-KEY-ID": broker.api_key,
+        "APCA-API-SECRET-KEY": broker.secret_key,
+    }
+    try:
+        clock = httpx.get(
+            "https://paper-api.alpaca.markets/v2/clock",
+            headers=headers,
+            timeout=30,
+        ).json()
+        return clock.get("is_open", False)
+    except Exception as exc:
+        print(f"[LIQUIDATE] WARN: could not check market clock: {exc}. Assuming open.")
+        return True
+
+
 async def main(dry_run: bool = False):
     settings = get_settings()
     if not settings.alpaca_api_key or not settings.alpaca_secret_key:
@@ -36,6 +55,13 @@ async def main(dry_run: bool = False):
         print("[LIQUIDATE] DRY RUN - no orders will be submitted")
 
     broker = AlpacaBroker()
+
+    # Guard: only liquidate during market hours (skip if market closed, unless dry_run)
+    if not dry_run:
+        market_open = await _is_market_open(broker)
+        if not market_open:
+            print("[LIQUIDATE] Market is closed. Skipping liquidation (positions will be sold at next market open).")
+            return
     now = datetime.now(timezone.utc)
 
     async with async_session_maker() as db:
