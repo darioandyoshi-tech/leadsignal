@@ -4,6 +4,8 @@ from .broker import AlpacaBroker, BrokerOrderResult
 from .portfolio import PaperPortfolioManager, TradePlan
 from .scorer import StockScorer
 from .recommender import StockRecommender
+from .sentiment import FinbertSentimentAnalyzer
+from .news_fetcher import NewsFetcher
 
 __all__ = [
     "NASDAQ100Fetcher",
@@ -14,4 +16,6 @@ __all__ = [
     "TradePlan",
     "StockScorer",
     "StockRecommender",
+    "FinbertSentimentAnalyzer",
+    "NewsFetcher",
 ]

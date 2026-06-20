@@ -1,0 +1,38 @@
+{
+  "AAPL": {
+    "sentiment": "neutral",
+    "score": 0.8024,
+    "headlines_analyzed": 5,
+    "breakdown": {
+      "positive": 1,
+      "negative": 1,
+      "neutral": 3
+    }
+  },
+  "MSFT": {
+    "sentiment": "neutral",
+    "score": 0.8408,
+    "headlines_analyzed": 5,
+    "breakdown": {
+      "positive": 0,
+      "negative": 2,
+      "neutral": 3
+    }
+  },
+  "NVDA": {
+    "sentiment": "negative",
+    "score": 0.9364,
+    "headlines_analyzed": 5,
+    "breakdown": {
+      "positive": 1,
+      "negative": 2,
+      "neutral": 2
+    }
+  },
+  "_meta": {
+    "scan_date": "2026-06-20T05:21:13.889988+00:00",
+    "stocks_scanned": 3,
+    "headlines_per_stock": 5,
+    "model": "ProsusAI/finbert"
+  }
+}

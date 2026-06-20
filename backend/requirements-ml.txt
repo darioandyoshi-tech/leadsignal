@@ -3,3 +3,4 @@ pandas-ta==0.4.71b0
 scikit-learn==1.7.2
 sktime==1.0.1
 yfinance==1.4.1
+torch	ransformers
