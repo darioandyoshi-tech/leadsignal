@@ -23,8 +23,13 @@ import os
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+import io
+import json
+import zipfile
+
 import numpy as np
 import pandas as pd
+import torch as th
 import yfinance as yf
 import gymnasium as gym
 from gymnasium import spaces
@@ -33,6 +38,63 @@ from stable_baselines3.common.vec_env import DummyVecEnv
 from stable_baselines3.common.callbacks import BaseCallback
 
 logger = logging.getLogger(__name__)
+
+# ---------------------------------------------------------------------------
+# Monkey-patch SB3 save_util to work around torch 2.6+ weights_only issue
+# torch 2.6+ changed weights_only=True default which breaks loading from ZipExtFile
+# https://github.com/DLR-RM/stable-baselines3/issues/2001
+# ---------------------------------------------------------------------------
+
+import zipfile as _zipfile
+
+def _patched_load_from_zip_file(load_path, load_data=True, custom_objects=None,
+                                  device="auto", verbose=0, print_system_info=False):
+    """Patched version that reads .pth files into BytesIO before torch.load."""
+    from stable_baselines3.common.save_util import open_path, get_device, json_to_data
+
+    file = open_path(load_path, "r", verbose=verbose, suffix="zip")
+    device = get_device(device=device)
+
+    try:
+        with _zipfile.ZipFile(file) as archive:
+            namelist = archive.namelist()
+            data = None
+            pytorch_variables = None
+            params = {}
+
+            if print_system_info and "system_info.txt" in namelist:
+                print("== SAVED MODEL SYSTEM INFO ==")
+                print(archive.read("system_info.txt").decode())
+
+            if "data" in namelist and load_data:
+                json_data = archive.read("data").decode()
+                data = json_to_data(json_data, custom_objects=custom_objects)
+
+            pth_files = [f for f in namelist if os.path.splitext(f)[1] == ".pth"]
+            for file_path in pth_files:
+                # Read into BytesIO to avoid torch weights_only issues with ZipExtFile
+                with archive.open(file_path, mode="r") as param_file:
+                    buf = io.BytesIO(param_file.read())
+                th_object = th.load(buf, map_location=device, weights_only=True)
+                if file_path == "pytorch_variables.pth" or file_path == "tensors.pth":
+                    pytorch_variables = th_object
+                else:
+                    params[os.path.splitext(file_path)[0]] = th_object
+    except _zipfile.BadZipFile as e:
+        raise ValueError(f"Error: the file {load_path} wasn't a zip-file") from e
+    finally:
+        if isinstance(load_path, (str, type(__import__('pathlib').Path()))):
+            file.close()
+
+    return data, params, pytorch_variables
+
+
+import stable_baselines3.common.save_util as _sb3_save_util
+import stable_baselines3.common.base_class as _sb3_base
+
+_sb3_save_util.load_from_zip_file = _patched_load_from_zip_file
+# Patch the already-imported reference in base_class
+_sb3_base.load_from_zip_file = _patched_load_from_zip_file
 
 # ---------------------------------------------------------------------------
 # Constants
