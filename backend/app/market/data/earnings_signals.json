@@ -1,0 +1,60 @@
+{
+  "signals": [
+    {
+      "symbol": "ORCL",
+      "signal": "BUY",
+      "confidence": 0.55,
+      "earnings_date": "2026-06-10",
+      "eps_estimate": 1.96,
+      "eps_reported": 2.11,
+      "eps_surprise": 7.52,
+      "surprise_pct": 7.52,
+      "qa_sentiment": {
+        "sentiment": "neutral",
+        "score": 0.7179,
+        "positive": 0.2524,
+        "negative": 0.0297,
+        "neutral": 0.7179,
+        "chunks_analyzed": 20
+      },
+      "reasoning": "positive EPS surprise; Q&A sentiment: neutral",
+      "strategy": "PEAD"
+    },
+    {
+      "symbol": "ADBE",
+      "signal": "BUY",
+      "confidence": 0.55,
+      "earnings_date": "2026-06-11",
+      "eps_estimate": 5.81,
+      "eps_reported": 5.96,
+      "eps_surprise": 2.5,
+      "surprise_pct": 2.5,
+      "qa_sentiment": {
+        "sentiment": "neutral",
+        "score": 0.8205,
+        "positive": 0.1649,
+        "negative": 0.0146,
+        "neutral": 0.8205,
+        "chunks_analyzed": 20
+      },
+      "reasoning": "positive EPS surprise; Q&A sentiment: neutral",
+      "strategy": "PEAD"
+    }
+  ],
+  "upcoming_earnings": [],
+  "_meta": {
+    "scan_date": "2026-06-20T05:47:50.120437+00:00",
+    "symbols_scanned": 30,
+    "lookback_days": 10,
+    "transcripts_fetched": true,
+    "model": "ProsusAI/finbert",
+    "strategy": "PEAD",
+    "summary": {
+      "buy": 2,
+      "avoid": 0,
+      "neutral": 0,
+      "total_signals": 2,
+      "upcoming_count": 0
+    }
+  }
+}

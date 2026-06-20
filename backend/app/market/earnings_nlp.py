@@ -287,8 +287,12 @@ class EarningsNLPScanner:
             # So 1 page per day roughly
             max_pages = min(days_ago + 3, 15)
 
-            for page in range(1, max_pages + 1):
-                url = f"https://www.fool.com/earnings-call-transcripts/page/{page}/"
+            for page in range(0, max_pages + 1):
+                if page == 0:
+                    # Base URL (most recent transcripts)
+                    url = "https://www.fool.com/earnings-call-transcripts/"
+                else:
+                    url = f"https://www.fool.com/earnings-call-transcripts/page/{page}/"
                 _rate_limit("fool_list", self._last_request)
 
                 resp = httpx.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=15)
@@ -339,25 +343,36 @@ class EarningsNLPScanner:
             text = re.sub(r"<script[^>]*>.*?</script>", "", text, flags=re.DOTALL | re.I)
             text = re.sub(r"<style[^>]*>.*?</style>", "", text, flags=re.DOTALL | re.I)
 
-            # Find the article body — Fool wraps content in <article> or specific divs
-            # Try to extract main content
-            article_match = re.search(r"<article[^>]*>(.*?)</article>", text, re.DOTALL | re.I)
+            # Strategy 1: Look for article-body div (Motley Fool's content container)
+            article_match = re.search(
+                r'class="article-body[^"]*"[^>]*>(.*?)(?:</div>\s*<div\s+class="(?:article-meta|author)|$)',
+                text,
+                re.DOTALL | re.I,
+            )
             if article_match:
                 article_html = article_match.group(1)
             else:
-                # Fallback: try to get everything between common content markers
+                # Fallback: use the full page
                 article_html = text
 
-            # Strip HTML
-            article_text = _strip_html(article_html)
+            # Extract all <p> tag contents — transcripts are structured as paragraphs
+            paragraphs = re.findall(r"<p[^>]*>(.*?)</p>", article_html, re.DOTALL | re.I)
+            if not paragraphs:
+                article_text = _strip_html(article_html)
+            else:
+                article_text = " ".join(paragraphs)
+                article_text = _strip_html(article_text)
 
-            # Tr trailing JS
-            # Find common end markers
+            # Trim trailing boilerplate
             end_markers = [
                 "The views and opinions expressed",
                 "Should you invest $1,000",
                 "More From The Motley Fool",
                 "This article was",
+                "Invest better with The Motley Fool",
+                "Making the world smarter",
+                "Market data powered by",
+                "About The Motley Fool",
             ]
             for marker in end_markers:
                 idx = article_text.find(marker)
