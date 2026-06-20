@@ -80,6 +80,34 @@ async def main():
     scores = scorer.score_all(features_df)
     print(f"Scored {len(scores)} symbols")
 
+    # ── Vendor incident alpha filter ─────────────────────────────────────
+    # Check PulseWatch for active vendor incidents and filter out affected symbols
+    from app.market.vendor_alpha import VendorIncidentSignalGenerator, Severity
+    try:
+        import httpx
+        # Fetch open incidents from PulseWatch public API
+        r = httpx.get("https://api.pulsewatch.us/v1/incidents/open", timeout=15)
+        incidents = r.json().get("incidents", []) if r.status_code == 200 else []
+    except Exception:
+        incidents = []
+
+    avoid_symbols = set()
+    if incidents:
+        gen = VendorIncidentSignalGenerator()
+        signals = gen.generate_signals(incidents, min_severity=Severity.MAJOR)
+        for s in signals:
+            avoid_symbols.update(s.affected_symbols)
+        if avoid_symbols:
+            print(f"[VENDOR ALPHA] {len(signals)} vendor incident signals, avoiding {len(avoid_symbols)} symbols: {sorted(avoid_symbols)}")
+
+    # Filter scores to exclude vendor-affected symbols
+    if avoid_symbols:
+        before = len(scores)
+        scores = [s for s in scores if s.symbol not in avoid_symbols]
+        print(f"[VENDOR ALPHA] Filtered {before - len(scores)} affected symbols, {len(scores)} remaining")
+    # ──────────────────────────────────────────────────────────────────
+
+
     recommender = StockRecommender(max_hold_days=4)
     top_picks = recommender.rank(scores, top_n=15)
     print(f"Top picks: {[(p.symbol, p.action, p.score) for p in top_picks[:5]]}")
