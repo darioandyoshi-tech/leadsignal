@@ -80,31 +80,67 @@ async def main():
     scores = scorer.score_all(features_df)
     print(f"Scored {len(scores)} symbols")
 
-    # ── Vendor incident alpha filter ─────────────────────────────────────
-    # Check PulseWatch for active vendor incidents and filter out affected symbols
+    # ── Vendor incident alpha filter (TimesFM-enhanced) ──────────────────
+    # Check PulseWatch for active vendor incidents, then use TimesFM to
+    # forecast which affected stocks will actually decline vs. recover.
     from app.market.vendor_alpha import VendorIncidentSignalGenerator, Severity
+    from app.market.vendor_timesfm import forecast_vendor_impact, classify_signal
+
     try:
         import httpx
-        # Fetch open incidents from PulseWatch public API
         r = httpx.get("https://api.pulsewatch.us/v1/incidents/open", timeout=15)
         incidents = r.json().get("incidents", []) if r.status_code == 200 else []
     except Exception:
         incidents = []
 
     avoid_symbols = set()
+    strong_avoid_symbols = set()
+    recovery_candidates = []
+
     if incidents:
         gen = VendorIncidentSignalGenerator()
         signals = gen.generate_signals(incidents, min_severity=Severity.MAJOR)
-        for s in signals:
-            avoid_symbols.update(s.affected_symbols)
-        if avoid_symbols:
-            print(f"[VENDOR ALPHA] {len(signals)} vendor incident signals, avoiding {len(avoid_symbols)} symbols: {sorted(avoid_symbols)}")
 
-    # Filter scores to exclude vendor-affected symbols
+        if signals:
+            print(f"[VENDOR ALPHA] {len(signals)} vendor incident signals generated")
+
+            for signal in signals:
+                affected = signal.affected_symbols
+                vendor_name = signal.vendor_name
+                print(f"[VENDOR ALPHA] {vendor_name}: forecasting {len(affected)} affected symbols...")
+
+                forecasts = await forecast_vendor_impact(affected, vendor_name, signal.incident_title)
+
+                for fc in forecasts:
+                    classification = classify_signal(fc)
+                    sym = fc["symbol"]
+                    ret = fc["expected_return_pct"]
+                    downside = fc.get("downside_pct")
+
+                    if classification == "STRONG_AVOID":
+                        strong_avoid_symbols.add(sym)
+                        avoid_symbols.add(sym)
+                        print(f"  {sym}: STRONG_AVOID (expected {ret:+.2f}%, downside {downside}%)")
+                    elif classification == "AVOID":
+                        avoid_symbols.add(sym)
+                        print(f"  {sym}: AVOID (expected {ret:+.2f}%)")
+                    elif classification == "RECOVERY":
+                        recovery_candidates.append({"symbol": sym, "expected_return": ret, "vendor": vendor_name})
+                        print(f"  {sym}: RECOVERY (expected {ret:+.2f}%) - incident priced in")
+
+            # For symbols where TimesFM failed, fall back to AVOID
+            for signal in signals:
+                for sym in signal.affected_symbols:
+                    if sym not in avoid_symbols and sym not in recovery_candidates:
+                        avoid_symbols.add(sym)
+
+    # Filter scores: remove strong avoid + avoid, keep neutral + recovery
     if avoid_symbols:
         before = len(scores)
         scores = [s for s in scores if s.symbol not in avoid_symbols]
-        print(f"[VENDOR ALPHA] Filtered {before - len(scores)} affected symbols, {len(scores)} remaining")
+        removed = before - len(scores)
+        print(f"[VENDOR ALPHA] Filtered {removed} symbols ({len(strong_avoid_symbols)} strong avoid + {len(avoid_symbols - strong_avoid_symbols)} avoid)")
+        print(f"[VENDOR ALPHA] {len(scores)} symbols remaining, {len(recovery_candidates)} recovery candidates")
     # ──────────────────────────────────────────────────────────────────
 
 
