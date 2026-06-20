@@ -6,6 +6,7 @@ from .scorer import StockScorer
 from .recommender import StockRecommender
 from .sentiment import FinbertSentimentAnalyzer
 from .news_fetcher import NewsFetcher
+from .options_flow import OptionsFlowScanner
 
 __all__ = [
     "NASDAQ100Fetcher",
@@ -18,4 +19,5 @@ __all__ = [
     "StockRecommender",
     "FinbertSentimentAnalyzer",
     "NewsFetcher",
+    "OptionsFlowScanner",
 ]
